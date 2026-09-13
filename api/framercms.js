@@ -1,12 +1,18 @@
 import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseFramerRanges } from '../src/lib/framer-ranges.mjs';
 
-// Vercel includes dist/assets/cms/** at bundle time (see vercel.json → functions.includeFiles).
+// Vercel includes dist/assets/cms/** and public/assets/cms/** at bundle time (see vercel.json → functions.includeFiles).
 // __dirname points to /var/task/api/ in the Vercel Lambda environment.
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const cmsDir = path.resolve(__dirname, '..', 'dist', 'assets', 'cms');
+
+function resolveCmsDir() {
+  const distDir = path.resolve(__dirname, '..', 'dist', 'assets', 'cms');
+  if (existsSync(distDir)) return distDir;
+  return path.resolve(__dirname, '..', 'public', 'assets', 'cms');
+}
 
 const SECURITY_HEADERS = {
   'X-Frame-Options': 'SAMEORIGIN',
@@ -122,6 +128,7 @@ export default async function handler(req, res) {
     return;
   }
 
+  const cmsDir = resolveCmsDir();
   const filePath = path.join(cmsDir, file);
 
   // Secondary path-traversal guard after join
@@ -132,7 +139,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    const source = await readFile(filePath);
+    let source;
+    try {
+      source = await readFile(filePath);
+    } catch (readErr) {
+      if (readErr.code === 'ENOENT') {
+        const fallbackDir = path.resolve(__dirname, '..', 'public', 'assets', 'cms');
+        if (cmsDir !== fallbackDir) {
+          source = await readFile(path.join(fallbackDir, file));
+        } else {
+          throw readErr;
+        }
+      } else {
+        throw readErr;
+      }
+    }
 
     // ── No range param → return the full file ────────────────────────────────
     if (!range) {
