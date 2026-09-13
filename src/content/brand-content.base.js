@@ -55,8 +55,6 @@
     "ARTIFACT—II": "NEZUS BISUTERÍA",
     "ARTIFACT—III": "SOLUCIONES EMPRESARIALES",
     "[CONFESS]": "[CONSTRUIR]",
-    "CAL": "JCL",
-    "TI": "LAB",
     "THE ARCHIVE OF EVERYTHING I CAN’T KEEP IN ONE PLACE.": "TECNOLOGÍA CONSTRUIDA PARA RESOLVER NECESIDADES REALES.",
     "VERTICAL STORAGE — 2015-2026": "JCAR LABS — SOLUCIONES DIGITALES",
     "ANALOG ARCHIVES": "CAPACIDADES",
@@ -404,7 +402,91 @@
       element.textContent = replacement
     }
 
-    // Explicit branding enforcement for About Section (Author Name, Signature, Subtitle)
+    // 1. Navigation Menu translation (Desktop, Mobile, Drawer, Sticky, Footer)
+    const navMatchers = [
+      { match: (h, n, t) => h.includes('/work') || n === 'work' || t.includes('WORK'), es: 'Proyectos', esUpper: 'PROYECTOS' },
+      { match: (h, n, t) => h.includes('#about-me') || n === 'about' || t.includes('ABOUT'), es: 'Nosotros', esUpper: 'NOSOTROS' },
+      { match: (h, n, t) => h.includes('/thoughts') || h.includes('/services') || n === 'thoughts' || t.includes('THOUGHT'), es: 'Servicios', esUpper: 'SERVICIOS' },
+      { match: (h, n, t) => h.includes('/contact') || n === 'contact' || t.includes('CONTACT'), es: 'Contacto', esUpper: 'CONTACTO' },
+      { match: (h, n, t) => (n === 'home' || t === 'HOME' || t.includes('HOME')) && n !== 'logo' && !h.includes('#'), es: 'Inicio', esUpper: 'INICIO' },
+      { match: (h, n, t) => h.includes('/privacy-policy') || n.includes('privacy') || t.includes('PRIVACY'), es: 'Política de Privacidad', esUpper: 'POLÍTICA DE PRIVACIDAD' },
+      { match: (h, n, t) => h.includes('/terms-of-use') || n.includes('terms') || t.includes('TERMS'), es: 'Términos de Uso', esUpper: 'TÉRMINOS DE USO' },
+    ]
+
+    for (const a of document.querySelectorAll('nav a, [data-framer-name="Navigation"] a, [data-framer-name="Footer"] a, footer a, .framer-Yd56o a, .framer-18fo7v1 a')) {
+      const href = (a.getAttribute('href') || '').toLowerCase()
+      const name = (a.getAttribute('name') || a.getAttribute('data-framer-name') || '').trim().toLowerCase()
+      const text = (a.textContent || '').trim().toUpperCase()
+      if (name === 'logo' || a.querySelector('img') || a.getAttribute('data-framer-name') === 'Logo') continue
+      for (const item of navMatchers) {
+        if (item.match(href, name, text)) {
+          const pTags = a.querySelectorAll('p')
+          if (pTags.length > 0) {
+            for (const p of pTags) {
+              p.textContent = p.textContent && p.textContent === p.textContent.toUpperCase() && p.textContent.length > 1 ? item.esUpper : item.es
+            }
+          } else {
+            a.textContent = text === text.toUpperCase() ? item.esUpper : item.es
+          }
+          break
+        }
+      }
+    }
+
+    // 2. Hero Headline (Right block)
+    const heroMsg = document.querySelector('[data-framer-name="Section 0 - Hero"] [data-framer-name="Message"]')
+    if (heroMsg) {
+      const line1 = heroMsg.querySelector('[data-framer-name="Line 1"] p')
+      if (line1 && line1.textContent !== 'CREAMOS SOLUCIONES') line1.textContent = 'CREAMOS SOLUCIONES'
+      const line2 = heroMsg.querySelector('[data-framer-name="Line 2"] p')
+      if (line2 && line2.textContent !== 'DIGITALES QUE') line2.textContent = 'DIGITALES QUE'
+      const line3 = heroMsg.querySelector('[data-framer-name="Line 3"] p')
+      if (line3 && line3.textContent !== 'HACEN CRECER NEGOCIOS') line3.textContent = 'HACEN CRECER NEGOCIOS'
+      const nameEl = heroMsg.querySelector('[data-framer-name="Name"] h1, [data-framer-name="Name"] p, .framer-1ntx5sg h1')
+      if (nameEl && !nameEl.textContent.includes('JCAR')) nameEl.textContent = 'JCAR Labs'
+      const titleEl = heroMsg.querySelector('[data-framer-name="Title"] h2, [data-framer-name="Title"] p, .framer-uxjk5g h2')
+      if (titleEl && !titleEl.textContent.includes('SOFTWARE')) titleEl.textContent = 'DESARROLLO WEB · SOFTWARE · IA'
+    }
+
+    // 3. Middle phases (001 - 004)
+    const heroRow2 = document.querySelector('[data-framer-name="Section 0 - Hero"] [data-framer-name="Row 2"]')
+    if (heroRow2) {
+      const phaseMap = { 'BREAK': 'IDEA', 'BUILD': 'DISEÑO', 'BEND': 'DESARROLLO', 'RELEASE': 'ESCALA' }
+      for (const p of heroRow2.querySelectorAll('[data-framer-name="Label"] p, [data-framer-name^="Label"] p')) {
+        let t = p.textContent || ''
+        for (const [en, es] of Object.entries(phaseMap)) {
+          if (t.includes(en)) p.textContent = t.replace('PHASE/' + en, 'FASE/' + es).replace(en, es)
+        }
+      }
+    }
+
+    // 4. Hero Bottom-left Capabilities
+    const heroRow3 = document.querySelector('[data-framer-name="Section 0 - Hero"] [data-framer-name="Row 3"]')
+    if (heroRow3) {
+      const startYear = heroRow3.querySelector('[data-framer-name="Start Year"] p')
+      if (startYear && startYear.textContent !== 'JCAR/LABS') startYear.textContent = 'JCAR/LABS'
+    }
+
+    // 5. Footer branding, watermark & links
+    const footer = document.querySelector('footer, [data-framer-name="Footer"]')
+    if (footer) {
+      for (const p of footer.querySelectorAll('[data-framer-name="Name"] p, .framer-1e89t9l p')) {
+        if (p.textContent !== 'JCAR LABS INC.') p.textContent = 'JCAR LABS INC.'
+      }
+      for (const p of footer.querySelectorAll('[data-framer-name="Large Text"] p, .framer-1c0kqur p')) {
+        if (p.textContent !== 'JCAR LABS') p.textContent = 'JCAR LABS'
+      }
+      for (const el of footer.querySelectorAll('[data-framer-name="Copyright"] footer, footer')) {
+        if (el.textContent && /vertical|adam knoxville/i.test(el.textContent)) {
+          el.textContent = '© 2026 JCAR Labs Inc. Todos los derechos reservados.'
+        }
+      }
+      for (const badge of footer.querySelectorAll('[data-framer-name="Creator"], .framer-18zdr70, a[href*="framerpod.com"]')) {
+        badge.style.display = 'none'
+      }
+    }
+
+    // 6. Explicit branding enforcement for About Section (Author Name, Signature, Subtitle)
     for (const el of document.querySelectorAll('[data-framer-name="Author Name"] p, .framer-1mieko6 p')) {
       if (el.textContent !== "JCAR LABS INC") el.textContent = "JCAR LABS INC"
     }
@@ -1208,55 +1290,23 @@
 
   const startBranding = () => {
     setupMetadataGuard()
-    if (RESTORATION_MODE) {
-      const main = document.querySelector("#main")
-      const hydrationExpected = main?.hasAttribute("data-framer-hydrate-v2")
-      if (!hydrationExpected) {
-        applyBrand()
-        return
-      }
+    applyBrand()
 
-      // Wait until Framer has committed its hydrated component tree. Mutating
-      // the server-rendered tree sooner creates React mismatches and can tear
-      // down CMS pages after their entrance animation.
-      let attempts = 0
-      const hydrationTimer = setInterval(() => {
-        attempts += 1
-        const hydrated = Boolean(main.querySelector(":scope > style"))
-        if (!hydrated && attempts < 120) return
-        clearInterval(hydrationTimer)
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            applyBrand()
-            const aboutSec = document.querySelector('main section[data-framer-name="Section 11 - About"]')
-            if (aboutSec) {
-              const fixAbout = () => {
-                for (const el of aboutSec.querySelectorAll('[data-framer-name="Author Name"] p, .framer-1mieko6 p')) {
-                  if (el.textContent !== "JCAR LABS INC") el.textContent = "JCAR LABS INC"
-                }
-                for (const img of aboutSec.querySelectorAll('img[src*="signature.svg"]')) {
-                  img.alt = "Jhon Charles — CEO de Jcar Labs Inc."
-                }
-                for (const el of aboutSec.querySelectorAll('[data-framer-name="Signature"] [data-framer-name="Subtitle"] p, .framer-kpmnl9 .framer-i5ly5t p')) {
-                  if (el.textContent !== "CEO de Jcar Labs Inc.") el.textContent = "CEO de Jcar Labs Inc."
-                }
-              }
-              fixAbout()
-              new MutationObserver(fixAbout).observe(aboutSec, { childList: true, subtree: true, characterData: true })
-            }
-          })
-        })
-      }, 100)
-      return
-    }
+    // Global observer for React hydration and client-side DOM mutations
+    let debounceTimer = null
+    const observer = new MutationObserver(() => {
+      if (debounceTimer) cancelAnimationFrame(debounceTimer)
+      debounceTimer = requestAnimationFrame(applyBrand)
+    })
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true })
 
-    const initialDelay = document.documentElement.classList.contains("jcar-interactive-page") || document.documentElement.classList.contains("jcar-static-page") ? 0 : 2200
-    setTimeout(() => {
-      applyBrand()
-      new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true })
-    }, initialDelay)
-    setTimeout(applyBrand, 3600)
-    setTimeout(applyBrand, 5200)
+    // Checkpoints during page load and entrance animations
+    setTimeout(applyBrand, 50)
+    setTimeout(applyBrand, 150)
+    setTimeout(applyBrand, 300)
+    setTimeout(applyBrand, 600)
+    setTimeout(applyBrand, 1200)
+    setTimeout(applyBrand, 2400)
   }
 
   if (document.readyState === "loading") {

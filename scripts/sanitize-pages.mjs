@@ -28,6 +28,12 @@ for (const file of files) {
   let content = await fs.readFile(file, 'utf8');
   const original = content;
 
+  // 0. Ensure data-local-cms-fetch is strictly restricted to localhost
+  content = content.replace(
+    /<script data-local-cms-fetch>[\s\S]*?<\/script>/g,
+    '<script data-local-cms-fetch>(function(){var isLocal=location.hostname===\'localhost\'||location.hostname===\'127.0.0.1\';if(!isLocal)return;var f=window.fetch;window.fetch=function(u,o){var raw=typeof u===\'string\'?u:(u&&u.url?u.url:String(u||\'\'));if(raw.includes(\'.framercms\')){var parsed=new URL(raw,location.href);var file=parsed.pathname.split(\'/\').pop();return f(\'/assets/cms/\'+file+parsed.search,o)}return f(u,o)}})();</script>'
+  );
+
   // 1. Sanitize Logo Alt Text
   content = content.replaceAll('alt="Vertical Logo"', 'alt="JCAR Labs Inc. Logo"');
   content = content.replaceAll('alt="vertical logo"', 'alt="JCAR Labs Inc. Logo"');
@@ -102,10 +108,67 @@ for (const file of files) {
   // 7. General replacements
   content = content.replaceAll('alt="Adam Knoxville"', 'alt="JCAR Labs Inc."');
   content = content.replaceAll('alt="adam knoxville"', 'alt="JCAR Labs Inc."');
-  content = content.replaceAll('>Adam Knoxville<', '>JCAR Labs Inc.<');
-  content = content.replaceAll('>Adam KNOXVILLE<', '>JCAR LABS INC<');
+  content = content.replaceAll('>Adam Knoxville<', '>JCAR LABS INC.<');
+  content = content.replaceAll('>Adam KNOXVILLE<', '>JCAR LABS INC.<');
   content = content.replaceAll('Adam Knoxville', 'JCAR Labs Inc.');
-  content = content.replaceAll('Adam KNOXVILLE', 'JCAR LABS INC');
+  content = content.replaceAll('Adam KNOXVILLE', 'JCAR LABS INC.');
+  content = content.replaceAll('© 2026 Vertical by JCAR Labs Inc.. All work, all rights.', '© 2026 JCAR Labs Inc. Todos los derechos reservados.');
+  content = content.replaceAll('© 2026 Vertical by JCAR Labs Inc.', '© 2026 JCAR Labs Inc.');
+
+  // 8. Navigation Translation (Spanish - uppercase and title case)
+  content = content.replaceAll('>Work<', '>Proyectos<');
+  content = content.replaceAll('>WORK<', '>PROYECTOS<');
+  content = content.replaceAll('>About<', '>Nosotros<');
+  content = content.replaceAll('>ABOUT<', '>NOSOTROS<');
+  content = content.replaceAll('>Thoughts<', '>Servicios<');
+  content = content.replaceAll('>THOUGHTS<', '>SERVICIOS<');
+  content = content.replaceAll('>Contact<', '>Contacto<');
+  content = content.replaceAll('>CONTACT<', '>CONTACTO<');
+  content = content.replaceAll('>Home<', '>Inicio<');
+  content = content.replaceAll('>HOME<', '>INICIO<');
+  content = content.replaceAll('>Privacy Policy<', '>Política de Privacidad<');
+  content = content.replaceAll('>PRIVACY POLICY<', '>POLÍTICA DE PRIVACIDAD<');
+  content = content.replaceAll('>Terms Of Use<', '>Términos de Uso<');
+  content = content.replaceAll('>Terms of Use<', '>Términos de Uso<');
+  content = content.replaceAll('>TERMS OF USE<', '>TÉRMINOS DE USO<');
+
+  // 9. Sections, Headings, Links & Badges (Spanish)
+  content = content.replaceAll('>VIEW THE WORK<', '>VER PROYECTOS<');
+  content = content.replaceAll('>View the work<', '>Ver proyectos<');
+  content = content.replaceAll('>SHOWROOM<', '>PORTAFOLIO<');
+  content = content.replaceAll('>SELECTED WORK<', '>PROYECTOS SELECCIONADOS<');
+  content = content.replaceAll('>EXPLORE<', '>DESCUBRIR<');
+  content = content.replaceAll('>THINGS I DO<', '>LO QUE HACEMOS<');
+  content = content.replaceAll('>SOCIALS<', '>CONTACTO<');
+  content = content.replaceAll('>STUDY — 04.13<', '>CASOS — 03<');
+  content = content.replaceAll('>ANALOG ARCHIVES<', '>CAPACIDADES<');
+  content = content.replaceAll('>UNITED KINGDOM<', '>PERÚ<');
+  content = content.replaceAll('>United Kingdom<', '>Perú<');
+  content = content.replaceAll('>SUBMIT<', '>ENVIAR MENSAJE<');
+  content = content.replaceAll('>Submit<', '>Enviar mensaje<');
+  content = content.replaceAll('>MODUS VIVENDI<', '>PRODUCTO EN MOVIMIENTO<');
+  content = content.replaceAll('>RIPPLE TRACE<', '>IMPACTO MEDIBLE<');
+  content = content.replaceAll('privacy@vertical.com', 'contacto@jcarlabs.com');
+  content = content.replaceAll('VERTICAL STORAGE — 2015-2026', 'JCAR LABS — SOLUCIONES DIGITALES');
+  content = content.replaceAll('STUDIO CAM66, LONDON', 'JCAR LABS · PERÚ');
+  content = content.replaceAll('DANIEL &amp; ADAM', 'EQUIPO JCAR LABS');
+  content = content.replaceAll('DANIEL & ADAM', 'EQUIPO JCAR LABS');
+  content = content.replaceAll('CHASING THE WHITE RABBIT*', 'EXPLORACIÓN CONTINUA*');
+  content = content.replaceAll('Framer template', '');
+
+  // 10. Phases Translation (Spanish)
+  content = content.replaceAll('BREAK</span>', 'IDEA</span>');
+  content = content.replaceAll('BUILD</span>', 'DISEÑO</span>');
+  content = content.replaceAll('BEND</span>', 'DESARROLLO</span>');
+  content = content.replaceAll('PHASE/', 'FASE/');
+
+  // 11. Capabilities Translation (Spanish)
+  content = content.replaceAll('>VISUAL EXPERIMENTS<', '>SOFTWARE & SAAS<');
+  content = content.replaceAll('>FORM & FUNCTION<', '>SISTEMAS LEGACY<');
+  content = content.replaceAll('>SOUND & MOTION<', '>IA, AGENTES & LLMOPS<');
+  content = content.replaceAll('>WRITTEN FRAGMENTS<', '>CLOUD & APIS<');
+  content = content.replaceAll('>THINGS I CAN’T EXPLAIN<', '>CONSULTORÍA & CÓDIGO<');
+  content = content.replaceAll('>THINGS I CAN&#39;T EXPLAIN<', '>CONSULTORÍA & CÓDIGO<');
 
   if (content !== original) {
     await fs.writeFile(file, content, 'utf8');

@@ -2680,14 +2680,15 @@ body {
   }
 }
 
-/* Reducción del tamaño de VER, LA, JCL un 20% (scale 0.8) */
-#main [data-framer-name="Large Text 1"],
-#main [data-framer-name="Large Text 2"],
-#main [data-framer-name="Large Text 3"],
-.framer-8i69wj,
-.framer-fafui1,
-.framer-h7qxhe {
-  transform: scale(0.8) !important;
-  transform-origin: center center !important;
+/* Ocultar definitivamente enlaces y badges de la plantilla Framer original */
+[data-framer-name="Creator"],
+.framer-18zdr70,
+a[href*="framerpod.com"],
+a[aria-label*="Framer template"],
+#__framer-badge-container {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 

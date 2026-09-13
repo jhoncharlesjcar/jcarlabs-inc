@@ -14,8 +14,23 @@ export function createBrandScript(original, sourceBlocks, runtime) {
   };
   const syntax = ts.createSourceFile('brand-content.js', original, ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
   const edits = [];
+  function isKeyOrCondition(node) {
+    const parent = node.parent;
+    if (!parent) return false;
+    // Don't replace property keys: { "KEY": "VALUE" }
+    if (ts.isPropertyAssignment(parent) && parent.name === node) return true;
+    // Don't replace comparisons: foo === "BAR" or foo !== "BAR"
+    if (ts.isBinaryExpression(parent)) return true;
+    // Don't replace function/method call arguments: foo.includes("BAR"), get("BAR"), querySelector("BAR")
+    if (ts.isCallExpression(parent)) return true;
+    // Don't replace switch case expressions: case "BAR":
+    if (ts.isCaseClause(parent)) return true;
+    // Don't replace element access: obj["BAR"]
+    if (ts.isElementAccessExpression(parent)) return true;
+    return false;
+  }
   function visit(node) {
-    if (ts.isStringLiteral(node) && content[normalized(node.text)]) {
+    if (ts.isStringLiteral(node) && !isKeyOrCondition(node) && content[normalized(node.text)]) {
       edits.push([node.getStart(syntax), node.end, JSON.stringify(content[normalized(node.text)])]);
     }
     ts.forEachChild(node, visit);

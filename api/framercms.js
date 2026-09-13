@@ -106,8 +106,8 @@ export default async function handler(req, res) {
   }
 
   const url = new URL(req.url, 'http://localhost');
-  const file = url.searchParams.get('file');
-  const range = url.searchParams.get('range');
+  const file = (req.query && req.query.file) || url.searchParams.get('file');
+  const range = (req.query && req.query.range) || url.searchParams.get('range');
 
   // ── Validate filename ─────────────────────────────────────────────────────
   if (

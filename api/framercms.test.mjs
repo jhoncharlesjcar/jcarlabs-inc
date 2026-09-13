@@ -115,3 +115,31 @@ test('handler rejects invalid or traversal filenames with 400', async () => {
     assert.equal(res.statusCode, 400, `Expected 400 for file ${file}`);
   }
 });
+
+test('handler reads file and range from req.query (Vercel serverless format)', async () => {
+  resetRateLimitStore();
+  const createMockRes = () => ({
+    statusCode: null,
+    headers: {},
+    body: null,
+    writeHead(code, headers) { this.statusCode = code; this.headers = headers; },
+    end(payload) { this.body = payload; },
+  });
+
+  const res = createMockRes();
+  const req = {
+    url: '/api/framercms?file=PuvR7bUan-indexes-default-0.framercms',
+    query: {
+      file: 'PuvR7bUan-indexes-default-0.framercms',
+      range: '0-144',
+    },
+    headers: {},
+  };
+
+  await handler(req, res);
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.headers['Content-Type'], 'application/octet-stream');
+  assert.equal(res.headers['Content-Length'], '145');
+  assert.equal(res.body.length, 145);
+});
+
