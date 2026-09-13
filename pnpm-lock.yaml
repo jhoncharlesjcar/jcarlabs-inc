@@ -11,6 +11,9 @@ importers:
       astro:
         specifier: 7.3.2
         version: 7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(yaml@2.9.0)
+      esbuild:
+        specifier: ^0.28.2
+        version: 0.28.2
       parse5:
         specifier: 8.0.1
         version: 8.0.1
