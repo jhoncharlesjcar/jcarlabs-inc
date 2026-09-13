@@ -161,8 +161,37 @@ export const services = [
     ] },
 ];
 
-// Replacements for text already present in the existing content layer.
+// Replacements for template text and content layer.
 export const sharedCopy = {
+  // Navigation & Core Identity
+  'HOME': 'INICIO',
+  'WORK': 'PROYECTOS',
+  'ABOUT': 'NOSOTROS',
+  'THOUGHTS': 'SERVICIOS',
+  'CONTACT': 'CONTACTO',
+  'PRIVACY POLICY': 'POLÍTICA DE PRIVACIDAD',
+  'TERMS OF USE': 'TÉRMINOS DE USO',
+  'VERTICAL': 'JCAR LABS',
+  'ADAM KNOXVILLE': 'JCAR LABS INC',
+  'ADAM KNOXVILLE / VERTICAL': 'JCAR LABS INC',
+  'VISUAL ARTIST/CREATOR': 'DESARROLLO WEB · SOFTWARE · IA',
+  'INDEPENDENT VISUAL ARTIST': 'CEO de Jcar Labs Inc.',
+  'EXPLORE': 'DESCUBRIR',
+
+  // Hero section copy
+  'I BREAK THINGS': 'CREAMOS SOLUCIONES',
+  'I break things': 'Creamos soluciones',
+  'TO SEE WHAT': 'DIGITALES QUE',
+  'to see WHAT': 'digitales que',
+  'THEY ARE MADE OF': 'HACEN CRECER NEGOCIOS',
+  'they are made of': 'hacen crecer negocios',
+  'PHASE/BREAK': 'FASE/IDEA',
+  'PHASE/BUILD': 'FASE/DISEÑO',
+  'PHASE/BEND': 'FASE/DESARROLLO',
+  'PHASE/RELEASE': 'FASE/ESCALA',
+  'IDX/AK': 'JCAR/LABS',
+
+  // Corporate Messaging
   'DESARROLLO WEB · SOFTWARE · IA': 'SOFTWARE · SISTEMAS · IA',
   'EQUIPO DE DESARROLLO Y TECNOLOGÍA': 'INGENIERÍA DE SOFTWARE PARA NEGOCIOS',
   'CREAMOS SOLUCIONES': 'SOFTWARE',

@@ -54,12 +54,22 @@ export function corporateDocument(source, route) {
     catch { return _; }
     function clean(value) {
       if (!value || typeof value !== 'object') return;
+      if (value.creator && typeof value.creator === 'object') {
+        value.creator = { '@type': 'Organization', name: site.name, url: site.origin || undefined };
+      }
+      if (value.author && typeof value.author === 'object') {
+        value.author = { '@type': 'Organization', name: site.name, url: site.origin || undefined };
+      }
       for (const [key, item] of Object.entries(value)) {
-        if (typeof item === 'string' && item.startsWith('https://vertical.framer.media')) {
-          if (site.origin && (key === 'url' || key === '@id')) {
-            value[key] = `${site.origin}${route === '/' ? '' : route}`;
-          } else {
-            delete value[key];
+        if (typeof item === 'string') {
+          if (item.startsWith('https://vertical.framer.media')) {
+            if (site.origin && (key === 'url' || key === '@id')) {
+              value[key] = `${site.origin}${route === '/' ? '' : route}`;
+            } else {
+              delete value[key];
+            }
+          } else if (/adam knoxville/i.test(item)) {
+            value[key] = site.name;
           }
         } else clean(item);
       }

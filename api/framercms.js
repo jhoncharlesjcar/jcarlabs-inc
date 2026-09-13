@@ -13,6 +13,64 @@ const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
 };
 
+export const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 60 seconds
+export const RATE_LIMIT_MAX_REQUESTS = 60;
+
+// In-memory sliding-window request tracker per IP
+const ipRequestTimestamps = new Map();
+
+/**
+ * Check rate limit for a client IP using sliding-window algorithm.
+ * @param {string} ip
+ * @param {number} [now]
+ * @param {number} [maxRequests]
+ * @param {number} [windowMs]
+ * @returns {{ allowed: boolean, limit: number, remaining: number, reset: number }}
+ */
+export function checkRateLimit(ip, now = Date.now(), maxRequests = RATE_LIMIT_MAX_REQUESTS, windowMs = RATE_LIMIT_WINDOW_MS) {
+  const windowStart = now - windowMs;
+  let timestamps = ipRequestTimestamps.get(ip);
+  if (!timestamps) {
+    timestamps = [];
+    ipRequestTimestamps.set(ip, timestamps);
+  }
+
+  const validTimestamps = timestamps.filter(t => t > windowStart);
+  ipRequestTimestamps.set(ip, validTimestamps);
+
+  // Occasional pruning of stale IPs to prevent unbounded memory growth
+  if (ipRequestTimestamps.size > 5000) {
+    for (const [key, list] of ipRequestTimestamps.entries()) {
+      if (list.length === 0 || list[list.length - 1] <= windowStart) {
+        ipRequestTimestamps.delete(key);
+      }
+    }
+  }
+
+  if (validTimestamps.length >= maxRequests) {
+    const oldest = validTimestamps[0];
+    const resetSeconds = Math.max(1, Math.ceil((oldest + windowMs - now) / 1000));
+    return {
+      allowed: false,
+      limit: maxRequests,
+      remaining: 0,
+      reset: resetSeconds,
+    };
+  }
+
+  validTimestamps.push(now);
+  return {
+    allowed: true,
+    limit: maxRequests,
+    remaining: maxRequests - validTimestamps.length,
+    reset: Math.ceil(windowMs / 1000),
+  };
+}
+
+export function resetRateLimitStore() {
+  ipRequestTimestamps.clear();
+}
+
 /**
  * Vercel serverless function — Framer CMS binary range protocol handler.
  *
@@ -27,6 +85,26 @@ const SECURITY_HEADERS = {
  * @param {import('http').ServerResponse}  res
  */
 export default async function handler(req, res) {
+  // ── Rate Limiting (60 req / 60 sec per IP) ────────────────────────────────
+  const forwarded = req.headers && req.headers['x-forwarded-for'];
+  const clientIp = (typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : '') ||
+    req.socket?.remoteAddress ||
+    '127.0.0.1';
+
+  const rateLimit = checkRateLimit(clientIp);
+  if (!rateLimit.allowed) {
+    res.writeHead(429, {
+      ...SECURITY_HEADERS,
+      'Content-Type': 'text/plain; charset=UTF-8',
+      'Retry-After': String(rateLimit.reset),
+      'RateLimit-Limit': String(rateLimit.limit),
+      'RateLimit-Remaining': '0',
+      'RateLimit-Reset': String(rateLimit.reset),
+    });
+    res.end('429 Too Many Requests');
+    return;
+  }
+
   const url = new URL(req.url, 'http://localhost');
   const file = url.searchParams.get('file');
   const range = url.searchParams.get('range');

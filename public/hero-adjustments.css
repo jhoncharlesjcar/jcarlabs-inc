@@ -12,3 +12,15 @@
     min-height: clamp(220px, 20vw, 360px);
   }
 }
+
+/* Reducción del tamaño de VER, LA, JCL un 20% (scale 0.8) */
+#main [data-framer-name="Large Text 1"],
+#main [data-framer-name="Large Text 2"],
+#main [data-framer-name="Large Text 3"],
+.framer-8i69wj,
+.framer-fafui1,
+.framer-h7qxhe {
+  transform: scale(0.8) !important;
+  transform-origin: center center !important;
+}
+

@@ -1,648 +1,41 @@
-(() => {
-  // Restoration mode keeps the exported Framer component tree intact. Branding
-  // is limited to content, links and form behaviour so Framer can continue to
-  // own layout, breakpoints, hover variants and scroll-driven animations.
-  const RESTORATION_MODE = true
-  const BRAND = "JCAR Labs Inc."
-  const CONTACT_URL = "https://wa.me/51904615337"
-  const EMAIL_URL = "mailto:contacto@jcarlabs.com"
+(()=>{const u="JCAR Labs Inc.",S="https://wa.me/51904615337",N="mailto:contacto@jcarlabs.com",E=e=>String(e||"").replace(/\s+/g," ").trim().toUpperCase(),c=e=>String(e).replace(/[&<>"']/g,t=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[t]),B=e=>Array.from(String(e)).map((t,a)=>`<span style="--char-index:${a}">${t===" "?"&nbsp;":c(t)}</span>`).join("");let C,T,m,h,P=!1,L;const O=new Map(Object.entries({INICIO:"INICIO",PROYECTOS:"PROYECTOS",NOSOTROS:"NOSOTROS",SERVICIOS:"SERVICIOS",CONTACTO:"CONTACTO","POL\xCDTICA DE PRIVACIDAD":"POL\xCDTICA DE PRIVACIDAD","T\xC9RMINOS DE USO":"T\xC9RMINOS DE USO","JCAR LABS":"JCAR LABS","JCAR LABS INC":"JCAR LABS INC","JCAR LABS INC":"JCAR LABS INC","DESARROLLO WEB \xB7 SOFTWARE \xB7 IA":"SOFTWARE \xB7 SISTEMAS \xB7 IA","CEO de Jcar Labs Inc.":"CEO de Jcar Labs Inc.",DESCUBRIR:"DESCUBRIR","CREAMOS SOLUCIONES":"SOFTWARE","DIGITALES QUE":"PARA TU","HACEN CRECER NEGOCIOS":"NEGOCIO","FASE/IDEA":"FASE/IDEA","FASE/DISE\xD1O":"FASE/DISE\xD1O","FASE/DESARROLLO":"FASE/DESARROLLO","FASE/ESCALA":"FASE/ESCALA","JCAR/LABS":"JCAR/LABS","VISUAL EXPERIMENTS":"SOFTWARE & SAAS","FORM & FUNCTION":"SISTEMAS LEGACY","SOUND & MOTION":"IA, AGENTES & LLMOPS","WRITTEN FRAGMENTS":"CLOUD & APIS","THINGS I CAN\u2019T EXPLAIN":"SOLUCIONES EMPRESARIALES","MODERN RITUALS":"PROYECTOS REALES","STUDY \u2014 04.13":"CASOS \u2014 03","SELECTED WORK":"PROYECTOS SELECCIONADOS","LINES BECOME SIGNALS.":"LAS NECESIDADES SE CONVIERTEN EN PRODUCTOS.","SURFACES BECOME STORIES.":"LAS IDEAS SE CONVIERTEN EN RESULTADOS.","LINES BECOME SIGNALS. SURFACES BECOME STORIES.":"LAS NECESIDADES SE CONVIERTEN EN PRODUCTOS. LAS IDEAS SE CONVIERTEN EN RESULTADOS.","STRUCTURE ARGUES WITH IMPULSE UNTIL BOTH LEARN TO STAND STILL. GRIDS SET THE PACE. MARGINS HOLD THE QUIET.":"DISE\xD1AMOS Y DESARROLLAMOS SOLUCIONES DIGITALES QUE CONECTAN TECNOLOG\xCDA, NEGOCIO Y EXPERIENCIA DE USUARIO.","ARTIFACT\u2014I":"SISTEMA HOTELERO","ARTIFACT\u2014II":"NEZUS BISUTER\xCDA","ARTIFACT\u2014III":"SOLUCIONES EMPRESARIALES","[CONFESS]":"[CONSTRUIR]",CAL:"JCL",TI:"LAB","THE ARCHIVE OF EVERYTHING I CAN\u2019T KEEP IN ONE PLACE.":"ECOSISTEMA DE SOLUCIONES DIGITALES.","VERTICAL STORAGE \u2014 2015-2026":"JCAR LABS \u2014 SOLUCIONES DIGITALES","ANALOG ARCHIVES":"CAPACIDADES","MOD \u2014 I/AK":"CAP \u2014 01","MOD \u2014 II/AK":"CAP \u2014 02","MOD \u2014 III/AK":"CAP \u2014 03","MOD \u2014 IV/AK":"CAP \u2014 04","MOD \u2014 V/AK":"CAP \u2014 05","STUDIES IN IMAGE, LIGHT, AND DISTORTION. TESTS THAT DON\u2019T FOLLOW RULES. PIECES BUILT FROM INSTINCT, ERROR, AND THE URGE TO SEE WHAT HAPPENS NEXT.":"SOFTWARE A MEDIDA Y PRODUCTOS SAAS QUE CONECTAN USUARIOS, DATOS Y PROCESOS DE NEGOCIO.","OBJECTS, SYSTEMS, AND SHAPES SHAPED WITH INTENTION \u2014 THEN PUSHED UNTIL THEY REVEAL THEIR LIMITS. A DIALOGUE BETWEEN WHAT LOOKS RIGHT AND WHAT WORKS.":"MODERNIZACI\xD3N DE SISTEMAS LEGACY CON CAMBIOS GRADUALES, VALIDACI\xD3N Y CONTINUIDAD OPERATIVA.","MOVING IMAGES, RHYTHM STUDIES, AND AUDIOVISUAL FRAGMENTS. WORK DRIVEN BY PULSE, TENSION, AND THE QUIET BETWEEN FRAMES.":"IA TRANSMODAL, AGENTES Y LLMOPS PARA CONECTAR MODELOS CON DATOS Y HERRAMIENTAS DEL NEGOCIO.","POEMS, LYRICS, AND UNFINISHED LINES. THOUGHTS CAUGHT MID-BREATH. WORDS THAT BEHAVE MORE LIKE IMAGES THAN SENTENCES.":"ARQUITECTURA CLOUD, APIS Y MICROSERVICIOS CON CONTRATOS CLAROS Y CAPACIDAD DE EVOLUCI\xD3N.","CREATIVE IDEAS THAT ARRIVED UNINVITED AND REFUSED TO LEAVE. THE WORK THAT SITS CLOSEST TO WHO I AM AND WHO I\u2019M STILL BECOMING.":"CONSULTOR\xCDA DE ARQUITECTURA Y AUDITOR\xCDA DE C\xD3DIGO PARA PRIORIZAR RIESGOS Y MEJORAS.","I\u2019AM":"SOMOS","DEVELOPING WORK ACROSS DIGITAL AND PHYSICAL FORMATS.":"DESARROLLAMOS PRODUCTOS DIGITALES DE PRINCIPIO A FIN.","I MAKE WORK ACROSS IMAGE, FORM, MOTION, AND TEXT.":"SOFTWARE, ARQUITECTURA E IA CONECTADOS CON TU NEGOCIO.","MOST PROJECTS START WITH A RULE. EXPERIENCE TRIGGERS THE NEXT STEP.":"CADA PROYECTO PARTE DE UNA NECESIDAD REAL Y AVANZA CON ESTRATEGIA, DISE\xD1O Y TECNOLOG\xCDA.",'"PERFECTION IS ACHIEVED NOT WHEN THERE IS NOTHING MORE TO ADD, BUT WHEN THERE IS NOTHING LEFT TO TAKE AWAY.\u201D':'"LA TECNOLOG\xCDA FUNCIONA MEJOR CUANDO RESUELVE ALGO REAL."',"\u2014 ANTOINE DE SAINT-EXUPERY":"\u2014 JCAR LABS INC.",SOCIALS:"CONTACTO","I\u2019M A UK-BASED VISUAL ARTIST. MY PRACTICE IS DRIVEN BY EXPERIMENTS, SYSTEMS, AND ITERATION. SOME WORK RESOLVES QUICKLY, OTHERS EVOLVE OVER TIME.":"JCAR LABS INC. INTEGRA INGENIER\xCDA DE PRODUCTO, MODERNIZACI\xD3N E IA. TRABAJAMOS CON REACT, NODE.JS, PYTHON, JAVA, PHP Y SQL SEG\xDAN EL CONTEXTO.","THINGS I DO":"ECOSISTEMA TECNOL\xD3GICO","SOUND DESIGN":"IA, AGENTES & LLMOPS","MOTION GRAPHICS":"CLOUD & APIS","INSTALLATION STUDIES":"SISTEMAS LEGACY",STORYBOARDS:"AUDITOR\xCDA DE C\xD3DIGO","VISUAL SCRIPTS":"UX/UI","VIEW THE WORK":"VER PROYECTOS","(PROJECT)":"(PROYECTO)","UNSTABLE SEQUENCE":"SISTEMA HOTELERO","A MOTION STUDY THAT RESISTS RESOLUTION.":"GESTI\xD3N HOTELERA CON FACTURACI\xD3N ELECTR\xD3NICA.","SELF-INITIATED INDEPENDENT PROJECT":"SOFTWARE EMPRESARIAL PARA HOTELES EN PER\xDA","MARCH 2025":"JAVA \xB7 MYSQL","DRAWN FROM MOTION STUDIES WHERE CLARITY FADES AND RHYTHM FRACTURES. MEANING APPEARS IN THE GAPS BETWEEN FRAMES, WHERE INSTABILITY BECOMES STRUCTURAL.":"SISTEMA DE GESTI\xD3N PARA HOTELES EN PER\xDA CON FACTURACI\xD3N ELECTR\xD3NICA Y CONTROL DE OPERACIONES.","STILL PRESSURE":"NEZUS BISUTER\xCDA","A PHOTOGRAPHIC STUDY OF PRESENCE, PAUSE, AND CONTAINED FORCE.":"E-COMMERCE Y PRESENCIA DIGITAL PARA UNA MARCA DE JOYER\xCDA.","V\xD6GEL DISTRIBUTION":"DESARROLLO WEB \xB7 UX/UI","SEPTEMBER 2025":"E-COMMERCE","MOMENTS OF STILLNESS WHERE TENSION REMAINS PRESENT. LIGHT, DISTANCE, AND POSTURE CARRY WEIGHT WITHOUT ACTION.":"SITIO CORPORATIVO Y TIENDA DIGITAL DISE\xD1ADOS PARA PRESENTAR PRODUCTOS Y FACILITAR LA COMPRA.","SURFACE TENSION":"SOLUCIONES EMPRESARIALES","A CONTROLLED STUDY IN RESTRAINT, PRESSURE, AND DELAYED RELEASE.":"COMUNICACI\xD3N INTERNA Y GESTI\xD3N EN UNA SOLA PLATAFORMA.","ATLAS BROADCASTING":"CLOUD & APIS","OCTOBER 2025":"PLATAFORMA EMPRESARIAL","INSPIRED BY MOMENTS WHERE FORM APPEARS STABLE WHILE FORCE ACCUMULATES BENEATH THE SURFACE. TENSION BUILDS THROUGH RESTRAINT RATHER THAN MOVEMENT.":"PLATAFORMA PARA CENTRALIZAR COMUNICACI\xD3N, INFORMACI\xD3N Y PROCESOS INTERNOS DE LA EMPRESA.",INSPIRATION:"SOLUCI\xD3N","THE VERTICAL BLOG":"ECOSISTEMA DIGITAL","THE ARCHIVE OF THOUGHTS I CAN KEEP IN ONE PLACE.":"SOFTWARE, ARQUITECTURA E IA PARA HACER EVOLUCIONAR TU NEGOCIO.","DECEMBER 30, 2025":"SERVICIO 01","BEYOND AI AESTHETICS: WHAT HUMAN-LED DIGITAL ART MEANS NOW":"SOFTWARE & SAAS","AI DIDN\u2019T REPLACE CREATIVITY. IT RESHAPED IT \u2014 FORCING ARTISTS TO REDEFINE WHAT HUMAN ORIGINALITY TRULY MEANS.":"SITIOS WEB MODERNOS, RESPONSIVOS Y OPTIMIZADOS PARA SEO, CONSTRUIDOS A LA MEDIDA DE CADA NEGOCIO.","OCTOBER 29, 2025":"SERVICIO 02","WHEN IMAGES BEGIN TO LISTEN: THE QUIET POWER OF RESPONSIVE ART":"IA, AGENTES & LLMOPS","INTERACTIVE WORK IS EVOLVING BEYOND TOUCHSCREENS AND GIMMICKS. THE MOST COMPELLING CONTEMPORARY PIECES NOW RESPOND SUBTLY \u2014 TO SOUND, ENVIRONMENT, PRESENCE, AND EMOTION.":"INTEGRACI\xD3N DE MODELOS DE IA Y AUTOMATIZACI\xD3N DE PROCESOS PARA TRABAJAR CON MAYOR VELOCIDAD Y PRECISI\xD3N.","DECEMBER 3, 2025":"SERVICIO 03","THE RISE OF EXPERIENTIAL MINIMALISM IN CONTEMPORARY EXHIBITIONS":"CLOUD & APIS","INSTEAD OF SPECTACLE, GALLERIES ARE EMBRACING CONTROLLED INTENSITY \u2014 RESTRAINED ENVIRONMENTS WITH POWERFUL PSYCHOLOGICAL IMPACT.":"DESARROLLO INTEGRAL DESDE LA BASE DE DATOS Y LA L\xD3GICA DE NEGOCIO HASTA LA INTERFAZ DE USUARIO.",BY:"ESPECIALIDAD","WRITTEN BY":"ESCRITO POR","READING TIME":"TIEMPO DE LECTURA",RELEASED:"LANZADO","MORE PROJECTS":"M\xC1S PROYECTOS","MORE THOUGHTS":"M\xC1S SERVICIOS","THE MAIN CHALLENGE WAS SUSTAINING TENSION WITHOUT ARRIVAL.":"EL RETO PRINCIPAL FUE INTEGRAR OPERACIONES, RESERVAS Y FACTURACI\xD3N EN UN SOLO FLUJO.","HANNA JANE WINSTON":u,"MATTHEW SPEARS":u,"FREJA ANDERSSON":u,"CONTACT ME":"CONTACTO","IF SOMETHING HERE SPARKED A THOUGHT, RAISED A QUESTION, OR SIMPLY MADE YOU PAUSE.":"HABLEMOS DEL SOFTWARE QUE TU NEGOCIO NECESITA CONSTRUIR O EVOLUCIONAR.","I\u2019M ALWAYS OPEN TO CONVERSATIONS ABOUT IDEAS, COLLABORATION, PROCESS, OR ANYTHING IN THE GREY AREA IN BETWEEN. LET\u2019S TALK.":"CU\xC9NTANOS SOBRE TU PRODUCTO, TU SISTEMA ACTUAL O EL PROCESO QUE QUIERES CONECTAR CON IA.",SUBMIT:"ENVIAR MENSAJE","BY SUBMITTING, YOU CONSENT TO MY PRIVACY POLICY.":"AL ENVIAR, ACEPTAS NUESTRA POL\xCDTICA DE PRIVACIDAD.","(44) 7700 900 482":"+51 904 615 337","HEY@ADAMKNOXVILLE.DESIGN":"CONTACTO@JCARLABS.COM","PHONE COPIED!":"TEL\xC9FONO COPIADO","EMAIL COPIED!":"CORREO COPIADO","STUDIO 204":u,"UNITED KINGDOM":"PER\xDA",VIMEO:"WHATSAPP",YOUTUBE:"EMAIL","\xA9 2026 VERTICAL BY ADAM KNOXVILLE. ALL WORK, ALL RIGHTS.":"\xA9 2026 JCAR LABS INC. TODOS LOS DERECHOS RESERVADOS.","ART IS A CONTROLLED INTERRUPTION A PRACTICE OF CATCHING THE MOMENT BEFORE IT DISAPPEARS.":"INGENIER\xCDA DE SOFTWARE PARA CREAR PRODUCTOS, MODERNIZAR SISTEMAS Y CONECTAR EL NEGOCIO CON IA.","I WORK ACROSS IMAGE, OBJECT, MOTION, AND SOUND TO TRACE THE SHAPE OF WHAT DOESN\u2019T SIT STILL.":"UNIMOS SOFTWARE A MEDIDA, ARQUITECTURA Y OPERACI\xD3N PARA CONSTRUIR SISTEMAS ESCALABLES Y SEGUROS.","IT ISN\u2019T A PORTFOLIO.":"INGENIER\xCDA CON PROP\xD3SITO.","IT\u2019S THE PLACE WHERE THE WORK STAYS HONEST. AN ONGOING RECORD OF WHAT I MAKE WHEN THOUGHT MOVES FASTER THAN STRUCTURE.":"CADA SOLUCI\xD3N PARTE DEL NEGOCIO Y SE SOSTIENE EN C\xD3DIGO, DATOS Y DECISIONES DE ARQUITECTURA.","NEW YORK (2025)":"ESTRATEGIA","PARIS (2023)":"UX/UI","SINGAPORE (2014)":"DESARROLLO","OSAKA (2019)":"INTEGRACIONES","BRIGHTON (2018)":"CLOUD & APIS","SYDNEY (2021)":"ESCALABILIDAD",INDX:"JCL","// CONCEPTUAL":"// PRODUCTO DIGITAL","REVISION \u2014 NEUE 7.6":"VERSI\xD3N \u2014 1.0","NOTHING STAYS UNTOUCHED":"CADA DETALLE TIENE UN PROP\xD3SITO","PAGES BECOME PLACES WORTH LINGERING IN, AND ISSUES BECOME EXPERIENCES PEOPLE ANTICIPATE, KEEP, AND SHARE.":"CONSTRUIMOS PRODUCTOS SAAS Y SOFTWARE A MEDIDA CON UNA BASE PREPARADA PARA OPERAR Y EVOLUCIONAR.","PERSPECTIVE NOT THE TRUTH":"INGENIER\xCDA DE PRODUCTO","CAT \u2014 1.07":"ETAPA \u2014 01","I WORK BETWEEN ORDER AND INTERRUPTION. WHERE CLEAN LINES ARGUE WITH IMPULSE. WHERE RHYTHM BREAKS BEFORE IT RESOLVES.":"ANALIZAMOS EL NEGOCIO, ORDENAMOS LAS PRIORIDADES Y DISE\xD1AMOS UNA EXPERIENCIA QUE RESPONDE A OBJETIVOS CONCRETOS.","CAT \u2014 1.08":"ETAPA \u2014 02","VERTICAL IS THE STATE I BUILD IN\u2014 A PLACE FOR UNFINISHED THOUGHTS, SHARPENED IDEAS, AND THE THINGS THAT REFUSE SILENCE.":"JCAR LABS ES DONDE LAS IDEAS SE CONVIERTEN EN SISTEMAS CONFIABLES, MEDIBLES Y LISTOS PARA EVOLUCIONAR.","EXPLORATION PHASE":"NUESTRO PROCESO","SOME PIECES SETTLE.SOME DON\u2019T.":"CADA PROYECTO COMIENZA CON PREGUNTAS.","SOME PIECES SETTLE. SOME DON\u2019T.":"CADA PROYECTO COMIENZA CON PREGUNTAS.","BOTH REVEAL SOMETHING THE FINISHED VERSION CAN\u2019T.":"LAS RESPUESTAS DEFINEN EL PRODUCTO QUE REALMENTE NECESITAS.","SOURCE \u2014 FIELD NOTES":"M\xC9TODO \u2014 JCAR LABS","MODULE \u2014 A.1":"FASE \u2014 01","A SECTION OF STUDIES IN RAW STRUCTURE. TEXTURES TESTED UNDER PRESSURE. FORMS PUSHED UNTIL THEY REVEAL INTENTION.":"DESCUBRIMIENTO Y ESTRATEGIA. ENTENDEMOS EL PROBLEMA, LOS USUARIOS Y LOS INDICADORES DE \xC9XITO.","MODULE \u2014 A.2":"FASE \u2014 02","EXPERIMENTS WITH PHYSICAL MATERIALS AND CONTROLLED DISTORTION. WHERE TOUCH, WEIGHT, AND FAILURE SHAPE THE OUTCOME.":"DISE\xD1O UX/UI Y PROTOTIPADO. VALIDAMOS FLUJOS, CONTENIDO Y DECISIONES VISUALES ANTES DE CONSTRUIR.","MODULE \u2014 A.3":"FASE \u2014 03","OBJECTS EXAMINED THROUGH REPETITION. SMALL SHIFTS CREATING NEW PATTERNS. A RECORD OF HOW MATTER RESPONDS TO MOTION.":"DESARROLLO E INTEGRACI\xD3N. CONSTRUIMOS FRONTEND, BACKEND, DATOS Y AUTOMATIZACIONES COMO UN SOLO SISTEMA.","MODULE \u2014 A.4":"FASE \u2014 04","FRAGMENTS FROM ONGOING INVESTIGATIONS. PART PROTOTYPES, PART UNRESOLVED IDEAS. WORK THAT STAYS HONEST BY NOT PRETENDING TO BE FINISHED.":"PRUEBAS, PUBLICACI\xD3N Y MEJORA CONTINUA. MEDIMOS EL RESULTADO Y PREPARAMOS LA SOLUCI\xD3N PARA ESCALAR.","PATTERNS EMERGE. FRICTION CREATES MEANING.":"LOS RETOS REVELAN OPORTUNIDADES.","SIGNALS FORM. SURFACES RESPOND.":"LOS DATOS ORIENTAN. EL PRODUCTO RESPONDE.",ILLUSIONLATENCYPERSPECTIVECONTROL:"IDEADISE\xD1OC\xD3DIGOIMPACTO","ILLUSION LATENCY PERSPECTIVE CONTROL":"IDEA DISE\xD1O C\xD3DIGO IMPACTO","EMBRACING THE":"CONSTRUIMOS LO",UNKNOWN:"POSIBLE","I FOLLOW IDEAS INTO PLACES THAT DON\u2019T HAVE NAMES YET. SOME REVEAL STRUCTURE. SOME COLLAPSE INTO NOISE.":"EXPLORAMOS SOLUCIONES SIN PERDER DE VISTA EL OBJETIVO: CREAR TECNOLOG\xCDA QUE LAS PERSONAS PUEDAN USAR Y LOS NEGOCIOS PUEDAN MEDIR.","WORK SHAPED BY MOVEMENT, MEMORY, AND INTERRUPTION. STUDIES IN LIGHT, DEPTH, AND DISTORTION. EACH PIECE BEGINS AS A QUESTION AND ENDS WHEREVER IT NEEDS TO.":"COMBINAMOS DISE\xD1O, INGENIER\xCDA Y AUTOMATIZACI\xD3N. CADA DECISI\xD3N NACE DE UNA NECESIDAD Y TERMINA EN UNA EXPERIENCIA COHERENTE.","WHAT HOLDS UP IS WHAT MATTERS.":"LO QUE FUNCIONA ES LO QUE IMPORTA.","OBSERVATION OVER EXPLANATION.PROCESS OVER CERTAINTY.":"CLARIDAD ANTES QUE COMPLEJIDAD. RESULTADOS ANTES QUE SUPOSICIONES.","OBSERVATION OVER EXPLANATION. PROCESS OVER CERTAINTY.":"CLARIDAD ANTES QUE COMPLEJIDAD. RESULTADOS ANTES QUE SUPOSICIONES.","I FOLLOW IDEAS INTO PLACES THAT SHIFT AS I STEP INTO THEM. PATHS APPEAR, VANISH, REAPPEAR SOMEWHERE ELSE. SOME LEAD TO CLARITY. SOME LEAD TO NOISE.BOTH KEEP THE RABBIT MOVING.":"INVESTIGAMOS, PROTOTIPAMOS Y APRENDEMOS R\xC1PIDO. CADA ITERACI\xD3N ACERCA EL PRODUCTO A UNA SOLUCI\xD3N M\xC1S CLARA.","I FOLLOW IDEAS INTO PLACES THAT SHIFT AS I STEP INTO THEM. PATHS APPEAR, VANISH, REAPPEAR SOMEWHERE ELSE. SOME LEAD TO CLARITY. SOME LEAD TO NOISE. BOTH KEEP THE RABBIT MOVING.":"INVESTIGAMOS, PROTOTIPAMOS Y APRENDEMOS R\xC1PIDO. CADA ITERACI\xD3N ACERCA EL PRODUCTO A UNA SOLUCI\xD3N M\xC1S CLARA.","I CHASE THE THINGS THAT CHANGE DIRECTION WITHOUT WARNING. A LINE BENDS. A THOUGHT SPLITS. A SHAPE BECOMES SOMETHING IT WASN\u2019T MEANT TO BE. I STAY WITH IT UNTIL IT REVEALS A REASON TO FOLLOW.THE RABBIT IS NEVER STILL.":"ADAPTAMOS LA TECNOLOG\xCDA AL CONTEXTO DEL NEGOCIO. SI EL RETO CAMBIA, EL SISTEMA EVOLUCIONA SIN PERDER ESTABILIDAD.","I CHASE THE THINGS THAT CHANGE DIRECTION WITHOUT WARNING. A LINE BENDS. A THOUGHT SPLITS. A SHAPE BECOMES SOMETHING IT WASN\u2019T MEANT TO BE. I STAY WITH IT UNTIL IT REVEALS A REASON TO FOLLOW. THE RABBIT IS NEVER STILL.":"ADAPTAMOS LA TECNOLOG\xCDA AL CONTEXTO DEL NEGOCIO. SI EL RETO CAMBIA, EL SISTEMA EVOLUCIONA SIN PERDER ESTABILIDAD.",VISUAL:"DISE\xD1O","IMAGES PULLED FROM MOVEMENT, MEMORY, AND INTERRUPTION. STUDIES IN LIGHT, DEPTH, AND DISTORTION. WORK BUILT FROM THE URGE TO SEE WHAT HAPPENS NEXT.":"REACT Y JAVASCRIPT PARA CONECTAR A LAS PERSONAS CON LAS FUNCIONES Y LOS DATOS DEL PRODUCTO.",FORM:"SISTEMAS","OBJECTS, SYSTEMS, AND STRUCTURES UNDER TENSION. WHERE FUNCTION BENDS INTO EXPRESSION. TESTS BUILT TO REVEAL HOW MATERIALS BEHAVE WHEN PUSHED.":"NODE.JS, PYTHON, JAVA Y PHP PARA LOS SERVICIOS. SQL PARA ORGANIZAR LOS DATOS Y SOSTENER LOS PROCESOS.",MOTION:"CLOUD & APIS","FRAMES DRIVEN BY RHYTHM AND ATMOSPHERE. LOOPS, PULSES, AND SHIFTING PERSPECTIVES. PIECES MEANT TO BE FELT BEFORE THEY\u2019RE UNDERSTOOD.":"APIS, AGENTES Y LLMOPS PARA INTEGRAR CAPACIDADES DE IA CON EVALUACI\xD3N, TRAZABILIDAD Y SUPERVISI\xD3N.","\u201CWHETHER ON PAPER OR PIXELS, THE GOAL IS CONSTANT \u2014 DESIGN THAT DISAPPEARS AS THE STORY APPEARS, LETTING THE WORK SPEAK WITHOUT SHOUTING FOR ATTENTION\u201D \u2014 AK":"\u201CUN BUEN PRODUCTO DIGITAL HACE SIMPLE LO COMPLEJO Y CONVIERTE LA TECNOLOG\xCDA EN UNA VENTAJA REAL.\u201D \u2014 JCAR LABS","STUDIO CHAT WITH DANIEL MOORE":"C\xD3MO TRABAJAMOS EN JCAR LABS","ADAM TALKS ABOUT BREAKING FORM, CHASING RHYTHM, AND SHAPING THOUGHT INTO IMAGES.":"UNA MIRADA A NUESTRO PROCESO: DE LA ESTRATEGIA Y EL DISE\xD1O A LA IMPLEMENTACI\xD3N, LAS PRUEBAS Y EL CRECIMIENTO.","RECORDED AT CAM66 STUDIOS LONDON IN 24 NOVEMBER 2025":"ESTRATEGIA \xB7 DISE\xD1O \xB7 DESARROLLO \xB7 ESCALA","15 MINUTES, 13 SECONDS":"PROCESO DE PRINCIPIO A FIN","DIGITAL MEDIA":"PRODUCTOS DIGITALES","MODUS VIVENDI":"SOFTWARE QUE MUEVE NEGOCIOS","A DELICATE BALANCE OF STILLNESS AND MOVEMENT, PRESENCE AND ABSENCE. IT CAPTURES BODIES IN TRANSFORMATION, SUSPENDED IN QUIET RESISTANCE.":"UNA COMBINACI\xD3N DE DISE\xD1O, DATOS Y AUTOMATIZACI\xD3N PARA CREAR EXPERIENCIAS QUE RESPONDEN CON VELOCIDAD.","SHOWING UNTIL 10 MARCH 2026":"EVOLUCI\xD3N CONTINUA","TATE MODERN EXHIBITION":"PROYECTO DIGITAL JCAR LABS","BANKSIDE, LONDON SE1 9TG":"PER\xDA \xB7 SOLUCIONES PARA CRECER",SHOWROOM:"JCAR LABS","CONCEPT / MOTION ART":"PRODUCTO / AUTOMATIZACI\xD3N","CONTEMPORARY/":"TECNOLOG\xCDA/","MOTION CONCEPT":"SISTEMA EN MOVIMIENTO","A STUDY IN RHYTHM, DISTORTION, AND CONTROLLED IMBALANCE. SURFACES REACT TO MOVEMENT. MOVEMENT RESHAPES THE FRAME. THE PIECE SHIFTS BETWEEN CLARITY AND NOISE, REVEALING PATTERNS YOU ONLY SEE WHEN THEY BREAK.":"UNA EXPERIENCIA DIGITAL DONDE CADA INTERACCI\xD3N TIENE UN PROP\xD3SITO. LA INTERFAZ RESPONDE, LOS DATOS FLUYEN Y EL SISTEMA SE ADAPTA AL RITMO DEL NEGOCIO.","NTRL 461.78.A.002":"JCL 2026.PRODUCT.001","RIPPLE TRACE":"IMPACTO MEDIBLE","AK1.0":"JCL1.0","VISUAL IDENTITYMOTION MAPPINGART DIRECTIONCONCEPT DEVELOPMENT":"UX/UIARQUITECTURAAUTOMATIZACI\xD3NPRODUCTO DIGITAL","VISUAL IDENTITY MOTION MAPPING ART DIRECTION CONCEPT DEVELOPMENT":"UX/UI ARQUITECTURA AUTOMATIZACI\xD3N PRODUCTO DIGITAL","NDX \u2014 A7":"JCAR \u2014 LABS","RELEASE WITHOUT RESTRAINT":"ESTRATEGIA CON PROP\xD3SITO",PHOTOGRAPHY:"PRODUCTO DIGITAL","A PAUSE BETWEEN DEPARTURES":"DESCUBRIMIENTO Y ESTRATEGIA","STREET ART":"INVESTIGACI\xD3N","CONCEALMENT AS A FORM OF POWER.":"DISE\xD1O QUE ORDENA LA COMPLEJIDAD.",FASHION:"DISE\xD1O UX/UI","QUIET STRENGTH IN FULL BLOOM":"PRODUCTOS LISTOS PARA CRECER","DISCIPLINE, HELD IN MOTION":"ARQUITECTURA EN MOVIMIENTO","JAPANESE CULTURE":"DESARROLLO","CAUGHT BETWEEN WHO YOU WERE AND WHO REMAINS":"AUTOMATIZACI\xD3N CON SENTIDO","LIGHT EXPERIMENT":"IA, AGENTES & LLMOPS","SILENCE SHAPED INTO FORM":"ESCALA Y EVOLUCI\xD3N",EXHIBITION:"PRODUCTO","CHASING THE WHITE RABBIT*":"EXPLORACI\xD3N CONTINUA*","STUDIO CAM66, LONDON":"JCAR LABS \xB7 PER\xDA","DANIEL & ADAM":"EQUIPO JCAR LABS","MODUS VIVENDI":"PRODUCTO EN MOVIMIENTO","BY ADAM KNOXVILLE":"POR JCAR LABS INC."}).map(([e,t])=>[E(e),t])),U=new Set(["22\u201324 GREAT EASTERN STREET","SHOREDITCH","LONDON EC2A 3NW"].map(E)),Y=new Map([["(44) 7700 900 482","+51 904 615 337"],["hey@adamknoxville.design","contacto@jcarlabs.com"],["Phone copied!","Tel\xE9fono copiado"],["Email copied!","Correo copiado"],["United Kingdom","Per\xFA"],["Inspiration","Soluci\xF3n"],["Release without restraint","Estrategia con prop\xF3sito"],["Photography","Producto digital"],["A pause between departures","Descubrimiento y estrategia"],["Street Art","Investigaci\xF3n"],["Concealment as a form of power.","Dise\xF1o que ordena la complejidad."],["Fashion","Dise\xF1o UX/UI"],["Quiet strength in full bloom","Productos listos para crecer"],["Discipline, held in motion","Arquitectura en movimiento"],["Japanese Culture","Desarrollo"],["Caught between who you were and who remains","Automatizaci\xF3n con sentido"],["Light Experiment","IA, AGENTES & LLMOPS"],["Silence shaped into form","Escala y evoluci\xF3n"],["Exhibition","Producto"],["CHASING THE WHITE RABBIT*","EXPLORACI\xD3N CONTINUA*"],["Studio CAM66, London","JCAR LABS \xB7 PER\xDA"],["Daniel & Adam","EQUIPO JCAR LABS"],["Modus Vivendi","PRODUCTO EN MOVIMIENTO"],["by Adam Knoxville","POR JCAR LABS INC."]].map(([e,t])=>[E(e),t])),g={"/work/sistema-hotelero":{kicker:"PROYECTO 01 \xB7 SOFTWARE EMPRESARIAL",title:"Sistema Hotelero",lead:"Gesti\xF3n integral para hoteles en Per\xFA con facturaci\xF3n electr\xF3nica.",description:"Una soluci\xF3n creada para centralizar reservas, operaciones y procesos administrativos en una plataforma preparada para el trabajo diario.",tags:["Java","MySQL","Facturaci\xF3n electr\xF3nica","Gesti\xF3n hotelera"],media:["/assets/images/hero-image-6.jpg","/assets/images/hero-image-7.jpg","/assets/images/hero-image-8.jpeg","/assets/images/hero-image-9.jpg"]},"/work/nezus-bisuteria":{kicker:"PROYECTO 02 \xB7 E-COMMERCE",title:"Nezus Bisuter\xEDa",lead:"E-commerce y presencia corporativa para una marca de joyer\xEDa.",description:"Una experiencia digital enfocada en presentar el cat\xE1logo, fortalecer la identidad de marca y facilitar el recorrido de compra.",tags:["SOFTWARE & SAAS","UX/UI","E-commerce"],media:["/assets/images/image-26.jpg","/assets/images/image-10.jpeg","/assets/images/image-11.jpg","/assets/images/image-12.jpg"]},"/work/soluciones-empresariales":{kicker:"PROYECTO 03 \xB7 FULL STACK",title:"SOLUCIONES EMPRESARIALES",lead:"Comunicaci\xF3n interna y gesti\xF3n empresarial en una sola plataforma.",description:"Una base tecnol\xF3gica para organizar informaci\xF3n, conectar equipos y mejorar procesos operativos internos.",tags:["Full stack","Gesti\xF3n empresarial","SISTEMAS LEGACY"],media:["/assets/images/image-37.jpg","/assets/images/image-35.jpg","/assets/images/image-9.jpeg","/assets/images/right-36.jpeg"]},"/services/desarrollo-web":{kicker:"SERVICIO 01",title:"SOFTWARE & SAAS",lead:"Sitios modernos, responsivos y optimizados para buscadores.",description:"Dise\xF1amos experiencias digitales a medida que comunican con claridad, funcionan en cualquier dispositivo y ayudan a convertir visitas en oportunidades.",tags:["Dise\xF1o responsive","SEO t\xE9cnico","UX/UI","Desarrollo a medida"]},"/services/inteligencia-artificial":{kicker:"SERVICIO 02",title:"IA, AGENTES & LLMOPS",lead:"Modelos de IA y automatizaci\xF3n aplicados a procesos reales.",description:"Integramos herramientas inteligentes para reducir tareas repetitivas, acelerar operaciones y convertir informaci\xF3n en mejores decisiones.",tags:["IA aplicada","CLOUD & APIS","Integraciones","Optimizaci\xF3n"]},"/services/desarrollo-full-stack":{kicker:"SERVICIO 03",title:"CLOUD & APIS",lead:"Productos completos desde la base de datos hasta la interfaz.",description:"Construimos sistemas robustos y escalables conectando arquitectura, l\xF3gica de negocio, APIs y experiencias de usuario.",tags:["Frontend","Backend","Bases de datos","APIs"]},"/services/software-empresarial":{kicker:"SERVICIO 04",title:"SISTEMAS LEGACY",lead:"Sistemas a medida para organizar y escalar operaciones.",description:"Dise\xF1amos software alrededor de los procesos reales del negocio para centralizar informaci\xF3n, reducir fricci\xF3n y mantener el control a medida que la operaci\xF3n crece.",tags:["SISTEMAS LEGACY","Procesos","Datos","Escalabilidad"]},"/services/auditoria-de-codigo":{kicker:"SERVICIO 05",title:"Consultor\xEDa de Arquitectura y Auditor\xEDa de C\xF3digo",lead:"Consultor\xEDa de arquitectura y auditor\xEDa de c\xF3digo. Convertimos hallazgos t\xE9cnicos en decisiones y prioridades para el negocio.",description:"Revisamos c\xF3mo est\xE1 construido un sistema y qu\xE9 necesita para continuar evolucionando. El resultado es una hoja de ruta priorizada, con evidencia y un alcance acordado.",tags:["Arquitectura","C\xF3digo","Seguridad","Mantenibilidad"]}},f={"/work":{kicker:"PORTAFOLIO \xB7 03 PROYECTOS",title:"Proyectos",lead:"Soluciones digitales creadas para necesidades reales de negocio.",items:[{number:"01",title:"Sistema Hotelero",description:"GESTI\xD3N HOTELERA CON FACTURACI\xD3N ELECTR\xD3NICA.",href:"/work/sistema-hotelero",tags:"JAVA \xB7 MYSQL",client:"Operaci\xF3n hotelera",category:"SISTEMAS LEGACY",date:"2026",image:"/assets/images/hero-image-18.jpg"},{number:"02",title:"Nezus Bisuter\xEDa",description:"E-COMMERCE Y PRESENCIA DIGITAL PARA UNA MARCA DE JOYER\xCDA.",href:"/work/nezus-bisuteria",tags:"WEB \xB7 UX/UI",client:"Nezus Bisuter\xEDa",category:"Comercio electr\xF3nico",date:"2026",image:"/assets/images/image-26.jpg"},{number:"03",title:"SOLUCIONES EMPRESARIALES",description:"COMUNICACI\xD3N INTERNA Y GESTI\xD3N EN UNA SOLA PLATAFORMA.",href:"/work/soluciones-empresariales",tags:"FULL STACK",client:"Producto JCAR Labs",category:"Plataforma empresarial",date:"2026",image:"/assets/images/image-37.jpg"}]},"/services":{kicker:"CAPACIDADES \xB7 05 SERVICIOS",title:"Servicios",lead:"Tecnolog\xEDa que hace crecer negocios.",items:[{number:"01",title:"SOFTWARE & SAAS",description:"Sitios modernos, responsivos y optimizados para buscadores.",href:"/services/desarrollo-web",tags:"WEB \xB7 SEO \xB7 UX/UI",image:"/assets/images/image-bundle-68.jpeg",avatar:"/assets/images/image-bundle-68.jpeg"},{number:"02",title:"IA, AGENTES & LLMOPS",description:"Modelos de IA y automatizaci\xF3n aplicados a procesos reales.",href:"/services/inteligencia-artificial",tags:"IA \xB7 AUTOMATIZACI\xD3N",image:"/assets/images/image-14.jpg",avatar:"/assets/images/image-14.jpg"},{number:"03",title:"CLOUD & APIS",description:"Productos completos desde la base de datos hasta la interfaz.",href:"/services/desarrollo-full-stack",tags:"FRONTEND \xB7 BACKEND",image:"/assets/images/image-19.jpg",avatar:"/assets/images/image-19.jpg"},{number:"04",title:"SISTEMAS LEGACY",description:"Sistemas a medida para organizar y escalar operaciones.",href:"/services/software-empresarial",tags:"SOFTWARE \xB7 PROCESOS",image:"/assets/images/image-35.jpg",avatar:"/assets/images/image-35.jpg"},{number:"05",title:"AUDITOR\xCDA DE C\xD3DIGO",description:"Consultor\xEDa de arquitectura y auditor\xEDa de c\xF3digo para priorizar riesgos y mejoras.",href:"/services/auditoria-de-codigo",tags:"ARQUITECTURA \xB7 C\xD3DIGO \xB7 SEGURIDAD",image:"/assets/images/image-9.jpeg",avatar:"/assets/images/image-9.jpeg"}]}},V={"/privacy-policy":{kicker:"JCAR LABS \xB7 LEGAL",title:"Pol\xEDtica de privacidad",updated:"Actualizada el 29 de agosto de 2026",lead:"Explicamos con claridad qu\xE9 informaci\xF3n recibimos, para qu\xE9 la utilizamos y c\xF3mo puedes ejercer tus derechos.",sections:[["01","Informaci\xF3n que recopilamos","Podemos recibir tu nombre, correo electr\xF3nico, tel\xE9fono y el contenido que compartas voluntariamente mediante nuestros formularios o canales de contacto. Tambi\xE9n podemos recopilar datos t\xE9cnicos b\xE1sicos, como tipo de navegador, regi\xF3n y uso del sitio."],["02","C\xF3mo utilizamos la informaci\xF3n","Usamos estos datos para responder consultas, preparar propuestas, prestar nuestros servicios, mantener la seguridad del sitio y mejorar la experiencia. No vendemos informaci\xF3n personal ni la utilizamos para fines ajenos a JCAR Labs."],["03","Cookies y anal\xEDtica","El sitio puede utilizar cookies esenciales necesarias para su funcionamiento. No utilizamos cookies de medici\xF3n ni anal\xEDtica propia en este momento."],["04","Conservaci\xF3n y seguridad","Conservamos los datos \xFAnicamente durante el tiempo necesario para atender la finalidad informada o cumplir obligaciones legales. Aplicamos medidas razonables para prevenir acceso, p\xE9rdida, uso o divulgaci\xF3n no autorizados."],["05","Servicios de terceros","Algunas funciones pueden depender de proveedores de alojamiento, anal\xEDtica, correo o mensajer\xEDa. Solo reciben la informaci\xF3n necesaria para prestar su funci\xF3n y se rigen por sus propias pol\xEDticas."],["06","Tus derechos","Puedes solicitar acceso, rectificaci\xF3n o eliminaci\xF3n de tus datos, as\xED como retirar un consentimiento otorgado. Evaluaremos cada solicitud de acuerdo con la legislaci\xF3n aplicable."],["07","Cambios en esta pol\xEDtica","Podemos actualizar esta pol\xEDtica cuando cambien nuestros servicios o las obligaciones aplicables. La fecha publicada al inicio identifica la versi\xF3n vigente."],["08","Contacto","Para consultas sobre privacidad, escribe a contacto@jcarlabs.com o comun\xEDcate al +51 904 615 337. JCAR Labs Inc. opera desde Per\xFA."]]},"/terms-of-use":{kicker:"JCAR LABS \xB7 LEGAL",title:"T\xE9rminos de uso",updated:"Actualizados el 29 de agosto de 2026",lead:"Estas condiciones regulan el acceso y uso del sitio web y de los materiales publicados por JCAR Labs Inc.",sections:[["01","Aceptaci\xF3n","Al navegar por este sitio aceptas estos t\xE9rminos. Si no est\xE1s de acuerdo con ellos, debes dejar de utilizarlo."],["02","Uso permitido","Puedes consultar y compartir p\xE1ginas p\xFAblicas para fines personales y no comerciales. No puedes interferir con el funcionamiento del sitio, intentar accesos no autorizados ni utilizarlo para actividades il\xEDcitas."],["03","Propiedad intelectual","El dise\xF1o, c\xF3digo, textos, marcas, im\xE1genes y casos presentados pertenecen a JCAR Labs Inc. o se utilizan con autorizaci\xF3n. No se permite copiarlos, revenderlos o atribuirse su autor\xEDa sin permiso escrito."],["04","Informaci\xF3n del sitio","Trabajamos para mantener el contenido correcto y actualizado, pero puede contener errores o referencias que cambien con el tiempo. La informaci\xF3n publicada no sustituye una propuesta o acuerdo de servicio."],["05","Enlaces externos","El sitio puede incluir enlaces a servicios de terceros. JCAR Labs no controla su contenido, disponibilidad ni pol\xEDticas; debes revisar sus condiciones antes de utilizarlos."],["06","Disponibilidad","No garantizamos operaci\xF3n ininterrumpida o libre de errores. Podemos modificar, suspender o retirar secciones cuando sea necesario para seguridad, mantenimiento o evoluci\xF3n del producto."],["07","Limitaci\xF3n de responsabilidad","En la medida permitida por la ley, JCAR Labs no ser\xE1 responsable por p\xE9rdidas indirectas derivadas del uso del sitio o de decisiones tomadas \xFAnicamente con base en su contenido."],["08","Contacto","Para permisos, consultas o aclaraciones, escribe a contacto@jcarlabs.com o comun\xEDcate al +51 904 615 337. JCAR Labs Inc. opera desde Per\xFA."]]}},p={services:[{route:"/services/desarrollo-web",number:"01",label:"SOFTWARE & SAAS",title:"Desarrollo de Software a Medida & Productos SaaS",description:"Desarrollo de software a medida y productos SaaS. Del proceso de negocio a una plataforma preparada para crecer.",sourceTitle:"Beyond AI Aesthetics: What Human-Led Digital Art Means Now",sourceDescription:"AI didn\u2019t replace creativity. It reshaped it \u2014 forcing artists to redefine what human originality truly means.",oldTitle:"Desarrollo Web",tags:["React","Node.js","SQL","Producto SaaS"]},{route:"/services/inteligencia-artificial",number:"02",label:"IA, AGENTES & LLMOPS",title:"Integraci\xF3n de IA Transmodal, Agentes y LLMOps",description:"Integraci\xF3n de IA transmodal, agentes y LLMOps. Conectamos modelos, datos y herramientas con procesos de negocio.",sourceTitle:"When Images Begin to Listen: The Quiet Power of Responsive Art",sourceDescription:"Interactive work is evolving beyond touchscreens and gimmicks. The most compelling contemporary pieces now respond subtly \u2014 to sound, environment, presence, and emotion.",oldTitle:"Inteligencia Artificial",tags:["Python","APIs","Agentes","LLMOps"]},{route:"/services/desarrollo-full-stack",number:"03",label:"CLOUD & APIS",title:"Arquitectura Cloud, APIs & Microservicios",description:"Arquitectura cloud, APIs y microservicios. Dise\xF1amos servicios conectados, observables y preparados para evolucionar.",sourceTitle:"The Rise of Experiential Minimalism in Contemporary Exhibitions",sourceDescription:"Instead of spectacle, galleries are embracing controlled intensity \u2014 restrained environments with powerful psychological impact.",oldTitle:"Desarrollo Full Stack",tags:["Node.js","Java","Python","APIs"]},{route:"/services/software-empresarial",number:"04",label:"SISTEMAS LEGACY",title:"Modernizaci\xF3n e Ingenier\xEDa de Sistemas Legacy",description:"Modernizaci\xF3n e ingenier\xEDa de sistemas legacy. Evolucionamos aplicaciones existentes con una transici\xF3n gradual y verificable.",sourceTitle:"Why Motion-First Art Is Defining The Next Creative Era",sourceDescription:"Static visuals are no longer enough. Motion-first thinking is reshaping art, branding, and digital experiences \u2014 here\u2019s why the shift matters.",oldTitle:"Software Empresarial",tags:["Java","PHP","SQL","Modernizaci\xF3n"]},{route:"/services/auditoria-de-codigo",number:"05",label:"AUDITOR\xCDA DE C\xD3DIGO",title:"Consultor\xEDa de Arquitectura y Auditor\xEDa de C\xF3digo",description:"Consultor\xEDa de arquitectura y auditor\xEDa de c\xF3digo. Convertimos hallazgos t\xE9cnicos en decisiones y prioridades para el negocio.",sourceTitle:"Why Slowness Is Becoming a Radical Artistic Choice",sourceDescription:"In a culture obsessed with speed, instant gratification, and constant refresh, artists are turning to slowness \u2014 not as nostalgia, but as resistance.",oldTitle:"Integraciones SUNAT",tags:["Arquitectura","C\xF3digo","Seguridad","Mantenibilidad"]}],extraCopy:{"Thanks for reading":"Construyamos la soluci\xF3n","SHARE ARTICLE ON SOCIAL":"COMPARTE ESTA SOLUCI\xD3N",NEXT:"SIGUIENTE",PREVIOUS:"ANTERIOR","December 4, 2025":"SERVICIO 04","October 1, 2025":"SERVICIO 05","December 2025":"JCAR LABS INC.","4 minutes":"4 minutos","5 minutes":"5 minutos","3 minutes":"3 minutos","6 mins":"6 minutos"},translations:{"/services/desarrollo-web":[[`Artificial Intelligence entered the creative world like a storm \u2014 exciting, frightening, overwhelming, misunderstood. At first, conversations revolved around fear: Will AI replace artists? Will originality die? Will creative labor become obsolete?
 
-  const normalized = (value) => String(value || "").replace(/\s+/g, " ").trim().toUpperCase()
-  const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character])
-  const animatedLetters = (value) => Array.from(String(value)).map((character, index) => `<span style="--char-index:${index}">${character === " " ? "&nbsp;" : escapeHTML(character)}</span>`).join("")
-  let homeVideoObserver
-  let revealObserver
-  let serviceCardObserver
-  let editorialMotionFrame
-  let headerScrollBound = false
-  let metadataObserver
+Those questions are settling. What remains is far more interesting.
 
-  const replacements = new Map(Object.entries({
-    "HOME": "INICIO",
-    "WORK": "PROYECTOS",
-    "ABOUT": "NOSOTROS",
-    "THOUGHTS": "SERVICIOS",
-    "CONTACT": "CONTACTO",
-    "PRIVACY POLICY": "POLÍTICA DE PRIVACIDAD",
-    "TERMS OF USE": "TÉRMINOS DE USO",
-    "VERTICAL": "JCAR LABS",
-    "ADAM KNOXVILLE": BRAND,
-    "ADAM KNOXVILLE / VERTICAL": BRAND,
-    "VISUAL ARTIST/CREATOR": "SOFTWARE · SISTEMAS · IA",
-    "INDEPENDENT VISUAL ARTIST": "INGENIERÍA DE SOFTWARE PARA NEGOCIOS",
-    "EXPLORE": "DESCUBRIR",
-    "I BREAK THINGS": "SOFTWARE",
-    "TO SEE WHAT": "PARA TU",
-    "THEY ARE MADE OF": "NEGOCIO",
-    "PHASE/BREAK": "FASE/IDEA",
-    "PHASE/BUILD": "FASE/DISEÑO",
-    "PHASE/BEND": "FASE/DESARROLLO",
-    "PHASE/RELEASE": "FASE/ESCALA",
-    "IDX/AK": "JCAR/LABS",
-    "VISUAL EXPERIMENTS": "SOFTWARE & SAAS",
-    "FORM & FUNCTION": "SISTEMAS LEGACY",
-    "SOUND & MOTION": "IA, AGENTES & LLMOPS",
-    "WRITTEN FRAGMENTS": "CLOUD & APIS",
-    "THINGS I CAN’T EXPLAIN": "SOLUCIONES EMPRESARIALES",
-    "MODERN RITUALS": "PROYECTOS REALES",
-    "STUDY — 04.13": "CASOS — 03",
-    "SELECTED WORK": "PROYECTOS SELECCIONADOS",
-    "LINES BECOME SIGNALS.": "LAS NECESIDADES SE CONVIERTEN EN PRODUCTOS.",
-    "SURFACES BECOME STORIES.": "LAS IDEAS SE CONVIERTEN EN RESULTADOS.",
-    "LINES BECOME SIGNALS. SURFACES BECOME STORIES.": "LAS NECESIDADES SE CONVIERTEN EN PRODUCTOS. LAS IDEAS SE CONVIERTEN EN RESULTADOS.",
-    "STRUCTURE ARGUES WITH IMPULSE UNTIL BOTH LEARN TO STAND STILL. GRIDS SET THE PACE. MARGINS HOLD THE QUIET.": "DISEÑAMOS Y DESARROLLAMOS SOLUCIONES DIGITALES QUE CONECTAN TECNOLOGÍA, NEGOCIO Y EXPERIENCIA DE USUARIO.",
-    "ARTIFACT—I": "SISTEMA HOTELERO",
-    "ARTIFACT—II": "NEZUS BISUTERÍA",
-    "ARTIFACT—III": "SOLUCIONES EMPRESARIALES",
-    "[CONFESS]": "[CONSTRUIR]",
-    "CAL": "JCL",
-    "TI": "LAB",
-    "THE ARCHIVE OF EVERYTHING I CAN’T KEEP IN ONE PLACE.": "ECOSISTEMA DE SOLUCIONES DIGITALES.",
-    "VERTICAL STORAGE — 2015-2026": "JCAR LABS — SOLUCIONES DIGITALES",
-    "ANALOG ARCHIVES": "CAPACIDADES",
-    "MOD — I/AK": "CAP — 01",
-    "MOD — II/AK": "CAP — 02",
-    "MOD — III/AK": "CAP — 03",
-    "MOD — IV/AK": "CAP — 04",
-    "MOD — V/AK": "CAP — 05",
-    "STUDIES IN IMAGE, LIGHT, AND DISTORTION. TESTS THAT DON’T FOLLOW RULES. PIECES BUILT FROM INSTINCT, ERROR, AND THE URGE TO SEE WHAT HAPPENS NEXT.": "SOFTWARE A MEDIDA Y PRODUCTOS SAAS QUE CONECTAN USUARIOS, DATOS Y PROCESOS DE NEGOCIO.",
-    "OBJECTS, SYSTEMS, AND SHAPES SHAPED WITH INTENTION — THEN PUSHED UNTIL THEY REVEAL THEIR LIMITS. A DIALOGUE BETWEEN WHAT LOOKS RIGHT AND WHAT WORKS.": "MODERNIZACIÓN DE SISTEMAS LEGACY CON CAMBIOS GRADUALES, VALIDACIÓN Y CONTINUIDAD OPERATIVA.",
-    "MOVING IMAGES, RHYTHM STUDIES, AND AUDIOVISUAL FRAGMENTS. WORK DRIVEN BY PULSE, TENSION, AND THE QUIET BETWEEN FRAMES.": "IA TRANSMODAL, AGENTES Y LLMOPS PARA CONECTAR MODELOS CON DATOS Y HERRAMIENTAS DEL NEGOCIO.",
-    "POEMS, LYRICS, AND UNFINISHED LINES. THOUGHTS CAUGHT MID-BREATH. WORDS THAT BEHAVE MORE LIKE IMAGES THAN SENTENCES.": "ARQUITECTURA CLOUD, APIS Y MICROSERVICIOS CON CONTRATOS CLAROS Y CAPACIDAD DE EVOLUCIÓN.",
-    "CREATIVE IDEAS THAT ARRIVED UNINVITED AND REFUSED TO LEAVE. THE WORK THAT SITS CLOSEST TO WHO I AM AND WHO I’M STILL BECOMING.": "CONSULTORÍA DE ARQUITECTURA Y AUDITORÍA DE CÓDIGO PARA PRIORIZAR RIESGOS Y MEJORAS.",
-    "I’AM": "SOMOS",
-    "DEVELOPING WORK ACROSS DIGITAL AND PHYSICAL FORMATS.": "DESARROLLAMOS PRODUCTOS DIGITALES DE PRINCIPIO A FIN.",
-    "I MAKE WORK ACROSS IMAGE, FORM, MOTION, AND TEXT.": "SOFTWARE, ARQUITECTURA E IA CONECTADOS CON TU NEGOCIO.",
-    "MOST PROJECTS START WITH A RULE. EXPERIENCE TRIGGERS THE NEXT STEP.": "CADA PROYECTO PARTE DE UNA NECESIDAD REAL Y AVANZA CON ESTRATEGIA, DISEÑO Y TECNOLOGÍA.",
-    "\"PERFECTION IS ACHIEVED NOT WHEN THERE IS NOTHING MORE TO ADD, BUT WHEN THERE IS NOTHING LEFT TO TAKE AWAY.”": "\"LA TECNOLOGÍA FUNCIONA MEJOR CUANDO RESUELVE ALGO REAL.\"",
-    "— ANTOINE DE SAINT-EXUPERY": "— JCAR LABS INC.",
-    "SOCIALS": "CONTACTO",
-    "I’M A UK-BASED VISUAL ARTIST. MY PRACTICE IS DRIVEN BY EXPERIMENTS, SYSTEMS, AND ITERATION. SOME WORK RESOLVES QUICKLY, OTHERS EVOLVE OVER TIME.": "JCAR LABS INC. INTEGRA INGENIERÍA DE PRODUCTO, MODERNIZACIÓN E IA. TRABAJAMOS CON REACT, NODE.JS, PYTHON, JAVA, PHP Y SQL SEGÚN EL CONTEXTO.",
-    "THINGS I DO": "ECOSISTEMA TECNOLÓGICO",
-    "SOUND DESIGN": "IA, AGENTES & LLMOPS",
-    "MOTION GRAPHICS": "CLOUD & APIS",
-    "INSTALLATION STUDIES": "SISTEMAS LEGACY",
-    "STORYBOARDS": "AUDITORÍA DE CÓDIGO",
-    "VISUAL SCRIPTS": "UX/UI",
-    "VIEW THE WORK": "VER PROYECTOS",
-    "(PROJECT)": "(PROYECTO)",
-    "UNSTABLE SEQUENCE": "SISTEMA HOTELERO",
-    "A MOTION STUDY THAT RESISTS RESOLUTION.": "GESTIÓN HOTELERA CON FACTURACIÓN ELECTRÓNICA.",
-    "SELF-INITIATED INDEPENDENT PROJECT": "SOFTWARE EMPRESARIAL PARA HOTELES EN PERÚ",
-    "MARCH 2025": "JAVA · MYSQL",
-    "DRAWN FROM MOTION STUDIES WHERE CLARITY FADES AND RHYTHM FRACTURES. MEANING APPEARS IN THE GAPS BETWEEN FRAMES, WHERE INSTABILITY BECOMES STRUCTURAL.": "SISTEMA DE GESTIÓN PARA HOTELES EN PERÚ CON FACTURACIÓN ELECTRÓNICA Y CONTROL DE OPERACIONES.",
-    "STILL PRESSURE": "NEZUS BISUTERÍA",
-    "A PHOTOGRAPHIC STUDY OF PRESENCE, PAUSE, AND CONTAINED FORCE.": "E-COMMERCE Y PRESENCIA DIGITAL PARA UNA MARCA DE JOYERÍA.",
-    "VÖGEL DISTRIBUTION": "DESARROLLO WEB · UX/UI",
-    "SEPTEMBER 2025": "E-COMMERCE",
-    "MOMENTS OF STILLNESS WHERE TENSION REMAINS PRESENT. LIGHT, DISTANCE, AND POSTURE CARRY WEIGHT WITHOUT ACTION.": "SITIO CORPORATIVO Y TIENDA DIGITAL DISEÑADOS PARA PRESENTAR PRODUCTOS Y FACILITAR LA COMPRA.",
-    "SURFACE TENSION": "SOLUCIONES EMPRESARIALES",
-    "A CONTROLLED STUDY IN RESTRAINT, PRESSURE, AND DELAYED RELEASE.": "COMUNICACIÓN INTERNA Y GESTIÓN EN UNA SOLA PLATAFORMA.",
-    "ATLAS BROADCASTING": "CLOUD & APIS",
-    "OCTOBER 2025": "PLATAFORMA EMPRESARIAL",
-    "INSPIRED BY MOMENTS WHERE FORM APPEARS STABLE WHILE FORCE ACCUMULATES BENEATH THE SURFACE. TENSION BUILDS THROUGH RESTRAINT RATHER THAN MOVEMENT.": "PLATAFORMA PARA CENTRALIZAR COMUNICACIÓN, INFORMACIÓN Y PROCESOS INTERNOS DE LA EMPRESA.",
-    "INSPIRATION": "SOLUCIÓN",
-    "THE VERTICAL BLOG": "ECOSISTEMA DIGITAL",
-    "THE ARCHIVE OF THOUGHTS I CAN KEEP IN ONE PLACE.": "SOFTWARE, ARQUITECTURA E IA PARA HACER EVOLUCIONAR TU NEGOCIO.",
-    "DECEMBER 30, 2025": "SERVICIO 01",
-    "BEYOND AI AESTHETICS: WHAT HUMAN-LED DIGITAL ART MEANS NOW": "SOFTWARE & SAAS",
-    "AI DIDN’T REPLACE CREATIVITY. IT RESHAPED IT — FORCING ARTISTS TO REDEFINE WHAT HUMAN ORIGINALITY TRULY MEANS.": "SITIOS WEB MODERNOS, RESPONSIVOS Y OPTIMIZADOS PARA SEO, CONSTRUIDOS A LA MEDIDA DE CADA NEGOCIO.",
-    "OCTOBER 29, 2025": "SERVICIO 02",
-    "WHEN IMAGES BEGIN TO LISTEN: THE QUIET POWER OF RESPONSIVE ART": "IA, AGENTES & LLMOPS",
-    "INTERACTIVE WORK IS EVOLVING BEYOND TOUCHSCREENS AND GIMMICKS. THE MOST COMPELLING CONTEMPORARY PIECES NOW RESPOND SUBTLY — TO SOUND, ENVIRONMENT, PRESENCE, AND EMOTION.": "INTEGRACIÓN DE MODELOS DE IA Y AUTOMATIZACIÓN DE PROCESOS PARA TRABAJAR CON MAYOR VELOCIDAD Y PRECISIÓN.",
-    "DECEMBER 3, 2025": "SERVICIO 03",
-    "THE RISE OF EXPERIENTIAL MINIMALISM IN CONTEMPORARY EXHIBITIONS": "CLOUD & APIS",
-    "INSTEAD OF SPECTACLE, GALLERIES ARE EMBRACING CONTROLLED INTENSITY — RESTRAINED ENVIRONMENTS WITH POWERFUL PSYCHOLOGICAL IMPACT.": "DESARROLLO INTEGRAL DESDE LA BASE DE DATOS Y LA LÓGICA DE NEGOCIO HASTA LA INTERFAZ DE USUARIO.",
-    "BY": "ESPECIALIDAD",
-    "WRITTEN BY": "ESCRITO POR",
-    "READING TIME": "TIEMPO DE LECTURA",
-    "RELEASED": "LANZADO",
-    "MORE PROJECTS": "MÁS PROYECTOS",
-    "MORE THOUGHTS": "MÁS SERVICIOS",
-    "THE MAIN CHALLENGE WAS SUSTAINING TENSION WITHOUT ARRIVAL.": "EL RETO PRINCIPAL FUE INTEGRAR OPERACIONES, RESERVAS Y FACTURACIÓN EN UN SOLO FLUJO.",
-    "HANNA JANE WINSTON": BRAND,
-    "MATTHEW SPEARS": BRAND,
-    "FREJA ANDERSSON": BRAND,
-    "CONTACT ME": "CONTACTO",
-    "IF SOMETHING HERE SPARKED A THOUGHT, RAISED A QUESTION, OR SIMPLY MADE YOU PAUSE.": "HABLEMOS DEL SOFTWARE QUE TU NEGOCIO NECESITA CONSTRUIR O EVOLUCIONAR.",
-    "I’M ALWAYS OPEN TO CONVERSATIONS ABOUT IDEAS, COLLABORATION, PROCESS, OR ANYTHING IN THE GREY AREA IN BETWEEN. LET’S TALK.": "CUÉNTANOS SOBRE TU PRODUCTO, TU SISTEMA ACTUAL O EL PROCESO QUE QUIERES CONECTAR CON IA.",
-    "SUBMIT": "ENVIAR MENSAJE",
-    "BY SUBMITTING, YOU CONSENT TO MY PRIVACY POLICY.": "AL ENVIAR, ACEPTAS NUESTRA POLÍTICA DE PRIVACIDAD.",
-    "(44) 7700 900 482": "+51 904 615 337",
-    "HEY@ADAMKNOXVILLE.DESIGN": "CONTACTO@JCARLABS.COM",
-    "PHONE COPIED!": "TELÉFONO COPIADO",
-    "EMAIL COPIED!": "CORREO COPIADO",
-    "STUDIO 204": BRAND,
-    "UNITED KINGDOM": "PERÚ",
-    "VIMEO": "WHATSAPP",
-    "YOUTUBE": "EMAIL",
-    "© 2026 VERTICAL BY ADAM KNOXVILLE. ALL WORK, ALL RIGHTS.": "© 2026 JCAR LABS INC. TODOS LOS DERECHOS RESERVADOS.",
+Now that AI has become ordinary, the real conversation begins: what does it mean to create as a human in a machine-accelerated world?`,`Desarrollo de Software a Medida & Productos SaaS. Convertimos necesidades de negocio en productos digitales que pueden evolucionar con sus usuarios. Partimos de los procesos, los datos y las decisiones que el software debe facilitar.
 
-    /* Home sections restored from the original Framer composition. */
-    "ART IS A CONTROLLED INTERRUPTION A PRACTICE OF CATCHING THE MOMENT BEFORE IT DISAPPEARS.": "INGENIERÍA DE SOFTWARE PARA CREAR PRODUCTOS, MODERNIZAR SISTEMAS Y CONECTAR EL NEGOCIO CON IA.",
-    "I WORK ACROSS IMAGE, OBJECT, MOTION, AND SOUND TO TRACE THE SHAPE OF WHAT DOESN’T SIT STILL.": "UNIMOS SOFTWARE A MEDIDA, ARQUITECTURA Y OPERACIÓN PARA CONSTRUIR SISTEMAS ESCALABLES Y SEGUROS.",
-    "IT ISN’T A PORTFOLIO.": "INGENIERÍA CON PROPÓSITO.",
-    "IT’S THE PLACE WHERE THE WORK STAYS HONEST. AN ONGOING RECORD OF WHAT I MAKE WHEN THOUGHT MOVES FASTER THAN STRUCTURE.": "CADA SOLUCIÓN PARTE DEL NEGOCIO Y SE SOSTIENE EN CÓDIGO, DATOS Y DECISIONES DE ARQUITECTURA.",
-    "NEW YORK (2025)": "ESTRATEGIA",
-    "PARIS (2023)": "UX/UI",
-    "SINGAPORE (2014)": "DESARROLLO",
-    "OSAKA (2019)": "INTEGRACIONES",
-    "BRIGHTON (2018)": "CLOUD & APIS",
-    "SYDNEY (2021)": "ESCALABILIDAD",
-    "INDX": "JCL",
-    "// CONCEPTUAL": "// PRODUCTO DIGITAL",
-    "REVISION — NEUE 7.6": "VERSIÓN — 1.0",
-    "NOTHING STAYS UNTOUCHED": "CADA DETALLE TIENE UN PROPÓSITO",
-    "PAGES BECOME PLACES WORTH LINGERING IN, AND ISSUES BECOME EXPERIENCES PEOPLE ANTICIPATE, KEEP, AND SHARE.": "CONSTRUIMOS PRODUCTOS SAAS Y SOFTWARE A MEDIDA CON UNA BASE PREPARADA PARA OPERAR Y EVOLUCIONAR.",
-    "PERSPECTIVE NOT THE TRUTH": "INGENIERÍA DE PRODUCTO",
-    "CAT — 1.07": "ETAPA — 01",
-    "I WORK BETWEEN ORDER AND INTERRUPTION. WHERE CLEAN LINES ARGUE WITH IMPULSE. WHERE RHYTHM BREAKS BEFORE IT RESOLVES.": "ANALIZAMOS EL NEGOCIO, ORDENAMOS LAS PRIORIDADES Y DISEÑAMOS UNA EXPERIENCIA QUE RESPONDE A OBJETIVOS CONCRETOS.",
-    "CAT — 1.08": "ETAPA — 02",
-    "VERTICAL IS THE STATE I BUILD IN— A PLACE FOR UNFINISHED THOUGHTS, SHARPENED IDEAS, AND THE THINGS THAT REFUSE SILENCE.": "JCAR LABS ES DONDE LAS IDEAS SE CONVIERTEN EN SISTEMAS CONFIABLES, MEDIBLES Y LISTOS PARA EVOLUCIONAR.",
-    "EXPLORATION PHASE": "NUESTRO PROCESO",
-    "SOME PIECES SETTLE.SOME DON’T.": "CADA PROYECTO COMIENZA CON PREGUNTAS.",
-    "SOME PIECES SETTLE. SOME DON’T.": "CADA PROYECTO COMIENZA CON PREGUNTAS.",
-    "BOTH REVEAL SOMETHING THE FINISHED VERSION CAN’T.": "LAS RESPUESTAS DEFINEN EL PRODUCTO QUE REALMENTE NECESITAS.",
-    "SOURCE — FIELD NOTES": "MÉTODO — JCAR LABS",
-    "MODULE — A.1": "FASE — 01",
-    "A SECTION OF STUDIES IN RAW STRUCTURE. TEXTURES TESTED UNDER PRESSURE. FORMS PUSHED UNTIL THEY REVEAL INTENTION.": "DESCUBRIMIENTO Y ESTRATEGIA. ENTENDEMOS EL PROBLEMA, LOS USUARIOS Y LOS INDICADORES DE ÉXITO.",
-    "MODULE — A.2": "FASE — 02",
-    "EXPERIMENTS WITH PHYSICAL MATERIALS AND CONTROLLED DISTORTION. WHERE TOUCH, WEIGHT, AND FAILURE SHAPE THE OUTCOME.": "DISEÑO UX/UI Y PROTOTIPADO. VALIDAMOS FLUJOS, CONTENIDO Y DECISIONES VISUALES ANTES DE CONSTRUIR.",
-    "MODULE — A.3": "FASE — 03",
-    "OBJECTS EXAMINED THROUGH REPETITION. SMALL SHIFTS CREATING NEW PATTERNS. A RECORD OF HOW MATTER RESPONDS TO MOTION.": "DESARROLLO E INTEGRACIÓN. CONSTRUIMOS FRONTEND, BACKEND, DATOS Y AUTOMATIZACIONES COMO UN SOLO SISTEMA.",
-    "MODULE — A.4": "FASE — 04",
-    "FRAGMENTS FROM ONGOING INVESTIGATIONS. PART PROTOTYPES, PART UNRESOLVED IDEAS. WORK THAT STAYS HONEST BY NOT PRETENDING TO BE FINISHED.": "PRUEBAS, PUBLICACIÓN Y MEJORA CONTINUA. MEDIMOS EL RESULTADO Y PREPARAMOS LA SOLUCIÓN PARA ESCALAR.",
-    "PATTERNS EMERGE. FRICTION CREATES MEANING.": "LOS RETOS REVELAN OPORTUNIDADES.",
-    "SIGNALS FORM. SURFACES RESPOND.": "LOS DATOS ORIENTAN. EL PRODUCTO RESPONDE.",
-    "ILLUSIONLATENCYPERSPECTIVECONTROL": "IDEADISEÑOCÓDIGOIMPACTO",
-    "ILLUSION LATENCY PERSPECTIVE CONTROL": "IDEA DISEÑO CÓDIGO IMPACTO",
-    "EMBRACING THE": "CONSTRUIMOS LO",
-    "UNKNOWN": "POSIBLE",
-    "I FOLLOW IDEAS INTO PLACES THAT DON’T HAVE NAMES YET. SOME REVEAL STRUCTURE. SOME COLLAPSE INTO NOISE.": "EXPLORAMOS SOLUCIONES SIN PERDER DE VISTA EL OBJETIVO: CREAR TECNOLOGÍA QUE LAS PERSONAS PUEDAN USAR Y LOS NEGOCIOS PUEDAN MEDIR.",
-    "WORK SHAPED BY MOVEMENT, MEMORY, AND INTERRUPTION. STUDIES IN LIGHT, DEPTH, AND DISTORTION. EACH PIECE BEGINS AS A QUESTION AND ENDS WHEREVER IT NEEDS TO.": "COMBINAMOS DISEÑO, INGENIERÍA Y AUTOMATIZACIÓN. CADA DECISIÓN NACE DE UNA NECESIDAD Y TERMINA EN UNA EXPERIENCIA COHERENTE.",
-    "WHAT HOLDS UP IS WHAT MATTERS.": "LO QUE FUNCIONA ES LO QUE IMPORTA.",
-    "OBSERVATION OVER EXPLANATION.PROCESS OVER CERTAINTY.": "CLARIDAD ANTES QUE COMPLEJIDAD. RESULTADOS ANTES QUE SUPOSICIONES.",
-    "OBSERVATION OVER EXPLANATION. PROCESS OVER CERTAINTY.": "CLARIDAD ANTES QUE COMPLEJIDAD. RESULTADOS ANTES QUE SUPOSICIONES.",
-    "I FOLLOW IDEAS INTO PLACES THAT SHIFT AS I STEP INTO THEM. PATHS APPEAR, VANISH, REAPPEAR SOMEWHERE ELSE. SOME LEAD TO CLARITY. SOME LEAD TO NOISE.BOTH KEEP THE RABBIT MOVING.": "INVESTIGAMOS, PROTOTIPAMOS Y APRENDEMOS RÁPIDO. CADA ITERACIÓN ACERCA EL PRODUCTO A UNA SOLUCIÓN MÁS CLARA.",
-    "I FOLLOW IDEAS INTO PLACES THAT SHIFT AS I STEP INTO THEM. PATHS APPEAR, VANISH, REAPPEAR SOMEWHERE ELSE. SOME LEAD TO CLARITY. SOME LEAD TO NOISE. BOTH KEEP THE RABBIT MOVING.": "INVESTIGAMOS, PROTOTIPAMOS Y APRENDEMOS RÁPIDO. CADA ITERACIÓN ACERCA EL PRODUCTO A UNA SOLUCIÓN MÁS CLARA.",
-    "I CHASE THE THINGS THAT CHANGE DIRECTION WITHOUT WARNING. A LINE BENDS. A THOUGHT SPLITS. A SHAPE BECOMES SOMETHING IT WASN’T MEANT TO BE. I STAY WITH IT UNTIL IT REVEALS A REASON TO FOLLOW.THE RABBIT IS NEVER STILL.": "ADAPTAMOS LA TECNOLOGÍA AL CONTEXTO DEL NEGOCIO. SI EL RETO CAMBIA, EL SISTEMA EVOLUCIONA SIN PERDER ESTABILIDAD.",
-    "I CHASE THE THINGS THAT CHANGE DIRECTION WITHOUT WARNING. A LINE BENDS. A THOUGHT SPLITS. A SHAPE BECOMES SOMETHING IT WASN’T MEANT TO BE. I STAY WITH IT UNTIL IT REVEALS A REASON TO FOLLOW. THE RABBIT IS NEVER STILL.": "ADAPTAMOS LA TECNOLOGÍA AL CONTEXTO DEL NEGOCIO. SI EL RETO CAMBIA, EL SISTEMA EVOLUCIONA SIN PERDER ESTABILIDAD.",
-    "VISUAL": "DISEÑO",
-    "IMAGES PULLED FROM MOVEMENT, MEMORY, AND INTERRUPTION. STUDIES IN LIGHT, DEPTH, AND DISTORTION. WORK BUILT FROM THE URGE TO SEE WHAT HAPPENS NEXT.": "REACT Y JAVASCRIPT PARA CONECTAR A LAS PERSONAS CON LAS FUNCIONES Y LOS DATOS DEL PRODUCTO.",
-    "FORM": "SISTEMAS",
-    "OBJECTS, SYSTEMS, AND STRUCTURES UNDER TENSION. WHERE FUNCTION BENDS INTO EXPRESSION. TESTS BUILT TO REVEAL HOW MATERIALS BEHAVE WHEN PUSHED.": "NODE.JS, PYTHON, JAVA Y PHP PARA LOS SERVICIOS. SQL PARA ORGANIZAR LOS DATOS Y SOSTENER LOS PROCESOS.",
-    "MOTION": "CLOUD & APIS",
-    "FRAMES DRIVEN BY RHYTHM AND ATMOSPHERE. LOOPS, PULSES, AND SHIFTING PERSPECTIVES. PIECES MEANT TO BE FELT BEFORE THEY’RE UNDERSTOOD.": "APIS, AGENTES Y LLMOPS PARA INTEGRAR CAPACIDADES DE IA CON EVALUACIÓN, TRAZABILIDAD Y SUPERVISIÓN.",
-    "“WHETHER ON PAPER OR PIXELS, THE GOAL IS CONSTANT — DESIGN THAT DISAPPEARS AS THE STORY APPEARS, LETTING THE WORK SPEAK WITHOUT SHOUTING FOR ATTENTION” — AK": "“UN BUEN PRODUCTO DIGITAL HACE SIMPLE LO COMPLEJO Y CONVIERTE LA TECNOLOGÍA EN UNA VENTAJA REAL.” — JCAR LABS",
-    "STUDIO CHAT WITH DANIEL MOORE": "CÓMO TRABAJAMOS EN JCAR LABS",
-    "ADAM TALKS ABOUT BREAKING FORM, CHASING RHYTHM, AND SHAPING THOUGHT INTO IMAGES.": "UNA MIRADA A NUESTRO PROCESO: DE LA ESTRATEGIA Y EL DISEÑO A LA IMPLEMENTACIÓN, LAS PRUEBAS Y EL CRECIMIENTO.",
-    "RECORDED AT CAM66 STUDIOS LONDON IN 24 NOVEMBER 2025": "ESTRATEGIA · DISEÑO · DESARROLLO · ESCALA",
-    "15 MINUTES, 13 SECONDS": "PROCESO DE PRINCIPIO A FIN",
-    "DIGITAL MEDIA": "PRODUCTOS DIGITALES",
-    "MODUS VIVENDI": "SOFTWARE QUE MUEVE NEGOCIOS",
-    "A DELICATE BALANCE OF STILLNESS AND MOVEMENT, PRESENCE AND ABSENCE. IT CAPTURES BODIES IN TRANSFORMATION, SUSPENDED IN QUIET RESISTANCE.": "UNA COMBINACIÓN DE DISEÑO, DATOS Y AUTOMATIZACIÓN PARA CREAR EXPERIENCIAS QUE RESPONDEN CON VELOCIDAD.",
-    "SHOWING UNTIL 10 MARCH 2026": "EVOLUCIÓN CONTINUA",
-    "TATE MODERN EXHIBITION": "PROYECTO DIGITAL JCAR LABS",
-    "BANKSIDE, LONDON SE1 9TG": "PERÚ · SOLUCIONES PARA CRECER",
-    "SHOWROOM": "JCAR LABS",
-    "CONCEPT / MOTION ART": "PRODUCTO / AUTOMATIZACIÓN",
-    "CONTEMPORARY/": "TECNOLOGÍA/",
-    "MOTION CONCEPT": "SISTEMA EN MOVIMIENTO",
-    "A STUDY IN RHYTHM, DISTORTION, AND CONTROLLED IMBALANCE. SURFACES REACT TO MOVEMENT. MOVEMENT RESHAPES THE FRAME. THE PIECE SHIFTS BETWEEN CLARITY AND NOISE, REVEALING PATTERNS YOU ONLY SEE WHEN THEY BREAK.": "UNA EXPERIENCIA DIGITAL DONDE CADA INTERACCIÓN TIENE UN PROPÓSITO. LA INTERFAZ RESPONDE, LOS DATOS FLUYEN Y EL SISTEMA SE ADAPTA AL RITMO DEL NEGOCIO.",
-    "NTRL 461.78.A.002": "JCL 2026.PRODUCT.001",
-    "RIPPLE TRACE": "IMPACTO MEDIBLE",
-    "AK1.0": "JCL1.0",
-    "VISUAL IDENTITYMOTION MAPPINGART DIRECTIONCONCEPT DEVELOPMENT": "UX/UIARQUITECTURAAUTOMATIZACIÓNPRODUCTO DIGITAL",
-    "VISUAL IDENTITY MOTION MAPPING ART DIRECTION CONCEPT DEVELOPMENT": "UX/UI ARQUITECTURA AUTOMATIZACIÓN PRODUCTO DIGITAL",
-    "NDX — A7": "JCAR — LABS"
-    ,"RELEASE WITHOUT RESTRAINT": "ESTRATEGIA CON PROPÓSITO"
-    ,"PHOTOGRAPHY": "PRODUCTO DIGITAL"
-    ,"A PAUSE BETWEEN DEPARTURES": "DESCUBRIMIENTO Y ESTRATEGIA"
-    ,"STREET ART": "INVESTIGACIÓN"
-    ,"CONCEALMENT AS A FORM OF POWER.": "DISEÑO QUE ORDENA LA COMPLEJIDAD."
-    ,"FASHION": "DISEÑO UX/UI"
-    ,"QUIET STRENGTH IN FULL BLOOM": "PRODUCTOS LISTOS PARA CRECER"
-    ,"DISCIPLINE, HELD IN MOTION": "ARQUITECTURA EN MOVIMIENTO"
-    ,"JAPANESE CULTURE": "DESARROLLO"
-    ,"CAUGHT BETWEEN WHO YOU WERE AND WHO REMAINS": "AUTOMATIZACIÓN CON SENTIDO"
-    ,"LIGHT EXPERIMENT": "IA, AGENTES & LLMOPS"
-    ,"SILENCE SHAPED INTO FORM": "ESCALA Y EVOLUCIÓN"
-    ,"EXHIBITION": "PRODUCTO"
-    ,"CHASING THE WHITE RABBIT*": "EXPLORACIÓN CONTINUA*"
-    ,"STUDIO CAM66, LONDON": "JCAR LABS · PERÚ"
-    ,"DANIEL & ADAM": "EQUIPO JCAR LABS"
-    ,"MODUS VIVENDI": "PRODUCTO EN MOVIMIENTO"
-    ,"BY ADAM KNOXVILLE": "POR JCAR LABS INC."
-  }).map(([key, value]) => [normalized(key), value]))
+Definimos el alcance, validamos los flujos y construimos una base mantenible. La arquitectura, las pruebas y la seguridad acompa\xF1an al producto desde el inicio.`],["Beyond Shock and Novelty","Producto y l\xF3gica de negocio"],["When AI-generated visuals emerged, their power was novelty. Suddenly, we could generate images at the speed of thought. Entire aesthetics bloomed overnight. But novelty has a short lifespan.","Un producto \xFAtil empieza por entender qui\xE9n lo usa y qu\xE9 necesita resolver. Identificamos reglas de negocio, roles y recorridos antes de decidir c\xF3mo implementarlos."],["Once everyone can produce something instantly, production no longer matters.","El alcance se organiza por valor y por dependencias reales."],["What separates meaningful art from machine-made output isn\u2019t complexity or technical execution. It\u2019s intention. AI can synthesize style. It can remix culture. It can hallucinate possibility. But it cannot anchor meaning to lived experience.","Dise\xF1amos software a medida para conectar la experiencia de usuario con las operaciones. Cada m\xF3dulo tiene una responsabilidad clara y cada dato, un lugar definido dentro del sistema."],["Human-led digital art accepts this. It doesn\u2019t compete with AI. It collaborates with it \u2014 shaping machine chaos with emotional direction.","Para productos SaaS, planificamos la separaci\xF3n de clientes, los permisos y la evoluci\xF3n de funcionalidades seg\xFAn el modelo del negocio."],["A Hybrid Future","Una base que puede evolucionar"],["We\u2019re entering an era where creativity is collaborative \u2014 human intuition directing machine capability. Artists shape direction. AI expands possibility. The relationship is additive, not antagonistic.","El ecosistema combina React y JavaScript en la experiencia de usuario con Node.js, Python, Java o PHP en los servicios, seg\xFAn las necesidades del producto. SQL conecta la informaci\xF3n con los procesos."],["This shift demands a different type of authorship. Creatives are no longer just makers \u2014 they are decision architects, curators of possibility. The role is evolving, not disappearing.","La elecci\xF3n t\xE9cnica responde al contexto: integraciones existentes, experiencia del equipo, mantenimiento y carga esperada. Documentamos las decisiones para que el producto pueda continuar creciendo."],["The future of digital art isn\u2019t AI replacing us.","Interfaz y reglas de negocio conectadas."],["It\u2019s AI requiring us to be more human than ever.","Datos consistentes y accesos definidos."],["And that may be the most valuable outcome of all.","Una base preparada para nuevas versiones."],["Friction, Error, and the Value of Imperfection","Calidad durante todo el desarrollo"],["AI tends toward completion. Humans tend toward exploration. That difference matters.","La seguridad y la mantenibilidad forman parte del dise\xF1o del producto."],["Some of the most compelling digital work right now embraces friction: artifacts, distortion, unpredictability. Artists are using AI\u2019s cold precision and intentionally interrupting it. They break patterns. They disrupt coherence. They impose feeling on structure.","Validamos los recorridos cr\xEDticos, los permisos y las integraciones antes de cada entrega. Las pruebas y la revisi\xF3n de c\xF3digo permiten detectar problemas y reducir el riesgo de cambios posteriores."],["Beauty isn\u2019t found in perfection \u2014 it\u2019s found in resistance.","Software pensado para operar y evolucionar."],["Human-led AI art isn\u2019t smooth. It\u2019s alive. And being alive inherently means being flawed, inconsistent, layered, and emotionally complicated.","Entregamos una base comprensible: responsabilidades claras, documentaci\xF3n y criterios para evaluar su comportamiento. El alcance de cada etapa se acuerda con el negocio."],["The work doesn\u2019t ask, \u201CHow realistic can we get?\u201D","\xBFQu\xE9 proceso necesita una mejor herramienta?"],["It asks, \u201CHow human can digital expression feel?\u201D","Conversemos sobre el producto que quieres construir."]],"/services/inteligencia-artificial":[[`For years, interactive art was loud. Glowing touchscreens. Reactive tech demos. Spectacle disguised as depth.
+But something has shifted.
 
-  const hiddenExactTexts = new Set([
-    "22–24 GREAT EASTERN STREET",
-    "SHOREDITCH",
-    "LONDON EC2A 3NW",
-  ].map(normalized))
+Today, the most meaningful interactive work hardly announces itself. It doesn\u2019t demand attention with flashing interfaces or exaggerated feedback. Instead, it listens. It observes. It responds quietly \u2014 almost gently \u2014 to the world around it.
 
-  const directReplacements = new Map([
-    ["(44) 7700 900 482", "+51 904 615 337"],
-    ["hey@adamknoxville.design", "contacto@jcarlabs.com"],
-    ["Phone copied!", "Teléfono copiado"],
-    ["Email copied!", "Correo copiado"],
-    ["United Kingdom", "Perú"],
-    ["Inspiration", "Solución"],
-    ["Release without restraint", "Estrategia con propósito"],
-    ["Photography", "Producto digital"],
-    ["A pause between departures", "Descubrimiento y estrategia"],
-    ["Street Art", "Investigación"],
-    ["Concealment as a form of power.", "Diseño que ordena la complejidad."],
-    ["Fashion", "Diseño UX/UI"],
-    ["Quiet strength in full bloom", "Productos listos para crecer"],
-    ["Discipline, held in motion", "Arquitectura en movimiento"],
-    ["Japanese Culture", "Desarrollo"],
-    ["Caught between who you were and who remains", "Automatización con sentido"],
-    ["Light Experiment", "IA, AGENTES & LLMOPS"],
-    ["Silence shaped into form", "Escala y evolución"],
-    ["Exhibition", "Producto"],
-    ["CHASING THE WHITE RABBIT*", "EXPLORACIÓN CONTINUA*"],
-    ["Studio CAM66, London", "JCAR LABS · PERÚ"],
-    ["Daniel & Adam", "EQUIPO JCAR LABS"],
-    ["Modus Vivendi", "PRODUCTO EN MOVIMIENTO"],
-    ["by Adam Knoxville", "POR JCAR LABS INC."],
-  ].map(([key, value]) => [normalized(key), value]))
+This isn\u2019t \u201Cinteractive\u201D as entertainment. This is responsiveness as emotional connection.`,`Integraci\xF3n de IA Transmodal, Agentes y LLMOps. Dise\xF1amos soluciones que conectan texto, im\xE1genes, audio y documentos seg\xFAn las capacidades del modelo y la necesidad del negocio.
 
-  const detailPages = {
-    "/work/sistema-hotelero": {
-      kicker: "PROYECTO 01 · SOFTWARE EMPRESARIAL",
-      title: "Sistema Hotelero",
-      lead: "Gestión integral para hoteles en Perú con facturación electrónica.",
-      description: "Una solución creada para centralizar reservas, operaciones y procesos administrativos en una plataforma preparada para el trabajo diario.",
-      tags: ["Java", "MySQL", "Facturación electrónica", "Gestión hotelera"],
-      media: ["/assets/images/hero-image-6.jpg", "/assets/images/hero-image-7.jpg", "/assets/images/hero-image-8.jpeg", "/assets/images/hero-image-9.jpg"],
-    },
-    "/work/nezus-bisuteria": {
-      kicker: "PROYECTO 02 · E-COMMERCE",
-      title: "Nezus Bisutería",
-      lead: "E-commerce y presencia corporativa para una marca de joyería.",
-      description: "Una experiencia digital enfocada en presentar el catálogo, fortalecer la identidad de marca y facilitar el recorrido de compra.",
-      tags: ["SOFTWARE & SAAS", "UX/UI", "E-commerce"],
-      media: ["/assets/images/image-26.jpg", "/assets/images/image-10.jpeg", "/assets/images/image-11.jpg", "/assets/images/image-12.jpg"],
-    },
-    "/work/soluciones-empresariales": {
-      kicker: "PROYECTO 03 · FULL STACK",
-      title: "SOLUCIONES EMPRESARIALES",
-      lead: "Comunicación interna y gestión empresarial en una sola plataforma.",
-      description: "Una base tecnológica para organizar información, conectar equipos y mejorar procesos operativos internos.",
-      tags: ["Full stack", "Gestión empresarial", "SISTEMAS LEGACY"],
-      media: ["/assets/images/image-37.jpg", "/assets/images/image-35.jpg", "/assets/images/image-9.jpeg", "/assets/images/right-36.jpeg"],
-    },
-    "/services/desarrollo-web": {
-      kicker: "SERVICIO 01",
-      title: "SOFTWARE & SAAS",
-      lead: "Sitios modernos, responsivos y optimizados para buscadores.",
-      description: "Diseñamos experiencias digitales a medida que comunican con claridad, funcionan en cualquier dispositivo y ayudan a convertir visitas en oportunidades.",
-      tags: ["Diseño responsive", "SEO técnico", "UX/UI", "Desarrollo a medida"],
-    },
-    "/services/inteligencia-artificial": {
-      kicker: "SERVICIO 02",
-      title: "IA, AGENTES & LLMOPS",
-      lead: "Modelos de IA y automatización aplicados a procesos reales.",
-      description: "Integramos herramientas inteligentes para reducir tareas repetitivas, acelerar operaciones y convertir información en mejores decisiones.",
-      tags: ["IA aplicada", "CLOUD & APIS", "Integraciones", "Optimización"],
-    },
-    "/services/desarrollo-full-stack": {
-      kicker: "SERVICIO 03",
-      title: "CLOUD & APIS",
-      lead: "Productos completos desde la base de datos hasta la interfaz.",
-      description: "Construimos sistemas robustos y escalables conectando arquitectura, lógica de negocio, APIs y experiencias de usuario.",
-      tags: ["Frontend", "Backend", "Bases de datos", "APIs"],
-    },
-    "/services/software-empresarial": {
-      kicker: "SERVICIO 04",
-      title: "SISTEMAS LEGACY",
-      lead: "Sistemas a medida para organizar y escalar operaciones.",
-      description: "Diseñamos software alrededor de los procesos reales del negocio para centralizar información, reducir fricción y mantener el control a medida que la operación crece.",
-      tags: ["SISTEMAS LEGACY", "Procesos", "Datos", "Escalabilidad"],
-    },
-    "/services/auditoria-de-codigo": {
-      kicker: "SERVICIO 05",
-      title: "Consultoría de Arquitectura y Auditoría de Código",
-      lead: "Consultoría de arquitectura y auditoría de código. Convertimos hallazgos técnicos en decisiones y prioridades para el negocio.",
-      description: "Revisamos cómo está construido un sistema y qué necesita para continuar evolucionando. El resultado es una hoja de ruta priorizada, con evidencia y un alcance acordado.",
-      tags: ["Arquitectura", "Código", "Seguridad", "Mantenibilidad"],
-    },
-  }
+Los agentes coordinan herramientas y tareas dentro de l\xEDmites expl\xEDcitos. LLMOps aporta evaluaci\xF3n, seguimiento y control de versiones para pasar de una demostraci\xF3n a una operaci\xF3n que pueda supervisarse.`],["From Interaction to Sensitivity","IA conectada con el negocio"],["The old definition of interactivity was rooted in action:","Comenzamos por un caso de uso concreto:"],["Tap here. Move this. Trigger that.","Comprender. Asistir. Automatizar."],["It placed the burden on the viewer \u2014 perform a task to unlock meaning.","Identificamos qu\xE9 informaci\xF3n necesita el sistema y qu\xE9 decisiones requieren revisi\xF3n humana."],["Responsive art changes the premise entirely. The viewer doesn\u2019t operate the work. They inhabit it. Presence itself becomes participation.","La integraci\xF3n transmodal permite trabajar con distintos tipos de informaci\xF3n sin perder el contexto del proceso. La soluci\xF3n se dise\xF1a alrededor de los datos disponibles y sus restricciones."],["Light shifts based on breathing space.","Texto y documentaci\xF3n del negocio."],["Sound textures evolve as others enter the room.","Im\xE1genes y archivos relevantes para la tarea."],["Visuals adjust their rhythm to the tone of the surrounding environment.","Audio y otros formatos cuando el caso de uso lo requiere."],["Nothing demands. Everything notices.","Cada entrada tiene una finalidad definida."],["This creates a new kind of intimacy \u2014 work that acknowledges the audience without controlling them. It feels less like technology and more like conversation.","La IA se conecta con sistemas existentes mediante APIs y servicios. Delimitamos qu\xE9 datos puede consultar y qu\xE9 acciones puede ejecutar, con trazabilidad de las operaciones relevantes."],["Toward More Human Technology","Agentes con responsabilidades claras"],["Responsive art points toward a future of technologies that behave less like machines and more like attentive companions. The systems we build for culture, design, architecture, and communication don\u2019t always need to shout.","Un agente puede consultar informaci\xF3n, utilizar herramientas y coordinar pasos de un flujo. Definimos su alcance, sus permisos y las condiciones en las que debe pedir intervenci\xF3n humana."],["Sometimes they just need to listen.","La autonom\xEDa se dise\xF1a con l\xEDmites."],["This doesn\u2019t mean abandoning complexity or engineering. It means applying it with restraint. Intelligence doesn\u2019t always need to be visible. Often, the most profound systems are the ones that get out of the way \u2014 letting human experience carry the weight.","Usamos Python y servicios API como parte del ecosistema de integraci\xF3n. La selecci\xF3n de modelos responde a calidad, latencia, coste y tratamiento de datos, evaluados para cada proyecto."],["The future of interactive work isn\u2019t louder.","La operaci\xF3n necesita criterios visibles."],["It\u2019s quieter.","Calidad de respuesta."],["More attentive.","Tiempo de ejecuci\xF3n."],["More human.","Uso de recursos."],["And that might be the most radical evolution of all.","Y un camino de revisi\xF3n cuando el sistema no tiene suficiente informaci\xF3n."],["The Emotional Weight of Being Seen","LLMOps para mejorar con evidencia"],["There\u2019s quiet psychology behind this.","Los modelos y los datos cambian."],["Most people don\u2019t want to push buttons in galleries. They don\u2019t want to perform. They want to feel acknowledged. Responsive art offers this beautifully. It tells viewers:","Preparamos evaluaciones con ejemplos del proceso real, versionamos instrucciones y revisamos los resultados antes de incorporar cambios. El objetivo es detectar degradaciones y hacer la operaci\xF3n comprensible."],["\u{1F4AC} \u201CYou\u2019re here. That matters. Your presence changes this.\u201D","\u201CCada cambio debe poder evaluarse.\u201D"],["That subtle recognition creates attachment.","Las trazas ayudan a entender cada ejecuci\xF3n."],["Visitors stay longer.","Se revisan los errores."],["They slow down.","Se contrastan las respuestas."],["They breathe differently.","Se ajustan los l\xEDmites."],["The room no longer feels like a display. It becomes an environment shared between artwork and audience \u2014 something living, aware, and sensitive.","La supervisi\xF3n permite mejorar la soluci\xF3n sin convertir cada actualizaci\xF3n en una apuesta. Documentamos los criterios y las decisiones que afectan su funcionamiento."],["This is presence transformed into connection.","IA integrada con criterio y seguimiento."]],"/services/desarrollo-full-stack":[[`Something fascinating is happening in gallery culture. While digital platforms flood us with visual excess, physical spaces are moving in the opposite direction: quieter, slower, more deliberate. This new movement isn\u2019t about stripping back aesthetics. It\u2019s about amplifying presence.
 
-  const listingPages = {
-    "/work": {
-      kicker: "PORTAFOLIO · 03 PROYECTOS",
-      title: "Proyectos",
-      lead: "Soluciones digitales creadas para necesidades reales de negocio.",
-      items: [
-        { number: "01", title: "Sistema Hotelero", description: "GESTIÓN HOTELERA CON FACTURACIÓN ELECTRÓNICA.", href: "/work/sistema-hotelero", tags: "JAVA · MYSQL", client: "Operación hotelera", category: "SISTEMAS LEGACY", date: "2026", image: "/assets/images/hero-image-18.jpg" },
-        { number: "02", title: "Nezus Bisutería", description: "E-COMMERCE Y PRESENCIA DIGITAL PARA UNA MARCA DE JOYERÍA.", href: "/work/nezus-bisuteria", tags: "WEB · UX/UI", client: "Nezus Bisutería", category: "Comercio electrónico", date: "2026", image: "/assets/images/image-26.jpg" },
-        { number: "03", title: "SOLUCIONES EMPRESARIALES", description: "COMUNICACIÓN INTERNA Y GESTIÓN EN UNA SOLA PLATAFORMA.", href: "/work/soluciones-empresariales", tags: "FULL STACK", client: "Producto JCAR Labs", category: "Plataforma empresarial", date: "2026", image: "/assets/images/image-37.jpg" },
-      ],
-    },
-    "/services": {
-      kicker: "CAPACIDADES · 05 SERVICIOS",
-      title: "Servicios",
-      lead: "Tecnología que hace crecer negocios.",
-      items: [
-        { number: "01", title: "SOFTWARE & SAAS", description: "Sitios modernos, responsivos y optimizados para buscadores.", href: "/services/desarrollo-web", tags: "WEB · SEO · UX/UI", image: "/assets/images/image-bundle-68.jpeg", avatar: "/assets/images/image-bundle-68.jpeg" },
-        { number: "02", title: "IA, AGENTES & LLMOPS", description: "Modelos de IA y automatización aplicados a procesos reales.", href: "/services/inteligencia-artificial", tags: "IA · AUTOMATIZACIÓN", image: "/assets/images/image-14.jpg", avatar: "/assets/images/image-14.jpg" },
-        { number: "03", title: "CLOUD & APIS", description: "Productos completos desde la base de datos hasta la interfaz.", href: "/services/desarrollo-full-stack", tags: "FRONTEND · BACKEND", image: "/assets/images/image-19.jpg", avatar: "/assets/images/image-19.jpg" },
-        { number: "04", title: "SISTEMAS LEGACY", description: "Sistemas a medida para organizar y escalar operaciones.", href: "/services/software-empresarial", tags: "SOFTWARE · PROCESOS", image: "/assets/images/image-35.jpg", avatar: "/assets/images/image-35.jpg" },
-        { number: "05", title: "AUDITORÍA DE CÓDIGO", description: "Consultoría de arquitectura y auditoría de código para priorizar riesgos y mejoras.", href: "/services/auditoria-de-codigo", tags: "ARQUITECTURA · CÓDIGO · SEGURIDAD", image: "/assets/images/image-9.jpeg", avatar: "/assets/images/image-9.jpeg" },
-      ],
-    },
-  }
+Welcome to Experiential Minimalism \u2014 exhibitions that use restraint not as aesthetic purity, but as emotional architecture.`,`Arquitectura Cloud, APIs & Microservicios. Dise\xF1amos la relaci\xF3n entre servicios, datos e infraestructura para que el sistema responda a las necesidades del negocio.
 
-  const legalPages = {
-    "/privacy-policy": {
-      kicker: "JCAR LABS · LEGAL",
-      title: "Política de privacidad",
-      updated: "Actualizada el 29 de agosto de 2026",
-      lead: "Explicamos con claridad qué información recibimos, para qué la utilizamos y cómo puedes ejercer tus derechos.",
-      sections: [
-        ["01", "Información que recopilamos", "Podemos recibir tu nombre, correo electrónico, teléfono y el contenido que compartas voluntariamente mediante nuestros formularios o canales de contacto. También podemos recopilar datos técnicos básicos, como tipo de navegador, región y uso del sitio."],
-        ["02", "Cómo utilizamos la información", "Usamos estos datos para responder consultas, preparar propuestas, prestar nuestros servicios, mantener la seguridad del sitio y mejorar la experiencia. No vendemos información personal ni la utilizamos para fines ajenos a JCAR Labs."],
-        ["03", "Cookies y analítica", "El sitio puede utilizar cookies esenciales necesarias para su funcionamiento. No utilizamos cookies de medición ni analítica propia en este momento."],
-        ["04", "Conservación y seguridad", "Conservamos los datos únicamente durante el tiempo necesario para atender la finalidad informada o cumplir obligaciones legales. Aplicamos medidas razonables para prevenir acceso, pérdida, uso o divulgación no autorizados."],
-        ["05", "Servicios de terceros", "Algunas funciones pueden depender de proveedores de alojamiento, analítica, correo o mensajería. Solo reciben la información necesaria para prestar su función y se rigen por sus propias políticas."],
-        ["06", "Tus derechos", "Puedes solicitar acceso, rectificación o eliminación de tus datos, así como retirar un consentimiento otorgado. Evaluaremos cada solicitud de acuerdo con la legislación aplicable."],
-        ["07", "Cambios en esta política", "Podemos actualizar esta política cuando cambien nuestros servicios o las obligaciones aplicables. La fecha publicada al inicio identifica la versión vigente."],
-        ["08", "Contacto", "Para consultas sobre privacidad, escribe a contacto@jcarlabs.com o comunícate al +51 904 615 337. JCAR Labs Inc. opera desde Perú."],
-      ],
-    },
-    "/terms-of-use": {
-      kicker: "JCAR LABS · LEGAL",
-      title: "Términos de uso",
-      updated: "Actualizados el 29 de agosto de 2026",
-      lead: "Estas condiciones regulan el acceso y uso del sitio web y de los materiales publicados por JCAR Labs Inc.",
-      sections: [
-        ["01", "Aceptación", "Al navegar por este sitio aceptas estos términos. Si no estás de acuerdo con ellos, debes dejar de utilizarlo."],
-        ["02", "Uso permitido", "Puedes consultar y compartir páginas públicas para fines personales y no comerciales. No puedes interferir con el funcionamiento del sitio, intentar accesos no autorizados ni utilizarlo para actividades ilícitas."],
-        ["03", "Propiedad intelectual", "El diseño, código, textos, marcas, imágenes y casos presentados pertenecen a JCAR Labs Inc. o se utilizan con autorización. No se permite copiarlos, revenderlos o atribuirse su autoría sin permiso escrito."],
-        ["04", "Información del sitio", "Trabajamos para mantener el contenido correcto y actualizado, pero puede contener errores o referencias que cambien con el tiempo. La información publicada no sustituye una propuesta o acuerdo de servicio."],
-        ["05", "Enlaces externos", "El sitio puede incluir enlaces a servicios de terceros. JCAR Labs no controla su contenido, disponibilidad ni políticas; debes revisar sus condiciones antes de utilizarlos."],
-        ["06", "Disponibilidad", "No garantizamos operación ininterrumpida o libre de errores. Podemos modificar, suspender o retirar secciones cuando sea necesario para seguridad, mantenimiento o evolución del producto."],
-        ["07", "Limitación de responsabilidad", "En la medida permitida por la ley, JCAR Labs no será responsable por pérdidas indirectas derivadas del uso del sitio o de decisiones tomadas únicamente con base en su contenido."],
-        ["08", "Contacto", "Para permisos, consultas o aclaraciones, escribe a contacto@jcarlabs.com o comunícate al +51 904 615 337. JCAR Labs Inc. opera desde Perú."],
-      ],
-    },
-  }
+Definimos l\xEDmites, contratos e integraciones con criterios de seguridad, operaci\xF3n y crecimiento. Elegimos una arquitectura acorde con la complejidad real y con la capacidad del equipo que la mantendr\xE1.`],["Less Material, More Impact","Servicios con l\xEDmites claros"],["Walk into one of these exhibitions and the first sensation isn\u2019t excitement \u2014 it\u2019s awareness. The space stops you. It holds you. Your breathing adjusts. Your senses sharpen.","Identificamos los dominios del negocio, los flujos de informaci\xF3n y las dependencias. Esa lectura permite definir responsabilidades y evitar que cada cambio afecte al sistema completo."],["This isn\u2019t traditional minimalism where simplicity equals absence. The new minimalism uses reduction as a pressure system. Nothing is loud, but everything is felt. Every decision carries weight because nothing exists without purpose.","Las APIs establecen contratos entre equipos y aplicaciones. Dise\xF1amos entradas, respuestas, autenticaci\xF3n, tratamiento de errores y evoluci\xF3n de versiones para hacer predecible la integraci\xF3n."],["Light becomes sculptural rather than atmospheric. Sound is treated like a living presence. Spatial emptiness isn\u2019t a void \u2014 it\u2019s tension. The viewer\u2019s body becomes part of the work. The experience isn\u2019t about looking at art. It\u2019s about standing inside it.","Los microservicios se eval\xFAan cuando aportan independencia de despliegue u operaci\xF3n. Consideramos tambi\xE9n el coste de coordinaci\xF3n, las llamadas de red y la consistencia de datos."],["In a world of noise, silence hits harder.","Cada servicio debe tener una raz\xF3n para existir."],["A Future Built on Precision, Not Excess","Evoluci\xF3n y operaci\xF3n"],["This movement is not a nostalgic return to minimalism. It\u2019s a response to digital culture. It\u2019s about crafting experiences that resist scrolling behavior and reward presence.","El ecosistema de servicios puede combinar Node.js, Java, Python y PHP seg\xFAn el contexto. SQL sostiene la informaci\xF3n estructurada; React conecta los servicios con la experiencia de usuario."],["Galleries are beginning to understand that people don\u2019t need more stimulation \u2014 they need focus. Creators are learning that impact doesn\u2019t come from quantity \u2014 it comes from precision.","Planificamos entornos, configuraci\xF3n, despliegue y observabilidad. El proveedor cloud y las herramientas se definen con el proyecto, considerando requisitos operativos y restricciones del negocio."],["Experiential Minimalism isn\u2019t smaller art.","La arquitectura se valida en funcionamiento."],["It\u2019s deeper art.","Con se\xF1ales que el equipo pueda interpretar."],["Art that stays with you not because of spectacle, but because it quietly refuses to leave.","Registros, m\xE9tricas y documentaci\xF3n ayudan a investigar incidentes y a priorizar mejoras con informaci\xF3n del sistema."],["The Psychology of Controlled Environments","Seguridad e integraciones"],["Experiential Minimalism understands something important: overstimulation numbs. The more we are given, the less we feel. These new exhibitions flip that.","Definimos permisos, manejo de secretos y validaci\xF3n de entradas desde los l\xEDmites del sistema. Revisamos los datos que circulan y las responsabilidades de cada integraci\xF3n."],["When a space restricts stimuli, perception heightens. Details matter. Small changes carry emotional gravity. Time slows down. Visitors don\u2019t just glance \u2014 they stay, observe, and begin to participate.","Dise\xF1amos c\xF3mo responder a fallos: tiempos de espera, reintentos acotados y recuperaci\xF3n. La disponibilidad se planifica de acuerdo con el alcance y las condiciones de operaci\xF3n."],["This develops powerful emotional intimacy.","Integraciones comprensibles y controladas."],["Instead of impressive grand gestures, viewers experience private, internal responses. The work invites introspection rather than spectacle. You\u2019re not forced to react \u2014 you\u2019re given space to feel.","Una arquitectura mantenible permite incorporar nuevas capacidades sin perder visibilidad sobre el conjunto. Dejamos decisiones y contratos documentados para facilitar el trabajo del equipo."],["And in the modern cultural climate, that feels radical.","Construyamos una base que acompa\xF1e al negocio."]],"/services/software-empresarial":[[`We live in a world that never stops moving. Screens refresh, feeds regenerate, environments shift, and our attention constantly repositions itself. In this landscape, static imagery feels increasingly foreign. That\u2019s why motion-first thinking isn\u2019t just a creative direction \u2014 it has become a natural cultural response.
 
-  const corporate = {"services":[{"route":"/services/desarrollo-web","number":"01","label":"SOFTWARE & SAAS","title":"Desarrollo de Software a Medida & Productos SaaS","description":"Desarrollo de software a medida y productos SaaS. Del proceso de negocio a una plataforma preparada para crecer.","sourceTitle":"Beyond AI Aesthetics: What Human-Led Digital Art Means Now","sourceDescription":"AI didn’t replace creativity. It reshaped it — forcing artists to redefine what human originality truly means.","oldTitle":"Desarrollo Web","tags":["React","Node.js","SQL","Producto SaaS"]},{"route":"/services/inteligencia-artificial","number":"02","label":"IA, AGENTES & LLMOPS","title":"Integración de IA Transmodal, Agentes y LLMOps","description":"Integración de IA transmodal, agentes y LLMOps. Conectamos modelos, datos y herramientas con procesos de negocio.","sourceTitle":"When Images Begin to Listen: The Quiet Power of Responsive Art","sourceDescription":"Interactive work is evolving beyond touchscreens and gimmicks. The most compelling contemporary pieces now respond subtly — to sound, environment, presence, and emotion.","oldTitle":"Inteligencia Artificial","tags":["Python","APIs","Agentes","LLMOps"]},{"route":"/services/desarrollo-full-stack","number":"03","label":"CLOUD & APIS","title":"Arquitectura Cloud, APIs & Microservicios","description":"Arquitectura cloud, APIs y microservicios. Diseñamos servicios conectados, observables y preparados para evolucionar.","sourceTitle":"The Rise of Experiential Minimalism in Contemporary Exhibitions","sourceDescription":"Instead of spectacle, galleries are embracing controlled intensity — restrained environments with powerful psychological impact.","oldTitle":"Desarrollo Full Stack","tags":["Node.js","Java","Python","APIs"]},{"route":"/services/software-empresarial","number":"04","label":"SISTEMAS LEGACY","title":"Modernización e Ingeniería de Sistemas Legacy","description":"Modernización e ingeniería de sistemas legacy. Evolucionamos aplicaciones existentes con una transición gradual y verificable.","sourceTitle":"Why Motion-First Art Is Defining The Next Creative Era","sourceDescription":"Static visuals are no longer enough. Motion-first thinking is reshaping art, branding, and digital experiences — here’s why the shift matters.","oldTitle":"Software Empresarial","tags":["Java","PHP","SQL","Modernización"]},{"route":"/services/auditoria-de-codigo","number":"05","label":"AUDITORÍA DE CÓDIGO","title":"Consultoría de Arquitectura y Auditoría de Código","description":"Consultoría de arquitectura y auditoría de código. Convertimos hallazgos técnicos en decisiones y prioridades para el negocio.","sourceTitle":"Why Slowness Is Becoming a Radical Artistic Choice","sourceDescription":"In a culture obsessed with speed, instant gratification, and constant refresh, artists are turning to slowness — not as nostalgia, but as resistance.","oldTitle":"Integraciones SUNAT","tags":["Arquitectura","Código","Seguridad","Mantenibilidad"]}],"extraCopy":{"Thanks for reading":"Construyamos la solución","SHARE ARTICLE ON SOCIAL":"COMPARTE ESTA SOLUCIÓN","NEXT":"SIGUIENTE","PREVIOUS":"ANTERIOR","December 4, 2025":"SERVICIO 04","October 1, 2025":"SERVICIO 05","December 2025":"JCAR LABS INC.","4 minutes":"4 minutos","5 minutes":"5 minutos","3 minutes":"3 minutos","6 mins":"6 minutos"},"translations":{"/services/desarrollo-web":[["Artificial Intelligence entered the creative world like a storm — exciting, frightening, overwhelming, misunderstood. At first, conversations revolved around fear: Will AI replace artists? Will originality die? Will creative labor become obsolete?\n\nThose questions are settling. What remains is far more interesting.\n\nNow that AI has become ordinary, the real conversation begins: what does it mean to create as a human in a machine-accelerated world?","Desarrollo de Software a Medida & Productos SaaS. Convertimos necesidades de negocio en productos digitales que pueden evolucionar con sus usuarios. Partimos de los procesos, los datos y las decisiones que el software debe facilitar.\n\nDefinimos el alcance, validamos los flujos y construimos una base mantenible. La arquitectura, las pruebas y la seguridad acompañan al producto desde el inicio."],["Beyond Shock and Novelty","Producto y lógica de negocio"],["When AI-generated visuals emerged, their power was novelty. Suddenly, we could generate images at the speed of thought. Entire aesthetics bloomed overnight. But novelty has a short lifespan.","Un producto útil empieza por entender quién lo usa y qué necesita resolver. Identificamos reglas de negocio, roles y recorridos antes de decidir cómo implementarlos."],["Once everyone can produce something instantly, production no longer matters.","El alcance se organiza por valor y por dependencias reales."],["What separates meaningful art from machine-made output isn’t complexity or technical execution. It’s intention. AI can synthesize style. It can remix culture. It can hallucinate possibility. But it cannot anchor meaning to lived experience.","Diseñamos software a medida para conectar la experiencia de usuario con las operaciones. Cada módulo tiene una responsabilidad clara y cada dato, un lugar definido dentro del sistema."],["Human-led digital art accepts this. It doesn’t compete with AI. It collaborates with it — shaping machine chaos with emotional direction.","Para productos SaaS, planificamos la separación de clientes, los permisos y la evolución de funcionalidades según el modelo del negocio."],["A Hybrid Future","Una base que puede evolucionar"],["We’re entering an era where creativity is collaborative — human intuition directing machine capability. Artists shape direction. AI expands possibility. The relationship is additive, not antagonistic.","El ecosistema combina React y JavaScript en la experiencia de usuario con Node.js, Python, Java o PHP en los servicios, según las necesidades del producto. SQL conecta la información con los procesos."],["This shift demands a different type of authorship. Creatives are no longer just makers — they are decision architects, curators of possibility. The role is evolving, not disappearing.","La elección técnica responde al contexto: integraciones existentes, experiencia del equipo, mantenimiento y carga esperada. Documentamos las decisiones para que el producto pueda continuar creciendo."],["The future of digital art isn’t AI replacing us.","Interfaz y reglas de negocio conectadas."],["It’s AI requiring us to be more human than ever.","Datos consistentes y accesos definidos."],["And that may be the most valuable outcome of all.","Una base preparada para nuevas versiones."],["Friction, Error, and the Value of Imperfection","Calidad durante todo el desarrollo"],["AI tends toward completion. Humans tend toward exploration. That difference matters.","La seguridad y la mantenibilidad forman parte del diseño del producto."],["Some of the most compelling digital work right now embraces friction: artifacts, distortion, unpredictability. Artists are using AI’s cold precision and intentionally interrupting it. They break patterns. They disrupt coherence. They impose feeling on structure.","Validamos los recorridos críticos, los permisos y las integraciones antes de cada entrega. Las pruebas y la revisión de código permiten detectar problemas y reducir el riesgo de cambios posteriores."],["Beauty isn’t found in perfection — it’s found in resistance.","Software pensado para operar y evolucionar."],["Human-led AI art isn’t smooth. It’s alive. And being alive inherently means being flawed, inconsistent, layered, and emotionally complicated.","Entregamos una base comprensible: responsabilidades claras, documentación y criterios para evaluar su comportamiento. El alcance de cada etapa se acuerda con el negocio."],["The work doesn’t ask, “How realistic can we get?”","¿Qué proceso necesita una mejor herramienta?"],["It asks, “How human can digital expression feel?”","Conversemos sobre el producto que quieres construir."]],"/services/inteligencia-artificial":[["For years, interactive art was loud. Glowing touchscreens. Reactive tech demos. Spectacle disguised as depth.\nBut something has shifted.\n\nToday, the most meaningful interactive work hardly announces itself. It doesn’t demand attention with flashing interfaces or exaggerated feedback. Instead, it listens. It observes. It responds quietly — almost gently — to the world around it.\n\nThis isn’t “interactive” as entertainment. This is responsiveness as emotional connection.","Integración de IA Transmodal, Agentes y LLMOps. Diseñamos soluciones que conectan texto, imágenes, audio y documentos según las capacidades del modelo y la necesidad del negocio.\n\nLos agentes coordinan herramientas y tareas dentro de límites explícitos. LLMOps aporta evaluación, seguimiento y control de versiones para pasar de una demostración a una operación que pueda supervisarse."],["From Interaction to Sensitivity","IA conectada con el negocio"],["The old definition of interactivity was rooted in action:","Comenzamos por un caso de uso concreto:"],["Tap here. Move this. Trigger that.","Comprender. Asistir. Automatizar."],["It placed the burden on the viewer — perform a task to unlock meaning.","Identificamos qué información necesita el sistema y qué decisiones requieren revisión humana."],["Responsive art changes the premise entirely. The viewer doesn’t operate the work. They inhabit it. Presence itself becomes participation.","La integración transmodal permite trabajar con distintos tipos de información sin perder el contexto del proceso. La solución se diseña alrededor de los datos disponibles y sus restricciones."],["Light shifts based on breathing space.","Texto y documentación del negocio."],["Sound textures evolve as others enter the room.","Imágenes y archivos relevantes para la tarea."],["Visuals adjust their rhythm to the tone of the surrounding environment.","Audio y otros formatos cuando el caso de uso lo requiere."],["Nothing demands. Everything notices.","Cada entrada tiene una finalidad definida."],["This creates a new kind of intimacy — work that acknowledges the audience without controlling them. It feels less like technology and more like conversation.","La IA se conecta con sistemas existentes mediante APIs y servicios. Delimitamos qué datos puede consultar y qué acciones puede ejecutar, con trazabilidad de las operaciones relevantes."],["Toward More Human Technology","Agentes con responsabilidades claras"],["Responsive art points toward a future of technologies that behave less like machines and more like attentive companions. The systems we build for culture, design, architecture, and communication don’t always need to shout.","Un agente puede consultar información, utilizar herramientas y coordinar pasos de un flujo. Definimos su alcance, sus permisos y las condiciones en las que debe pedir intervención humana."],["Sometimes they just need to listen.","La autonomía se diseña con límites."],["This doesn’t mean abandoning complexity or engineering. It means applying it with restraint. Intelligence doesn’t always need to be visible. Often, the most profound systems are the ones that get out of the way — letting human experience carry the weight.","Usamos Python y servicios API como parte del ecosistema de integración. La selección de modelos responde a calidad, latencia, coste y tratamiento de datos, evaluados para cada proyecto."],["The future of interactive work isn’t louder.","La operación necesita criterios visibles."],["It’s quieter.","Calidad de respuesta."],["More attentive.","Tiempo de ejecución."],["More human.","Uso de recursos."],["And that might be the most radical evolution of all.","Y un camino de revisión cuando el sistema no tiene suficiente información."],["The Emotional Weight of Being Seen","LLMOps para mejorar con evidencia"],["There’s quiet psychology behind this.","Los modelos y los datos cambian."],["Most people don’t want to push buttons in galleries. They don’t want to perform. They want to feel acknowledged. Responsive art offers this beautifully. It tells viewers:","Preparamos evaluaciones con ejemplos del proceso real, versionamos instrucciones y revisamos los resultados antes de incorporar cambios. El objetivo es detectar degradaciones y hacer la operación comprensible."],["💬 “You’re here. That matters. Your presence changes this.”","“Cada cambio debe poder evaluarse.”"],["That subtle recognition creates attachment.","Las trazas ayudan a entender cada ejecución."],["Visitors stay longer.","Se revisan los errores."],["They slow down.","Se contrastan las respuestas."],["They breathe differently.","Se ajustan los límites."],["The room no longer feels like a display. It becomes an environment shared between artwork and audience — something living, aware, and sensitive.","La supervisión permite mejorar la solución sin convertir cada actualización en una apuesta. Documentamos los criterios y las decisiones que afectan su funcionamiento."],["This is presence transformed into connection.","IA integrada con criterio y seguimiento."]],"/services/desarrollo-full-stack":[["Something fascinating is happening in gallery culture. While digital platforms flood us with visual excess, physical spaces are moving in the opposite direction: quieter, slower, more deliberate. This new movement isn’t about stripping back aesthetics. It’s about amplifying presence.\n\nWelcome to Experiential Minimalism — exhibitions that use restraint not as aesthetic purity, but as emotional architecture.","Arquitectura Cloud, APIs & Microservicios. Diseñamos la relación entre servicios, datos e infraestructura para que el sistema responda a las necesidades del negocio.\n\nDefinimos límites, contratos e integraciones con criterios de seguridad, operación y crecimiento. Elegimos una arquitectura acorde con la complejidad real y con la capacidad del equipo que la mantendrá."],["Less Material, More Impact","Servicios con límites claros"],["Walk into one of these exhibitions and the first sensation isn’t excitement — it’s awareness. The space stops you. It holds you. Your breathing adjusts. Your senses sharpen.","Identificamos los dominios del negocio, los flujos de información y las dependencias. Esa lectura permite definir responsabilidades y evitar que cada cambio afecte al sistema completo."],["This isn’t traditional minimalism where simplicity equals absence. The new minimalism uses reduction as a pressure system. Nothing is loud, but everything is felt. Every decision carries weight because nothing exists without purpose.","Las APIs establecen contratos entre equipos y aplicaciones. Diseñamos entradas, respuestas, autenticación, tratamiento de errores y evolución de versiones para hacer predecible la integración."],["Light becomes sculptural rather than atmospheric. Sound is treated like a living presence. Spatial emptiness isn’t a void — it’s tension. The viewer’s body becomes part of the work. The experience isn’t about looking at art. It’s about standing inside it.","Los microservicios se evalúan cuando aportan independencia de despliegue u operación. Consideramos también el coste de coordinación, las llamadas de red y la consistencia de datos."],["In a world of noise, silence hits harder.","Cada servicio debe tener una razón para existir."],["A Future Built on Precision, Not Excess","Evolución y operación"],["This movement is not a nostalgic return to minimalism. It’s a response to digital culture. It’s about crafting experiences that resist scrolling behavior and reward presence.","El ecosistema de servicios puede combinar Node.js, Java, Python y PHP según el contexto. SQL sostiene la información estructurada; React conecta los servicios con la experiencia de usuario."],["Galleries are beginning to understand that people don’t need more stimulation — they need focus. Creators are learning that impact doesn’t come from quantity — it comes from precision.","Planificamos entornos, configuración, despliegue y observabilidad. El proveedor cloud y las herramientas se definen con el proyecto, considerando requisitos operativos y restricciones del negocio."],["Experiential Minimalism isn’t smaller art.","La arquitectura se valida en funcionamiento."],["It’s deeper art.","Con señales que el equipo pueda interpretar."],["Art that stays with you not because of spectacle, but because it quietly refuses to leave.","Registros, métricas y documentación ayudan a investigar incidentes y a priorizar mejoras con información del sistema."],["The Psychology of Controlled Environments","Seguridad e integraciones"],["Experiential Minimalism understands something important: overstimulation numbs. The more we are given, the less we feel. These new exhibitions flip that.","Definimos permisos, manejo de secretos y validación de entradas desde los límites del sistema. Revisamos los datos que circulan y las responsabilidades de cada integración."],["When a space restricts stimuli, perception heightens. Details matter. Small changes carry emotional gravity. Time slows down. Visitors don’t just glance — they stay, observe, and begin to participate.","Diseñamos cómo responder a fallos: tiempos de espera, reintentos acotados y recuperación. La disponibilidad se planifica de acuerdo con el alcance y las condiciones de operación."],["This develops powerful emotional intimacy.","Integraciones comprensibles y controladas."],["Instead of impressive grand gestures, viewers experience private, internal responses. The work invites introspection rather than spectacle. You’re not forced to react — you’re given space to feel.","Una arquitectura mantenible permite incorporar nuevas capacidades sin perder visibilidad sobre el conjunto. Dejamos decisiones y contratos documentados para facilitar el trabajo del equipo."],["And in the modern cultural climate, that feels radical.","Construyamos una base que acompañe al negocio."]],"/services/software-empresarial":[["We live in a world that never stops moving. Screens refresh, feeds regenerate, environments shift, and our attention constantly repositions itself. In this landscape, static imagery feels increasingly foreign. That’s why motion-first thinking isn’t just a creative direction — it has become a natural cultural response.\n\nAcross art, design, and communication, movement is no longer support material or aesthetic enhancement. It is now the core medium through which meaning is built, emotion is activated, and presence is felt. To understand where visual culture is heading, we need to understand why motion has taken center stage, and why standing still isn’t an option anymore.","Modernización e Ingeniería de Sistemas Legacy. El software existente contiene reglas, integraciones y conocimiento del negocio que deben entenderse antes de cambiarlo.\n\nAnalizamos el sistema, hacemos visibles sus dependencias y definimos una transición por etapas. El objetivo es mejorar su capacidad de evolución manteniendo bajo control la continuidad operativa y los datos que utiliza."],["Motion as Language, Not Decoration","Entender antes de transformar"],["For years, motion graphics lived at the periphery — useful for advertising, digital displays, brand reveals, and cinematic identity. Now motion is stepping into conceptual territory. It’s no longer “animation added to design.” It is the design.","Revisamos código, datos, interfaces y procesos de operación. Documentamos las funciones críticas y las dependencias para distinguir qué debe conservarse, qué puede aislarse y qué conviene reemplazar."],["Motion holds cognitive power. Movement creates anticipation. Timelines build narrative. Transition defines emotion. When imagery shifts, the brain participates — tracking, following, expecting. Viewers don’t simply look. They react.","La ingeniería del sistema legacy recupera conocimiento que suele estar repartido entre el código y las personas. Convertimos ese contexto en criterios para decidir el siguiente cambio."],["The contemporary audience no longer consumes visuals passively. We’re used to systems that adapt, respond, and evolve in real time. Our relationship with visual media has become kinetic. The result? Work that remains still risks feeling incomplete — like a sentence cut midway.","Antes de intervenir, establecemos una referencia del comportamiento actual. Las pruebas de caracterización ayudan a detectar variaciones en reglas y recorridos importantes."],["The most compelling works today treat motion as structure. Meaning is found in the pace of change, the friction between frames, the tension before release. This is visual literacy evolving — motion as grammar, movement as syntax.","La modernización puede incluir separar módulos, exponer APIs, actualizar componentes o migrar partes del sistema. El plan responde a riesgos y necesidades, no a una sustitución automática de todo el código."],["Why This Isn’t Just a Trend","Una transición por etapas"],["Every major change in art history begins with a technological and cultural shift. Photography transformed representation. The internet transformed communication. Motion is now transforming perception itself.","Ordenamos los cambios por impacto y dependencia. Cada etapa define qué se modifica, cómo se valida y qué condiciones deben cumplirse para continuar."],["This isn’t novelty-driven aesthetics. It’s the next visual literacy.","La continuidad del negocio guía las decisiones."],["Motion-first thinking is shaping education, influencing gallery programming, redefining brand presence, and shifting how audiences emotionally engage with work. It requires different thinking — not “what does it look like?” but “how does it behave?”","Trabajamos con el ecosistema existente, incluyendo Java, PHP y SQL cuando forman parte de la solución. Incorporamos tecnologías como Node.js, Python o React donde aportan una mejora justificada."],["This shift is visible in physical environments too. Gallery installations adjust based on proximity. Digital exhibitions evolve based on time of day. Public art responds to movement, sound, or presence. We’re no longer designing for consumption. We’re designing for interaction.","La transición de datos requiere controles propios: correspondencia de estructuras, validación de resultados y mecanismos de recuperación. Las integraciones también se verifican antes de pasar a producción."],["Creators who understand this aren’t adapting to the times — they’re defining them.","Cada avance debe dejar el sistema más comprensible."],["Motion isn’t future-thinking anymore. It’s the language of now.","Y ofrecer al equipo una base para continuar."],["Branding, Identity & The Rise of the Living System","Conservar el conocimiento del negocio"],["Modern identity design is no longer about “logo + layout.” Brands exist as living entities. They appear across countless environments, scales, cultures, and contexts. Static identity systems simply can’t keep up.","Modernizar también implica documentar decisiones y reducir dependencias difíciles de mantener. Buscamos que las personas puedan entender el sistema, investigar fallos y trabajar sobre él con mayor claridad."],["Motion creates continuity.","Evolución con continuidad."],["Kinetic branding allows identity to breathe — pulsing, adjusting, shifting energy based on context. Instead of one definitive form, brands now operate as organisms, responding to time, sound, emotion, and environment. We’re witnessing design strategies inspired by biology rather than print heritage.","Acordamos el alcance de la transición, los criterios de aceptación y las responsabilidades operativas. La nueva arquitectura se conecta con la realidad del sistema que ya sostiene al negocio."]],"/services/auditoria-de-codigo":[["Open your phone and everything competes for urgency. Notifications pulse. Content scrolls endlessly. News cycles reset every hour. Speed has quietly become our baseline condition.\n\nWhich makes slowness… revolutionary.\n\nAcross contemporary art, motion work, performance, photography, and installation design, creators are deliberately embracing pacing that resists modern tempo. Moments stretch. Sequences linger. Time becomes material.\n\nThis isn’t sentimental longing for the past. It’s a conscious cultural intervention.","Consultoría de Arquitectura y Auditoría de Código. Revisamos cómo está construido un sistema y qué necesita para continuar evolucionando.\n\nConectamos decisiones técnicas con el contexto del negocio: operación, crecimiento, riesgos y capacidad del equipo. La revisión produce hallazgos explicados y una hoja de ruta priorizada, con un alcance acordado desde el inicio."],["Art That Refuses to Rush","Una revisión con contexto"],["Slow work doesn’t beg for attention. It earns it.","La auditoría empieza por definir el alcance."],["A video loop that develops with painful patience.","Qué componentes se revisan."],["A performance that unfolds like breathing.","Qué procesos son críticos."],["An installation where nothing happens — until you realize everything is happening in ways your rushed perception nearly missed.","Qué preguntas necesita responder el equipo para decidir sobre la siguiente etapa del producto o de la plataforma."],["When time stretches, viewers confront themselves.","El código se interpreta dentro del sistema."],["You notice your restlessness.","Sus responsabilidades."],["You confront your discomfort.","Sus dependencias."],["You become aware of your impatience.","Sus puntos de cambio."],["This makes slowness powerful. It forces presence. It exposes habit. It interrupts the momentum of modern life with deliberate friction.","Analizamos la organización del código, los contratos y el tratamiento de datos. Contrastamos la implementación con los requisitos y las restricciones que debe atender."],["Where speed stimulates, slowness reveals.","Los hallazgos necesitan evidencia y contexto."],["The Value of Refusal","Decisiones que se pueden ejecutar"],["Slowness is not a limitation of medium. It is a statement of intent.","Una revisión es útil cuando permite ordenar el trabajo."],["It resists algorithm culture.","Riesgo e impacto."],["It refuses performance metrics.","Esfuerzo y dependencias."],["It ignores pressure to entertain.","Prioridad y secuencia."],["Slow work creates another world inside our world — one governed by different rules, where presence matters more than reaction, and patience becomes reward rather than burden.","Documentamos los problemas observados y las alternativas de mejora. Diferenciamos acciones inmediatas de cambios que requieren una transición o una decisión de producto."],["In that sense, slowness is not retreat.","El resultado es una hoja de ruta."],["It is rebellion.","Comprensible."],["A quiet rebellion.","Priorizada."],["A grounded rebellion.","Justificada."],["A necessary rebellion.","Acorde con el contexto."],["Because sometimes the bravest creative act is doing the exact opposite of what the world demands.","El equipo recibe criterios para actuar y para verificar si los cambios resuelven el problema identificado."],["The Emotional Mechanics of Time","Seguridad y mantenibilidad"],["Slowness isn’t emptiness. It’s density.","Revisamos límites y responsabilidades."],["The longer you stay with a work, the more meaning accumulates. Small variations become emotionally significant. Repetition becomes meditative instead of mechanical. Subtlety becomes dramatically amplified.","El análisis puede abarcar autenticación, autorización, validación de entradas, manejo de errores y dependencias. Las conclusiones se vinculan con el código y el alcance efectivamente revisados."],["Psychologists call this temporal dilation — time subjectively expands when attention deepens.","El ecosistema documentado incluye JavaScript, React, Node.js, Python, Java, PHP y SQL. Definimos la profundidad de revisión según los componentes del proyecto."],["In art, that expansion becomes poetics.","También evaluamos claridad y facilidad de cambio."],["Viewers aren’t just watching time pass. They’re feeling themselves inside time. That’s rare today. That’s valuable. That’s human.","Una auditoría de código aporta información para decidir; el alcance específico determina qué aspectos pueden evaluarse y qué validaciones adicionales necesita el sistema."],["Which is exactly why artists are protecting it.","Conversemos sobre lo que necesitas conocer de tu software."]]}}
-  for (const service of corporate.services) {
-    const originalTitle = normalized(service.sourceTitle)
-    const previousDescription = replacements.get(normalized(service.sourceDescription))
-    replacements.set(originalTitle, service.label)
-    replacements.set(normalized(service.sourceDescription), service.description.toUpperCase())
-    if (previousDescription) replacements.set(normalized(previousDescription), service.description.toUpperCase())
-    Object.assign(detailPages[service.route], { title: service.title, lead: service.description, description: service.description, tags: service.tags })
-  }
+Across art, design, and communication, movement is no longer support material or aesthetic enhancement. It is now the core medium through which meaning is built, emotion is activated, and presence is felt. To understand where visual culture is heading, we need to understand why motion has taken center stage, and why standing still isn\u2019t an option anymore.`,`Modernizaci\xF3n e Ingenier\xEDa de Sistemas Legacy. El software existente contiene reglas, integraciones y conocimiento del negocio que deben entenderse antes de cambiarlo.
 
-  // Corporate copy is applied after the retained Framer hydration lifecycle.
-  // Keep every existing element, span, link, class and motion attribute.
-  function setCorporateText(element, value) {
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-    if (!nodes.length) return;
-    const words = value.split(/\s+/);
-    const lengths = nodes.map((node) => (node.nodeValue.trim().match(/\S+/g) || []).length);
-    const total = lengths.reduce((sum, count) => sum + count, 0) || 1;
-    let used = 0;
-    let weight = 0;
-    nodes.forEach((node, index) => {
-      weight += lengths[index];
-      const end = index === nodes.length - 1 ? words.length : Math.round(words.length * weight / total);
-      node.nodeValue = words.slice(used, end).join(' ') + (end > used && end < words.length ? ' ' : '');
-      used = end;
-    });
-  }
+Analizamos el sistema, hacemos visibles sus dependencias y definimos una transici\xF3n por etapas. El objetivo es mejorar su capacidad de evoluci\xF3n manteniendo bajo control la continuidad operativa y los datos que utiliza.`],["Motion as Language, Not Decoration","Entender antes de transformar"],["For years, motion graphics lived at the periphery \u2014 useful for advertising, digital displays, brand reveals, and cinematic identity. Now motion is stepping into conceptual territory. It\u2019s no longer \u201Canimation added to design.\u201D It is the design.","Revisamos c\xF3digo, datos, interfaces y procesos de operaci\xF3n. Documentamos las funciones cr\xEDticas y las dependencias para distinguir qu\xE9 debe conservarse, qu\xE9 puede aislarse y qu\xE9 conviene reemplazar."],["Motion holds cognitive power. Movement creates anticipation. Timelines build narrative. Transition defines emotion. When imagery shifts, the brain participates \u2014 tracking, following, expecting. Viewers don\u2019t simply look. They react.","La ingenier\xEDa del sistema legacy recupera conocimiento que suele estar repartido entre el c\xF3digo y las personas. Convertimos ese contexto en criterios para decidir el siguiente cambio."],["The contemporary audience no longer consumes visuals passively. We\u2019re used to systems that adapt, respond, and evolve in real time. Our relationship with visual media has become kinetic. The result? Work that remains still risks feeling incomplete \u2014 like a sentence cut midway.","Antes de intervenir, establecemos una referencia del comportamiento actual. Las pruebas de caracterizaci\xF3n ayudan a detectar variaciones en reglas y recorridos importantes."],["The most compelling works today treat motion as structure. Meaning is found in the pace of change, the friction between frames, the tension before release. This is visual literacy evolving \u2014 motion as grammar, movement as syntax.","La modernizaci\xF3n puede incluir separar m\xF3dulos, exponer APIs, actualizar componentes o migrar partes del sistema. El plan responde a riesgos y necesidades, no a una sustituci\xF3n autom\xE1tica de todo el c\xF3digo."],["Why This Isn\u2019t Just a Trend","Una transici\xF3n por etapas"],["Every major change in art history begins with a technological and cultural shift. Photography transformed representation. The internet transformed communication. Motion is now transforming perception itself.","Ordenamos los cambios por impacto y dependencia. Cada etapa define qu\xE9 se modifica, c\xF3mo se valida y qu\xE9 condiciones deben cumplirse para continuar."],["This isn\u2019t novelty-driven aesthetics. It\u2019s the next visual literacy.","La continuidad del negocio gu\xEDa las decisiones."],["Motion-first thinking is shaping education, influencing gallery programming, redefining brand presence, and shifting how audiences emotionally engage with work. It requires different thinking \u2014 not \u201Cwhat does it look like?\u201D but \u201Chow does it behave?\u201D","Trabajamos con el ecosistema existente, incluyendo Java, PHP y SQL cuando forman parte de la soluci\xF3n. Incorporamos tecnolog\xEDas como Node.js, Python o React donde aportan una mejora justificada."],["This shift is visible in physical environments too. Gallery installations adjust based on proximity. Digital exhibitions evolve based on time of day. Public art responds to movement, sound, or presence. We\u2019re no longer designing for consumption. We\u2019re designing for interaction.","La transici\xF3n de datos requiere controles propios: correspondencia de estructuras, validaci\xF3n de resultados y mecanismos de recuperaci\xF3n. Las integraciones tambi\xE9n se verifican antes de pasar a producci\xF3n."],["Creators who understand this aren\u2019t adapting to the times \u2014 they\u2019re defining them.","Cada avance debe dejar el sistema m\xE1s comprensible."],["Motion isn\u2019t future-thinking anymore. It\u2019s the language of now.","Y ofrecer al equipo una base para continuar."],["Branding, Identity & The Rise of the Living System","Conservar el conocimiento del negocio"],["Modern identity design is no longer about \u201Clogo + layout.\u201D Brands exist as living entities. They appear across countless environments, scales, cultures, and contexts. Static identity systems simply can\u2019t keep up.","Modernizar tambi\xE9n implica documentar decisiones y reducir dependencias dif\xEDciles de mantener. Buscamos que las personas puedan entender el sistema, investigar fallos y trabajar sobre \xE9l con mayor claridad."],["Motion creates continuity.","Evoluci\xF3n con continuidad."],["Kinetic branding allows identity to breathe \u2014 pulsing, adjusting, shifting energy based on context. Instead of one definitive form, brands now operate as organisms, responding to time, sound, emotion, and environment. We\u2019re witnessing design strategies inspired by biology rather than print heritage.","Acordamos el alcance de la transici\xF3n, los criterios de aceptaci\xF3n y las responsabilidades operativas. La nueva arquitectura se conecta con la realidad del sistema que ya sostiene al negocio."]],"/services/auditoria-de-codigo":[[`Open your phone and everything competes for urgency. Notifications pulse. Content scrolls endlessly. News cycles reset every hour. Speed has quietly become our baseline condition.
 
-  function applyCorporateCopy() {
-    const route = location.pathname.replace(/\/$/, '') || '/';
-    const copy = new Map(Object.entries(corporate.extraCopy).map(([key, value]) => [normalized(key), value]));
-    if (route.startsWith('/services/')) copy.set('PLATAFORMA EMPRESARIAL', 'JCAR LABS INC.');
-    for (const service of corporate.services) {
-      for (const key of [service.sourceTitle, service.oldTitle]) copy.set(normalized(key), service.label);
-      copy.set(normalized(service.sourceDescription), service.description.toUpperCase());
-    }
-    for (const [key, value] of corporate.translations[route] || []) copy.set(normalized(key), value);
-    for (const element of document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main h5, main h6')) {
-      const value = copy.get(normalized(element.textContent));
-      if (value) setCorporateText(element, value);
-    }
-    if (route === '/') {
-      for (const element of document.querySelectorAll('main section[data-framer-name="Section 0 - Hero"] p, main section[data-framer-name="Section 6 - Work Types"] p')) {
-        if (normalized(element.textContent) === 'SOLUCIONES EMPRESARIALES') setCorporateText(element, 'CONSULTORÍA & CÓDIGO');
-      }
-      const about = document.getElementById('about-me');
-      if (about) {
-        const technologies = new Map([
-          ['SOFTWARE & SAAS', 'JAVASCRIPT'], ['SISTEMAS LEGACY', 'PYTHON'],
-          ['IA, AGENTES & LLMOPS', 'REACT'], ['CLOUD, APIS & MICROSERVICIOS', 'NODE.JS'],
-          ['CLOUD & APIS', 'SQL'], ['AUDITORÍA DE CÓDIGO', 'PHP'], ['UX/UI', 'ARQUITECTURA'],
-        ]);
-        let legacy = 0;
-        let cloud = 0;
-        for (const element of about.querySelectorAll('p')) {
-          const key = normalized(element.textContent);
-          const value = key === 'SISTEMAS LEGACY' && legacy++ ? 'JAVA' : key === 'CLOUD & APIS' ? (cloud++ ? 'SQL' : 'NODE.JS') : technologies.get(key);
-          if (value) setCorporateText(element, value);
-        }
-      }
-    }
-  }
+Which makes slowness\u2026 revolutionary.
 
+Across contemporary art, motion work, performance, photography, and installation design, creators are deliberately embracing pacing that resists modern tempo. Moments stretch. Sequences linger. Time becomes material.
 
-  function replaceCompositeText() {
-    const candidates = document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, footer, button, label")
-    for (const element of candidates) {
-      const key = normalized(element.innerText || element.textContent)
-      if (!key) continue
-      if (hiddenExactTexts.has(key)) {
-        element.hidden = true
-        continue
-      }
-      const replacement = replacements.get(key)
-      if (!replacement || key === normalized(replacement)) continue
-      element.textContent = replacement
-    }
+This isn\u2019t sentimental longing for the past. It\u2019s a conscious cultural intervention.`,`Consultor\xEDa de Arquitectura y Auditor\xEDa de C\xF3digo. Revisamos c\xF3mo est\xE1 construido un sistema y qu\xE9 necesita para continuar evolucionando.
 
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
-    while (walker.nextNode()) {
-      const node = walker.currentNode
-      const parent = node.parentElement
-      if (!parent || ["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) continue
-      const key = normalized(node.nodeValue)
-      if (key.startsWith("CAPTION:")) {
-        parent.hidden = true
-        continue
-      }
-      if (hiddenExactTexts.has(key)) {
-        parent.hidden = true
-        continue
-      }
-      const replacement = directReplacements.get(key) || (key.length > 30 ? replacements.get(key) : null)
-      if (replacement && key !== normalized(replacement)) node.nodeValue = replacement
-    }
-  }
-
-  function adaptDetailCopy() {
-    const projectWords = {
-      "/work/sistema-hotelero": { UNSTABLE: "SISTEMA", SEQUENCE: "HOTELERO" },
-      "/work/nezus-bisuteria": { STILL: "NEZUS", PRESSURE: "BISUTERÍA" },
-      "/work/soluciones-empresariales": { SURFACE: "SOLUCIONES", TENSION: "EMPRESARIALES" },
-    }[location.pathname]
-
-    if (projectWords) {
-      for (const heading of document.querySelectorAll("main h1, main h2")) {
-        const replacement = projectWords[normalized(heading.textContent)]
-        if (replacement) heading.textContent = replacement
-      }
-    }
-
-    const walker = document.createTreeWalker(document.querySelector("main") || document.body, NodeFilter.SHOW_TEXT)
-    while (walker.nextNode()) {
-      const node = walker.currentNode
-      if (/^\s*\d+\s+minutes?\s*$/i.test(node.nodeValue || "")) {
-        node.nodeValue = node.nodeValue.replace(/minutes?/i, "minutos")
-      }
-    }
-  }
-
-  function restoreEditorialEmphasis() {
-    if (location.pathname !== "/") return
-    const emphasis = new Map([
-      ["SOFTWARE A MEDIDA Y PRODUCTOS SAAS QUE CONECTAN USUARIOS, DATOS Y PROCESOS DE NEGOCIO.", ["SOFTWARE A MEDIDA"]],
-      ["MODERNIZACIÓN DE SISTEMAS LEGACY CON CAMBIOS GRADUALES, VALIDACIÓN Y CONTINUIDAD OPERATIVA.", ["SISTEMAS LEGACY"]],
-      ["IA TRANSMODAL, AGENTES Y LLMOPS PARA CONECTAR MODELOS CON DATOS Y HERRAMIENTAS DEL NEGOCIO.", ["AGENTES Y LLMOPS"]],
-      ["ARQUITECTURA CLOUD, APIS Y MICROSERVICIOS CON CONTRATOS CLAROS Y CAPACIDAD DE EVOLUCIÓN.", ["APIS", "MICROSERVICIOS"]],
-      ["CONSULTORÍA DE ARQUITECTURA Y AUDITORÍA DE CÓDIGO PARA PRIORIZAR RIESGOS Y MEJORAS.", ["AUDITORÍA DE CÓDIGO"]],
-    ])
-    for (const element of document.querySelectorAll('main section[data-framer-name="Section 6 - Work Types"] p')) {
-      const key = normalized(element.innerText)
-      const phrases = emphasis.get(key)
-      if (!phrases || element.dataset.jcarHighlighted === "true") continue
-      let html = element.textContent
-      for (const phrase of phrases) html = html.replace(phrase, `<span class="jcar-highlight">${phrase}</span>`)
-      element.innerHTML = html
-      element.dataset.jcarHighlighted = "true"
-    }
-  }
-
-  function updateNavigationAndLinks() {
-    for (const anchor of document.querySelectorAll("a[href]")) {
-      const href = anchor.getAttribute("href") || ""
-      const absolute = new URL(href, location.href)
-
-      if (absolute.origin === location.origin && absolute.hash === "#about-me") anchor.href = "/#about-me"
-      if (absolute.origin === location.origin && absolute.pathname === "/thoughts") anchor.href = "/services"
-      if (absolute.origin === location.origin && absolute.pathname === "/work/unstable-sequence") anchor.href = "/work/sistema-hotelero"
-      if (absolute.origin === location.origin && absolute.pathname === "/work/still-pressure") anchor.href = "/work/nezus-bisuteria"
-      if (absolute.origin === location.origin && absolute.pathname === "/work/surface-tension") anchor.href = "/work/soluciones-empresariales"
-
-      const serviceRoutes = {
-        "/thoughts/beyond-ai-aesthetics-what-human-led-digital-art-means-now": "/services/desarrollo-web",
-        "/thoughts/when-images-begin-to-listen-the-quiet-power-of-responsive-art": "/services/inteligencia-artificial",
-        "/thoughts/the-rise-of-experiential-minimalism-in-contemporary-exhibitions": "/services/desarrollo-full-stack",
-        "/thoughts/why-motion-first-art-is-defining-the-next-creative-era": "/services/software-empresarial",
-        "/thoughts/why-slowness-is-becoming-a-radical-artistic-choice": "/services/auditoria-de-codigo",
-      }
-      if (absolute.origin === location.origin && serviceRoutes[absolute.pathname]) anchor.href = serviceRoutes[absolute.pathname]
-
-      if (["https://www.vimeo.com/", "https://vimeo.com/"].includes(absolute.href)) {
-        anchor.href = CONTACT_URL
-        anchor.target = "_blank"
-        anchor.rel = "noopener noreferrer"
-        anchor.setAttribute("aria-label", "WhatsApp")
-      } else if (["https://www.youtube.com/", "https://youtube.com/"].includes(absolute.href)) {
-        anchor.href = EMAIL_URL
-        anchor.removeAttribute("target")
-        anchor.setAttribute("aria-label", "Correo electrónico")
-      } else if (["instagram.com", "www.instagram.com", "linkedin.com", "www.linkedin.com", "github.com", "www.github.com", "tiktok.com", "www.tiktok.com", "x.com", "www.x.com"].includes(absolute.hostname)) {
-        // Keep the complete five-icon footer rhythm from the reference while
-        // avoiding links to the template author's personal profiles.
-        anchor.hidden = false
-        anchor.removeAttribute("aria-hidden")
-        anchor.removeAttribute("tabindex")
-        anchor.href = "/contact"
-      }
-    }
-
-    for (const logo of document.querySelectorAll('[data-framer-name="Logo"]')) {
-      logo.classList.add("jcar-logo-lockup")
-      const image = logo.querySelector("img")
-      if (image) image.alt = "JCAR Labs Inc."
-    }
-  }
-
-  function restoreHomeComposition() {
-    if (location.pathname !== "/") return
-    for (const section of document.querySelectorAll("main section[data-framer-name]")) {
-      section.hidden = false
-    }
-
-    const processSection = document.querySelector('main section[data-framer-name="Section 4 - Process"]')
-    const processBackground = processSection?.querySelector('[data-framer-name="BG Image"]')
-    const processVideos = processSection ? [...processSection.querySelectorAll("video")] : []
-    const fallbackVideo = processVideos.find((video) => video.hasAttribute("data-jcar-process-video"))
-    const framerVideo = processVideos.find((video) => !video.hasAttribute("data-jcar-process-video"))
-    if (framerVideo && fallbackVideo) fallbackVideo.remove()
-    else if (processBackground && !framerVideo && !fallbackVideo) {
-      const processVideo = document.createElement("video")
-      processVideo.dataset.jcarProcessVideo = "true"
-      processVideo.className = "jcar-process-video"
-      processVideo.src = "/assets/videos/video-overlay-video-3.mp4"
-      processVideo.poster = "/assets/images/bg-image-28.jpeg"
-      processVideo.preload = "auto"
-      processVideo.setAttribute("aria-hidden", "true")
-      processVideo.tabIndex = -1
-      processBackground.append(processVideo)
-    }
-
-    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (!homeVideoObserver && !reduceMotion) {
-      homeVideoObserver = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          const video = entry.target
-          if (entry.isIntersecting) video.play().catch(() => {})
-          else video.pause()
-        }
-      }, { threshold: 0.08 })
-    }
-
-    for (const video of document.querySelectorAll("main video")) {
-      video.muted = true
-      video.loop = true
-      video.playsInline = true
-      video.autoplay = !reduceMotion
-      if (reduceMotion) video.pause()
-      else if (!video.dataset.jcarPlaybackObserved) {
-        video.dataset.jcarPlaybackObserved = "true"
-        homeVideoObserver.observe(video)
-      }
-    }
-  }
-
-  function renderAboutSection() {
-    if (location.pathname !== "/") return
-    const section = document.querySelector('main section[data-framer-name="Section 11 - About"]')
-    if (!section) return
-    section.id = "about-me"
-    section.classList.add("jcar-about")
-    if (section.dataset.jcarAboutRendered === "true") return
-    section.dataset.jcarAboutRendered = "true"
-    section.innerHTML = `
+Conectamos decisiones t\xE9cnicas con el contexto del negocio: operaci\xF3n, crecimiento, riesgos y capacidad del equipo. La revisi\xF3n produce hallazgos explicados y una hoja de ruta priorizada, con un alcance acordado desde el inicio.`],["Art That Refuses to Rush","Una revisi\xF3n con contexto"],["Slow work doesn\u2019t beg for attention. It earns it.","La auditor\xEDa empieza por definir el alcance."],["A video loop that develops with painful patience.","Qu\xE9 componentes se revisan."],["A performance that unfolds like breathing.","Qu\xE9 procesos son cr\xEDticos."],["An installation where nothing happens \u2014 until you realize everything is happening in ways your rushed perception nearly missed.","Qu\xE9 preguntas necesita responder el equipo para decidir sobre la siguiente etapa del producto o de la plataforma."],["When time stretches, viewers confront themselves.","El c\xF3digo se interpreta dentro del sistema."],["You notice your restlessness.","Sus responsabilidades."],["You confront your discomfort.","Sus dependencias."],["You become aware of your impatience.","Sus puntos de cambio."],["This makes slowness powerful. It forces presence. It exposes habit. It interrupts the momentum of modern life with deliberate friction.","Analizamos la organizaci\xF3n del c\xF3digo, los contratos y el tratamiento de datos. Contrastamos la implementaci\xF3n con los requisitos y las restricciones que debe atender."],["Where speed stimulates, slowness reveals.","Los hallazgos necesitan evidencia y contexto."],["The Value of Refusal","Decisiones que se pueden ejecutar"],["Slowness is not a limitation of medium. It is a statement of intent.","Una revisi\xF3n es \xFAtil cuando permite ordenar el trabajo."],["It resists algorithm culture.","Riesgo e impacto."],["It refuses performance metrics.","Esfuerzo y dependencias."],["It ignores pressure to entertain.","Prioridad y secuencia."],["Slow work creates another world inside our world \u2014 one governed by different rules, where presence matters more than reaction, and patience becomes reward rather than burden.","Documentamos los problemas observados y las alternativas de mejora. Diferenciamos acciones inmediatas de cambios que requieren una transici\xF3n o una decisi\xF3n de producto."],["In that sense, slowness is not retreat.","El resultado es una hoja de ruta."],["It is rebellion.","Comprensible."],["A quiet rebellion.","Priorizada."],["A grounded rebellion.","Justificada."],["A necessary rebellion.","Acorde con el contexto."],["Because sometimes the bravest creative act is doing the exact opposite of what the world demands.","El equipo recibe criterios para actuar y para verificar si los cambios resuelven el problema identificado."],["The Emotional Mechanics of Time","Seguridad y mantenibilidad"],["Slowness isn\u2019t emptiness. It\u2019s density.","Revisamos l\xEDmites y responsabilidades."],["The longer you stay with a work, the more meaning accumulates. Small variations become emotionally significant. Repetition becomes meditative instead of mechanical. Subtlety becomes dramatically amplified.","El an\xE1lisis puede abarcar autenticaci\xF3n, autorizaci\xF3n, validaci\xF3n de entradas, manejo de errores y dependencias. Las conclusiones se vinculan con el c\xF3digo y el alcance efectivamente revisados."],["Psychologists call this temporal dilation \u2014 time subjectively expands when attention deepens.","El ecosistema documentado incluye JavaScript, React, Node.js, Python, Java, PHP y SQL. Definimos la profundidad de revisi\xF3n seg\xFAn los componentes del proyecto."],["In art, that expansion becomes poetics.","Tambi\xE9n evaluamos claridad y facilidad de cambio."],["Viewers aren\u2019t just watching time pass. They\u2019re feeling themselves inside time. That\u2019s rare today. That\u2019s valuable. That\u2019s human.","Una auditor\xEDa de c\xF3digo aporta informaci\xF3n para decidir; el alcance espec\xEDfico determina qu\xE9 aspectos pueden evaluarse y qu\xE9 validaciones adicionales necesita el sistema."],["Which is exactly why artists are protecting it.","Conversemos sobre lo que necesitas conocer de tu software."]]}};for(const e of p.services){const t=E(e.sourceTitle),a=O.get(E(e.sourceDescription));O.set(t,e.label),O.set(E(e.sourceDescription),e.description.toUpperCase()),a&&O.set(E(a),e.description.toUpperCase()),Object.assign(g[e.route],{title:e.title,lead:e.description,description:e.description,tags:e.tags})}function D(e,t){const a=document.createTreeWalker(e,NodeFilter.SHOW_TEXT),o=[];for(;a.nextNode();)o.push(a.currentNode);if(!o.length)return;const i=t.split(/\s+/),r=o.map(d=>(d.nodeValue.trim().match(/\S+/g)||[]).length),s=r.reduce((d,A)=>d+A,0)||1;let n=0,l=0;o.forEach((d,A)=>{l+=r[A];const R=A===o.length-1?i.length:Math.round(i.length*l/s);d.nodeValue=i.slice(n,R).join(" ")+(R>n&&R<i.length?" ":""),n=R})}function F(){const e=location.pathname.replace(/\/$/,"")||"/",t=new Map(Object.entries(p.extraCopy).map(([a,o])=>[E(a),o]));e.startsWith("/services/")&&t.set("PLATAFORMA EMPRESARIAL","JCAR LABS INC.");for(const a of p.services){for(const o of[a.sourceTitle,a.oldTitle])t.set(E(o),a.label);t.set(E(a.sourceDescription),a.description.toUpperCase())}for(const[a,o]of p.translations[e]||[])t.set(E(a),o);for(const a of document.querySelectorAll("main p, main h1, main h2, main h3, main h4, main h5, main h6")){const o=t.get(E(a.textContent));o&&D(a,o)}if(e==="/"){for(const o of document.querySelectorAll('main section[data-framer-name="Section 0 - Hero"] p, main section[data-framer-name="Section 6 - Work Types"] p'))E(o.textContent)==="SOLUCIONES EMPRESARIALES"&&D(o,"CONSULTOR\xCDA & C\xD3DIGO");const a=document.getElementById("about-me");if(a){const o=new Map([["SOFTWARE & SAAS","JAVASCRIPT"],["SISTEMAS LEGACY","PYTHON"],["IA, AGENTES & LLMOPS","REACT"],["CLOUD, APIS & MICROSERVICIOS","NODE.JS"],["CLOUD & APIS","SQL"],["AUDITOR\xCDA DE C\xD3DIGO","PHP"],["UX/UI","ARQUITECTURA"]]);let i=0,r=0;for(const s of a.querySelectorAll("p")){const n=E(s.textContent),l=n==="SISTEMAS LEGACY"&&i++?"JAVA":n==="CLOUD & APIS"?r++?"SQL":"NODE.JS":o.get(n);l&&D(s,l)}}}}function y(){const e=document.querySelectorAll("p, h1, h2, h3, h4, h5, h6, footer, button, label");for(const a of e){const o=E(a.innerText||a.textContent);if(!o)continue;if(U.has(o)){a.hidden=!0;continue}const i=O.get(o);!i||o===E(i)||(a.textContent=i)}for(const a of document.querySelectorAll('[data-framer-name="Author Name"] p, .framer-1mieko6 p'))a.textContent!=="JCAR LABS INC"&&(a.textContent="JCAR LABS INC");for(const a of document.querySelectorAll('[data-framer-name="Signature"] img, .framer-kpmnl9 img, img[src*="signature.svg"]'))a.alt="Jhon Charles \u2014 CEO de Jcar Labs Inc.";for(const a of document.querySelectorAll('[data-framer-name="Signature"] [data-framer-name="Subtitle"] p, .framer-kpmnl9 .framer-i5ly5t p'))a.textContent!=="CEO de Jcar Labs Inc."&&(a.textContent="CEO de Jcar Labs Inc.");const t=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);for(;t.nextNode();){const a=t.currentNode,o=a.parentElement;if(!o||["SCRIPT","STYLE","NOSCRIPT"].includes(o.tagName))continue;const i=E(a.nodeValue);if(i.startsWith("CAPTION:")){o.hidden=!0;continue}if(U.has(i)){o.hidden=!0;continue}const r=Y.get(i)||(i.length>30?O.get(i):null);r&&i!==E(r)&&(a.nodeValue=r)}}function W(){const e={"/work/sistema-hotelero":{UNSTABLE:"SISTEMA",SEQUENCE:"HOTELERO"},"/work/nezus-bisuteria":{STILL:"NEZUS",PRESSURE:"BISUTER\xCDA"},"/work/soluciones-empresariales":{SURFACE:"SOLUCIONES",TENSION:"EMPRESARIALES"}}[location.pathname];if(e)for(const a of document.querySelectorAll("main h1, main h2")){const o=e[E(a.textContent)];o&&(a.textContent=o)}const t=document.createTreeWalker(document.querySelector("main")||document.body,NodeFilter.SHOW_TEXT);for(;t.nextNode();){const a=t.currentNode;/^\s*\d+\s+minutes?\s*$/i.test(a.nodeValue||"")&&(a.nodeValue=a.nodeValue.replace(/minutes?/i,"minutos"))}}function b(){if(location.pathname!=="/")return;const e=new Map([["SOFTWARE A MEDIDA Y PRODUCTOS SAAS QUE CONECTAN USUARIOS, DATOS Y PROCESOS DE NEGOCIO.",["SOFTWARE A MEDIDA"]],["MODERNIZACI\xD3N DE SISTEMAS LEGACY CON CAMBIOS GRADUALES, VALIDACI\xD3N Y CONTINUIDAD OPERATIVA.",["SISTEMAS LEGACY"]],["IA TRANSMODAL, AGENTES Y LLMOPS PARA CONECTAR MODELOS CON DATOS Y HERRAMIENTAS DEL NEGOCIO.",["AGENTES Y LLMOPS"]],["ARQUITECTURA CLOUD, APIS Y MICROSERVICIOS CON CONTRATOS CLAROS Y CAPACIDAD DE EVOLUCI\xD3N.",["APIS","MICROSERVICIOS"]],["CONSULTOR\xCDA DE ARQUITECTURA Y AUDITOR\xCDA DE C\xD3DIGO PARA PRIORIZAR RIESGOS Y MEJORAS.",["AUDITOR\xCDA DE C\xD3DIGO"]]]);for(const t of document.querySelectorAll('main section[data-framer-name="Section 6 - Work Types"] p')){const a=E(t.innerText),o=e.get(a);if(!o||t.dataset.jcarHighlighted==="true")continue;let i=t.textContent;for(const r of o)i=i.replace(r,`<span class="jcar-highlight">${r}</span>`);t.innerHTML=i,t.dataset.jcarHighlighted="true"}}function M(){for(const e of document.querySelectorAll("a[href]")){const t=e.getAttribute("href")||"",a=new URL(t,location.href);a.origin===location.origin&&a.hash==="#about-me"&&(e.href="/#about-me"),a.origin===location.origin&&a.pathname==="/thoughts"&&(e.href="/services"),a.origin===location.origin&&a.pathname==="/work/unstable-sequence"&&(e.href="/work/sistema-hotelero"),a.origin===location.origin&&a.pathname==="/work/still-pressure"&&(e.href="/work/nezus-bisuteria"),a.origin===location.origin&&a.pathname==="/work/surface-tension"&&(e.href="/work/soluciones-empresariales");const o={"/thoughts/beyond-ai-aesthetics-what-human-led-digital-art-means-now":"/services/desarrollo-web","/thoughts/when-images-begin-to-listen-the-quiet-power-of-responsive-art":"/services/inteligencia-artificial","/thoughts/the-rise-of-experiential-minimalism-in-contemporary-exhibitions":"/services/desarrollo-full-stack","/thoughts/why-motion-first-art-is-defining-the-next-creative-era":"/services/software-empresarial","/thoughts/why-slowness-is-becoming-a-radical-artistic-choice":"/services/auditoria-de-codigo"};a.origin===location.origin&&o[a.pathname]&&(e.href=o[a.pathname]),["https://www.vimeo.com/","https://vimeo.com/"].includes(a.href)?(e.href=S,e.target="_blank",e.rel="noopener noreferrer",e.setAttribute("aria-label","WhatsApp")):["https://www.youtube.com/","https://youtube.com/"].includes(a.href)?(e.href=N,e.removeAttribute("target"),e.setAttribute("aria-label","Correo electr\xF3nico")):["instagram.com","www.instagram.com","linkedin.com","www.linkedin.com","github.com","www.github.com","tiktok.com","www.tiktok.com","x.com","www.x.com"].includes(a.hostname)&&(e.hidden=!1,e.removeAttribute("aria-hidden"),e.removeAttribute("tabindex"),e.href="/contact")}for(const e of document.querySelectorAll('[data-framer-name="Logo"]')){e.classList.add("jcar-logo-lockup");const t=e.querySelector("img");t&&(t.alt="JCAR Labs Inc.")}}function H(){if(location.pathname!=="/")return;for(const s of document.querySelectorAll("main section[data-framer-name]"))s.hidden=!1;const e=document.querySelector('main section[data-framer-name="Section 4 - Process"]'),t=e?.querySelector('[data-framer-name="BG Image"]'),a=e?[...e.querySelectorAll("video")]:[],o=a.find(s=>s.hasAttribute("data-jcar-process-video")),i=a.find(s=>!s.hasAttribute("data-jcar-process-video"));if(i&&o)o.remove();else if(t&&!i&&!o){const s=document.createElement("video");s.dataset.jcarProcessVideo="true",s.className="jcar-process-video",s.src="/assets/videos/video-overlay-video-3.mp4",s.poster="/assets/images/bg-image-28.jpeg",s.preload="auto",s.setAttribute("aria-hidden","true"),s.tabIndex=-1,t.append(s)}const r=matchMedia("(prefers-reduced-motion: reduce)").matches;!C&&!r&&(C=new IntersectionObserver(s=>{for(const n of s){const l=n.target;n.isIntersecting?l.play().catch(()=>{}):l.pause()}},{threshold:.08}));for(const s of document.querySelectorAll("main video"))s.muted=!0,s.loop=!0,s.playsInline=!0,s.autoplay=!r,r?s.pause():s.dataset.jcarPlaybackObserved||(s.dataset.jcarPlaybackObserved="true",C.observe(s))}function _(){if(location.pathname!=="/")return;const e=document.querySelector('main section[data-framer-name="Section 11 - About"]');e&&(e.id="about-me",e.classList.add("jcar-about"),e.dataset.jcarAboutRendered!=="true"&&(e.dataset.jcarAboutRendered="true",e.innerHTML=`
       <div class="jcar-about__grid">
         <div class="jcar-about__identity" data-jcar-reveal>
           <p class="jcar-about__display">SOMOS</p>
           <h2>JCAR LABS INC.</h2>
           <p class="jcar-about__meta">DESARROLLAMOS PRODUCTOS DIGITALES<br>DE PRINCIPIO A FIN.</p>
           <div class="jcar-about__signature" aria-label="JCAR Labs">JCL / 2026</div>
-          <p class="jcar-about__role">DISEÑO · SOFTWARE · INTELIGENCIA ARTIFICIAL</p>
-          <blockquote>“LA TECNOLOGÍA ES ÚTIL CUANDO RESUELVE ALGO REAL.”<cite>— JCAR LABS INC.</cite></blockquote>
+          <p class="jcar-about__role">DISE\xD1O \xB7 SOFTWARE \xB7 INTELIGENCIA ARTIFICIAL</p>
+          <blockquote>\u201CLA TECNOLOG\xCDA ES \xDATIL CUANDO RESUELVE ALGO REAL.\u201D<cite>\u2014 JCAR LABS INC.</cite></blockquote>
         </div>
         <div class="jcar-about__work" data-jcar-reveal>
           <figure class="jcar-about__portrait">
@@ -655,98 +48,22 @@
           <span class="jcar-about__rule" aria-hidden="true"></span>
         </div>
         <div class="jcar-about__profile" data-jcar-reveal>
-          <p class="jcar-about__statement">SOMOS UN EQUIPO DIGITAL. TRABAJAMOS CON ESTRATEGIA, SISTEMAS E ITERACIÓN. ALGUNAS IDEAS SE RESUELVEN RÁPIDO; OTRAS EVOLUCIONAN CON EL NEGOCIO.</p>
+          <p class="jcar-about__statement">SOMOS UN EQUIPO DIGITAL. TRABAJAMOS CON ESTRATEGIA, SISTEMAS E ITERACI\xD3N. ALGUNAS IDEAS SE RESUELVEN R\xC1PIDO; OTRAS EVOLUCIONAN CON EL NEGOCIO.</p>
           <p class="jcar-about__label">LO QUE HACEMOS</p>
           <ul>
             <li>SOFTWARE &amp; SAAS</li>
             <li>SISTEMAS LEGACY</li>
             <li>IA, AGENTES &amp; LLMOPS</li>
             <li>CLOUD &amp; APIS</li>
-            <li>AUDITORÍA DE CÓDIGO</li>
+            <li>AUDITOR\xCDA DE C\xD3DIGO</li>
             <li>UX/UI</li>
             <li>ARQUITECTURA</li>
             <li>PRODUCTO DIGITAL</li>
           </ul>
-          <a href="/work">VER PROYECTOS <span aria-hidden="true">↗</span></a>
+          <a href="/work">VER PROYECTOS <span aria-hidden="true">\u2197</span></a>
         </div>
-      </div>`
-
-    if (location.hash === "#about-me" && section.dataset.jcarHashAligned !== "true") {
-      section.dataset.jcarHashAligned = "true"
-      requestAnimationFrame(() => requestAnimationFrame(() => section.scrollIntoView({ block: "start" })))
-    }
-  }
-
-  function hideUnconfirmedCards() {
-    const paths = [
-      "/work/fragile-perfection",
-      "/work/silent-gravity",
-      "/thoughts/why-motion-first-art-is-defining-the-next-creative-era",
-      "/thoughts/why-slowness-is-becoming-a-radical-artistic-choice",
-    ]
-    for (const anchor of document.querySelectorAll("a[href]")) {
-      const pathname = new URL(anchor.href, location.href).pathname.replace(/\/$/, "") || "/"
-      if (!paths.includes(pathname)) continue
-      anchor.hidden = true
-      anchor.setAttribute("aria-hidden", "true")
-      anchor.tabIndex = -1
-    }
-  }
-
-  function configureContactForm() {
-    for (const form of document.forms) {
-      const visibleFields = [...form.querySelectorAll('input:not([type="hidden"]):not([aria-hidden="true"]), textarea:not([aria-hidden="true"])')]
-      const [name, email, message] = visibleFields
-      if (name) {
-        name.placeholder = "Nombre"
-        name.setAttribute("aria-label", "Nombre")
-        name.autocomplete = "name"
-      }
-      if (email) {
-        email.placeholder = "Correo electrónico"
-        email.setAttribute("aria-label", "Correo electrónico")
-        email.autocomplete = "email"
-      }
-      if (message) {
-        message.placeholder = "Cuéntanos sobre tu proyecto"
-        message.setAttribute("aria-label", "Cuéntanos sobre tu proyecto")
-      }
-      if (form.dataset.jcarConfigured) continue
-      form.dataset.jcarConfigured = "true"
-      form.addEventListener("submit", (event) => {
-        event.preventDefault()
-        if (!form.reportValidity()) return
-        const text = `Hola JCAR Labs, soy ${name?.value || ""}. Mi correo es ${email?.value || ""}. ${message?.value || "Quiero conversar sobre un proyecto."}`
-        window.open(`${CONTACT_URL}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer")
-      })
-    }
-  }
-
-  function shouldUseJcarHeader() {
-    const path = location.pathname.replace(/\/$/, "") || "/"
-    return path === "/work" || path.startsWith("/work/") ||
-      path === "/services" || path.startsWith("/services/") ||
-      path === "/contact" || (path === "/" && location.hash === "#about-me")
-  }
-
-  function renderSiteHeader() {
-    const shouldRender = shouldUseJcarHeader()
-    let header = document.querySelector("[data-jcar-site-header]")
-
-    if (!shouldRender) {
-      header?.remove()
-      document.documentElement.classList.remove("has-jcar-site-header")
-      return
-    }
-
-    document.documentElement.classList.add("has-jcar-site-header")
-    if (header) return
-
-    header = document.createElement("header")
-    header.className = "jcar-site-header"
-    header.dataset.jcarSiteHeader = "true"
-    header.innerHTML = `
-      <a class="jcar-site-header__logo" href="/" aria-label="JCAR Labs — Inicio">JCARLABS</a>
+      </div>`,location.hash==="#about-me"&&e.dataset.jcarHashAligned!=="true"&&(e.dataset.jcarHashAligned="true",requestAnimationFrame(()=>requestAnimationFrame(()=>e.scrollIntoView({block:"start"}))))))}function k(){const e=["/work/fragile-perfection","/work/silent-gravity","/thoughts/why-motion-first-art-is-defining-the-next-creative-era","/thoughts/why-slowness-is-becoming-a-radical-artistic-choice"];for(const t of document.querySelectorAll("a[href]")){const a=new URL(t.href,location.href).pathname.replace(/\/$/,"")||"/";e.includes(a)&&(t.hidden=!0,t.setAttribute("aria-hidden","true"),t.tabIndex=-1)}}function j(){for(const e of document.forms){const t=[...e.querySelectorAll('input:not([type="hidden"]):not([aria-hidden="true"]), textarea:not([aria-hidden="true"])')],[a,o,i]=t;a&&(a.placeholder="Nombre",a.setAttribute("aria-label","Nombre"),a.autocomplete="name"),o&&(o.placeholder="Correo electr\xF3nico",o.setAttribute("aria-label","Correo electr\xF3nico"),o.autocomplete="email"),i&&(i.placeholder="Cu\xE9ntanos sobre tu proyecto",i.setAttribute("aria-label","Cu\xE9ntanos sobre tu proyecto")),!e.dataset.jcarConfigured&&(e.dataset.jcarConfigured="true",e.addEventListener("submit",r=>{if(r.preventDefault(),!e.reportValidity())return;const s=`Hola JCAR Labs, soy ${a?.value||""}. Mi correo es ${o?.value||""}. ${i?.value||"Quiero conversar sobre un proyecto."}`;window.open(`${S}?text=${encodeURIComponent(s)}`,"_blank","noopener,noreferrer")}))}}function q(){const e=location.pathname.replace(/\/$/,"")||"/";return e==="/work"||e.startsWith("/work/")||e==="/services"||e.startsWith("/services/")||e==="/contact"||e==="/"&&location.hash==="#about-me"}function J(){const e=q();let t=document.querySelector("[data-jcar-site-header]");if(!e){t?.remove(),document.documentElement.classList.remove("has-jcar-site-header");return}if(document.documentElement.classList.add("has-jcar-site-header"),t)return;t=document.createElement("header"),t.className="jcar-site-header",t.dataset.jcarSiteHeader="true",t.innerHTML=`
+      <a class="jcar-site-header__logo" href="/" aria-label="JCAR Labs \u2014 Inicio">JCARLABS</a>
       <button class="jcar-site-header__toggle" type="button" aria-expanded="false" aria-controls="jcar-site-menu">
         <span></span><span></span><span></span><span class="sr-only">Abrir menu</span>
       </button>
@@ -756,57 +73,12 @@
         <a href="/services">SERVICIOS</a>
         <a href="/contact">CONTACTO</a>
       </nav>
-      <span class="jcar-site-header__progress" aria-hidden="true"></span>`
-
-    const activePath = location.pathname.replace(/\/$/, "") || "/"
-    for (const anchor of header.querySelectorAll("nav a")) {
-      const target = new URL(anchor.href, location.href)
-      const active = target.hash === "#about-me"
-        ? activePath === "/" && location.hash === "#about-me"
-        : activePath === target.pathname || activePath.startsWith(`${target.pathname}/`)
-      if (active) anchor.setAttribute("aria-current", "page")
-    }
-
-    const toggle = header.querySelector("button")
-    toggle.addEventListener("click", () => {
-      const open = header.classList.toggle("is-menu-open")
-      toggle.setAttribute("aria-expanded", String(open))
-    })
-    header.querySelectorAll("a").forEach((anchor) => anchor.addEventListener("click", () => header.classList.remove("is-menu-open")))
-
-    document.body.prepend(header)
-    requestAnimationFrame(() => header.classList.add("is-ready"))
-
-    if (!headerScrollBound) {
-      headerScrollBound = true
-      addEventListener("scroll", () => {
-        const current = document.querySelector("[data-jcar-site-header]")
-        if (!current || editorialMotionFrame) return
-        editorialMotionFrame = requestAnimationFrame(() => {
-          const maximum = Math.max(1, document.documentElement.scrollHeight - innerHeight)
-          current.style.setProperty("--jcar-scroll", String(Math.min(1, scrollY / maximum)))
-          current.style.setProperty("--jcar-header-shift", `${Math.min(18, scrollY * 0.035)}px`)
-          editorialMotionFrame = 0
-        })
-      }, { passive: true })
-    }
-  }
-
-  function renderContactPage() {
-    if (location.pathname.replace(/\/$/, "") !== "/contact") return
-    for (const main of document.querySelectorAll("main:not([data-jcar-contact])")) main.hidden = true
-    for (const footer of document.querySelectorAll("footer")) footer.hidden = true
-    if (document.querySelector("[data-jcar-contact]")) return
-
-    const main = document.createElement("main")
-    main.dataset.jcarContact = "true"
-    main.className = "jcar-contact"
-    main.innerHTML = `
+      <span class="jcar-site-header__progress" aria-hidden="true"></span>`;const a=location.pathname.replace(/\/$/,"")||"/";for(const i of t.querySelectorAll("nav a")){const r=new URL(i.href,location.href);(r.hash==="#about-me"?a==="/"&&location.hash==="#about-me":a===r.pathname||a.startsWith(`${r.pathname}/`))&&i.setAttribute("aria-current","page")}const o=t.querySelector("button");o.addEventListener("click",()=>{const i=t.classList.toggle("is-menu-open");o.setAttribute("aria-expanded",String(i))}),t.querySelectorAll("a").forEach(i=>i.addEventListener("click",()=>t.classList.remove("is-menu-open"))),document.body.prepend(t),requestAnimationFrame(()=>t.classList.add("is-ready")),P||(P=!0,addEventListener("scroll",()=>{const i=document.querySelector("[data-jcar-site-header]");!i||h||(h=requestAnimationFrame(()=>{const r=Math.max(1,document.documentElement.scrollHeight-innerHeight);i.style.setProperty("--jcar-scroll",String(Math.min(1,scrollY/r))),i.style.setProperty("--jcar-header-shift",`${Math.min(18,scrollY*.035)}px`),h=0}))},{passive:!0}))}function x(){if(location.pathname.replace(/\/$/,"")!=="/contact")return;for(const a of document.querySelectorAll("main:not([data-jcar-contact])"))a.hidden=!0;for(const a of document.querySelectorAll("footer"))a.hidden=!0;if(document.querySelector("[data-jcar-contact]"))return;const e=document.createElement("main");e.dataset.jcarContact="true",e.className="jcar-contact",e.innerHTML=`
       <section class="jcar-contact__hero" data-jcar-reveal>
         <div class="jcar-contact__hero-copy">
           <p>JCAR LABS INC. / CONTACTO</p>
-          <h1>HABLEMOS DE TU PRÓXIMO PROYECTO.</h1>
-          <div><span>ESTRATEGIA</span><span>DISEÑO</span><span>SOFTWARE</span><span>IA</span></div>
+          <h1>HABLEMOS DE TU PR\xD3XIMO PROYECTO.</h1>
+          <div><span>ESTRATEGIA</span><span>DISE\xD1O</span><span>SOFTWARE</span><span>IA</span></div>
         </div>
         <figure aria-hidden="true"><span>INICIAR / 2026</span></figure>
       </section>
@@ -814,8 +86,8 @@
         <p>CONTACTO / 01</p>
         <h2>CONSTRUYAMOS ALGO QUE RESUELVA UNA NECESIDAD REAL.</h2>
         <div class="jcar-contact__manifesto-grid">
-          <p>CUÉNTANOS QUÉ QUIERES CREAR, MEJORAR O AUTOMATIZAR. DEFINIREMOS EL SIGUIENTE PASO CON CLARIDAD.</p>
-          <a href="${CONTACT_URL}" target="_blank" rel="noopener noreferrer">CONVERSAR POR WHATSAPP <span>↗</span></a>
+          <p>CU\xC9NTANOS QU\xC9 QUIERES CREAR, MEJORAR O AUTOMATIZAR. DEFINIREMOS EL SIGUIENTE PASO CON CLARIDAD.</p>
+          <a href="${S}" target="_blank" rel="noopener noreferrer">CONVERSAR POR WHATSAPP <span>\u2197</span></a>
         </div>
       </section>
       <section class="jcar-contact__form-section" data-jcar-reveal>
@@ -825,496 +97,168 @@
           <address>
             <a href="mailto:contacto@jcarlabs.com">contacto@jcarlabs.com</a>
             <a href="tel:+51904615337">+51 904 615 337</a>
-            <span>PERÚ · TRABAJO REMOTO</span>
+            <span>PER\xDA \xB7 TRABAJO REMOTO</span>
           </address>
         </div>
         <form class="jcar-contact__form" aria-label="Formulario de contacto">
           <label><span>01 / NOMBRE</span><input name="name" type="text" required autocomplete="name" placeholder="Tu nombre"></label>
           <label><span>02 / CORREO</span><input name="email" type="email" required autocomplete="email" placeholder="tu@correo.com"></label>
-          <label><span>03 / PROYECTO</span><textarea name="message" required rows="4" placeholder="Cuéntanos qué necesitas construir"></textarea></label>
-          <button type="submit">ENVIAR MENSAJE <span>→</span></button>
+          <label><span>03 / PROYECTO</span><textarea name="message" required rows="4" placeholder="Cu\xE9ntanos qu\xE9 necesitas construir"></textarea></label>
+          <button type="submit">ENVIAR MENSAJE <span>\u2192</span></button>
         </form>
       </section>
       <section class="jcar-contact__footer" data-jcar-reveal>
         <div class="jcar-contact__ticks" aria-hidden="true"></div>
         <p class="jcar-contact__wordmark">JCAR LABS</p>
         <div class="jcar-contact__directory">
-          <div><strong>JCAR LABS INC.</strong><span>PRODUCTOS DIGITALES · SOFTWARE · IA</span></div>
-          <nav aria-label="Navegación del pie"><a href="/">INICIO</a><a href="/work">PROYECTOS</a><a href="/#about-me">NOSOTROS</a><a href="/services">SERVICIOS</a></nav>
-          <div><a href="${CONTACT_URL}" target="_blank" rel="noopener noreferrer">WHATSAPP</a><a href="${EMAIL_URL}">CORREO</a></div>
+          <div><strong>JCAR LABS INC.</strong><span>PRODUCTOS DIGITALES \xB7 SOFTWARE \xB7 IA</span></div>
+          <nav aria-label="Navegaci\xF3n del pie"><a href="/">INICIO</a><a href="/work">PROYECTOS</a><a href="/#about-me">NOSOTROS</a><a href="/services">SERVICIOS</a></nav>
+          <div><a href="${S}" target="_blank" rel="noopener noreferrer">WHATSAPP</a><a href="${N}">CORREO</a></div>
         </div>
-        <small>© 2026 JCAR LABS INC. TODOS LOS DERECHOS RESERVADOS.</small>
-      </section>`
-    const header = document.querySelector("[data-jcar-site-header]")
-    if (header) header.after(main)
-    else document.body.prepend(main)
-  }
-
-  function setupEditorialMotion() {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const selectors = [
-      ".jcar-work-card__visual",
-      ".jcar-service-card__visual img",
-      ".jcar-detail__media",
-      ".jcar-service-detail__overview figure img",
-      ".jcar-about__portrait-layer",
-    ]
-    const motionElements = document.querySelectorAll(selectors.join(","))
-    for (const element of motionElements) {
-      if (element.dataset.jcarMotionBound === "true") continue
-      element.dataset.jcarMotionBound = "true"
-      const host = element.closest("a, figure, section") || element
-      host.addEventListener("pointermove", (event) => {
-        if (event.pointerType === "touch") return
-        const rect = host.getBoundingClientRect()
-        const x = ((event.clientX - rect.left) / Math.max(1, rect.width) - 0.5) * 2
-        const y = ((event.clientY - rect.top) / Math.max(1, rect.height) - 0.5) * 2
-        element.style.setProperty("--jcar-pointer-x", x.toFixed(3))
-        element.style.setProperty("--jcar-pointer-y", y.toFixed(3))
-      }, { passive: true })
-      host.addEventListener("pointerleave", () => {
-        element.style.setProperty("--jcar-pointer-x", "0")
-        element.style.setProperty("--jcar-pointer-y", "0")
-      }, { passive: true })
-    }
-
-    if (document.documentElement.dataset.jcarParallaxBound === "true") return
-    document.documentElement.dataset.jcarParallaxBound = "true"
-    let frame = 0
-    const update = () => {
-      frame = 0
-      for (const element of document.querySelectorAll(selectors.join(","))) {
-        const rect = element.getBoundingClientRect()
-        if (rect.bottom < -120 || rect.top > innerHeight + 120) continue
-        const center = rect.top + rect.height / 2
-        const offset = Math.max(-1, Math.min(1, (center - innerHeight / 2) / innerHeight))
-        element.style.setProperty("--jcar-parallax-y", `${(-offset * 18).toFixed(2)}px`)
-      }
-    }
-    const scheduleMotion = () => {
-      if (frame) return
-      frame = requestAnimationFrame(update)
-    }
-    addEventListener("scroll", scheduleMotion, { passive: true })
-    addEventListener("resize", scheduleMotion, { passive: true })
-    scheduleMotion()
-  }
-
-  function renderDetailPage() {
-    const detail = detailPages[location.pathname.replace(/\/$/, "")]
-    if (!detail) return
-    for (const main of document.querySelectorAll("main:not([data-jcar-detail])")) main.hidden = true
-    if (document.querySelector("[data-jcar-detail]")) return
-
-    const isService = location.pathname.startsWith("/services/")
-    const main = document.createElement("main")
-    main.dataset.jcarDetail = "true"
-    main.className = `jcar-detail ${isService ? "jcar-detail--service" : "jcar-detail--project"}`
-    const siblingItems = listingPages[isService ? "/services" : "/work"].items.filter((item) => item.href !== location.pathname)
-    const currentItem = listingPages[isService ? "/services" : "/work"].items.find((item) => item.href === location.pathname)
-    const editorialSections = isService
-      ? [
-          ["01 / ENFOQUE", "ESTRATEGIA ANTES QUE TECNOLOGÍA", `Comenzamos entendiendo el objetivo, el usuario y el contexto operativo. ${escapeHTML(detail.description)}`],
-          ["02 / CONSTRUCCIÓN", "DISEÑO, IMPLEMENTACIÓN Y PRUEBAS", `Convertimos el alcance en una solución usable, mantenible y preparada para evolucionar. Trabajamos con ${escapeHTML(detail.tags.join(", "))}.`],
-          ["03 / EVOLUCIÓN", "UN PRODUCTO QUE PUEDE CRECER", "Publicamos con una base sólida, medimos el funcionamiento y priorizamos las siguientes mejoras con criterio de negocio."],
-        ]
-      : [
-          ["03 / CONTEXTO", "UNA NECESIDAD REAL CONVERTIDA EN PRODUCTO", escapeHTML(detail.description)],
-          ["04 / ENFOQUE", "CLARIDAD, CONTROL Y ESCALABILIDAD", "La solución se planteó desde los flujos esenciales, reduciendo fricción y organizando la información alrededor del trabajo cotidiano."],
-          ["05 / RETO", "UNIFICAR PROCESOS SIN AÑADIR COMPLEJIDAD", "El reto fue transformar distintas necesidades operativas en una experiencia coherente, clara y preparada para crecer."],
-          ["06 / SOLUCIÓN", "ARQUITECTURA Y EXPERIENCIA COMO UN SOLO SISTEMA", `Diseño, desarrollo e integración se trabajaron en conjunto mediante ${escapeHTML(detail.tags.join(", "))}.`],
-          ["07 / RESULTADO", "UNA BASE DIGITAL LISTA PARA EVOLUCIONAR", "El producto centraliza la operación principal y ofrece una estructura mantenible para incorporar nuevas capacidades."],
-        ]
-
-    main.innerHTML = isService ? `
+        <small>\xA9 2026 JCAR LABS INC. TODOS LOS DERECHOS RESERVADOS.</small>
+      </section>`;const t=document.querySelector("[data-jcar-site-header]");t?t.after(e):document.body.prepend(e)}function $(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;const e=[".jcar-work-card__visual",".jcar-service-card__visual img",".jcar-detail__media",".jcar-service-detail__overview figure img",".jcar-about__portrait-layer"],t=document.querySelectorAll(e.join(","));for(const r of t){if(r.dataset.jcarMotionBound==="true")continue;r.dataset.jcarMotionBound="true";const s=r.closest("a, figure, section")||r;s.addEventListener("pointermove",n=>{if(n.pointerType==="touch")return;const l=s.getBoundingClientRect(),d=((n.clientX-l.left)/Math.max(1,l.width)-.5)*2,A=((n.clientY-l.top)/Math.max(1,l.height)-.5)*2;r.style.setProperty("--jcar-pointer-x",d.toFixed(3)),r.style.setProperty("--jcar-pointer-y",A.toFixed(3))},{passive:!0}),s.addEventListener("pointerleave",()=>{r.style.setProperty("--jcar-pointer-x","0"),r.style.setProperty("--jcar-pointer-y","0")},{passive:!0})}if(document.documentElement.dataset.jcarParallaxBound==="true")return;document.documentElement.dataset.jcarParallaxBound="true";let a=0;const o=()=>{a=0;for(const r of document.querySelectorAll(e.join(","))){const s=r.getBoundingClientRect();if(s.bottom<-120||s.top>innerHeight+120)continue;const n=s.top+s.height/2,l=Math.max(-1,Math.min(1,(n-innerHeight/2)/innerHeight));r.style.setProperty("--jcar-parallax-y",`${(-l*18).toFixed(2)}px`)}},i=()=>{a||(a=requestAnimationFrame(o))};addEventListener("scroll",i,{passive:!0}),addEventListener("resize",i,{passive:!0}),i()}function z(){const e=g[location.pathname.replace(/\/$/,"")];if(!e)return;for(const n of document.querySelectorAll("main:not([data-jcar-detail])"))n.hidden=!0;if(document.querySelector("[data-jcar-detail]"))return;const t=location.pathname.startsWith("/services/"),a=document.createElement("main");a.dataset.jcarDetail="true",a.className=`jcar-detail ${t?"jcar-detail--service":"jcar-detail--project"}`;const o=f[t?"/services":"/work"].items.filter(n=>n.href!==location.pathname),i=f[t?"/services":"/work"].items.find(n=>n.href===location.pathname),r=t?[["01 / ENFOQUE","ESTRATEGIA ANTES QUE TECNOLOG\xCDA",`Comenzamos entendiendo el objetivo, el usuario y el contexto operativo. ${c(e.description)}`],["02 / CONSTRUCCI\xD3N","DISE\xD1O, IMPLEMENTACI\xD3N Y PRUEBAS",`Convertimos el alcance en una soluci\xF3n usable, mantenible y preparada para evolucionar. Trabajamos con ${c(e.tags.join(", "))}.`],["03 / EVOLUCI\xD3N","UN PRODUCTO QUE PUEDE CRECER","Publicamos con una base s\xF3lida, medimos el funcionamiento y priorizamos las siguientes mejoras con criterio de negocio."]]:[["03 / CONTEXTO","UNA NECESIDAD REAL CONVERTIDA EN PRODUCTO",c(e.description)],["04 / ENFOQUE","CLARIDAD, CONTROL Y ESCALABILIDAD","La soluci\xF3n se plante\xF3 desde los flujos esenciales, reduciendo fricci\xF3n y organizando la informaci\xF3n alrededor del trabajo cotidiano."],["05 / RETO","UNIFICAR PROCESOS SIN A\xD1ADIR COMPLEJIDAD","El reto fue transformar distintas necesidades operativas en una experiencia coherente, clara y preparada para crecer."],["06 / SOLUCI\xD3N","ARQUITECTURA Y EXPERIENCIA COMO UN SOLO SISTEMA",`Dise\xF1o, desarrollo e integraci\xF3n se trabajaron en conjunto mediante ${c(e.tags.join(", "))}.`],["07 / RESULTADO","UNA BASE DIGITAL LISTA PARA EVOLUCIONAR","El producto centraliza la operaci\xF3n principal y ofrece una estructura mantenible para incorporar nuevas capacidades."]];a.innerHTML=t?`
       <section class="jcar-service-detail__header" data-jcar-reveal>
         <aside>
-          <a class="jcar-service-detail__back" href="/services">← SERVICIOS</a>
-          <img src="${currentItem?.avatar || currentItem?.image || "/assets/images/hero-image-6.jpg"}" alt="JCAR Labs Inc.">
+          <a class="jcar-service-detail__back" href="/services">\u2190 SERVICIOS</a>
+          <img src="${i?.avatar||i?.image||"/assets/images/hero-image-6.jpg"}" alt="JCAR Labs Inc.">
           <p>DESARROLLADO POR<br><strong>JCAR LABS INC.</strong></p>
           <div aria-hidden="true"></div>
         </aside>
         <div class="jcar-service-detail__headline">
-          <p>SERVICIO ${currentItem?.number || "01"} · 2026</p>
-          <h1>${escapeHTML(detail.title)}</h1>
+          <p>SERVICIO ${i?.number||"01"} \xB7 2026</p>
+          <h1>${c(e.title)}</h1>
           <span aria-hidden="true"></span>
-          <h2>${escapeHTML(detail.lead)}</h2>
-          <small>ALCANCE · ${escapeHTML(detail.tags.join(" · "))}</small>
+          <h2>${c(e.lead)}</h2>
+          <small>ALCANCE \xB7 ${c(e.tags.join(" \xB7 "))}</small>
         </div>
       </section>
       <section class="jcar-service-detail__overview" data-jcar-reveal>
         <div class="jcar-service-detail__overview-copy">
-          <p>01 / VISIÓN GENERAL</p>
-          <h2>TECNOLOGÍA DISEÑADA PARA RESOLVER ALGO REAL.</h2>
-          <p>${escapeHTML(detail.description)}</p>
+          <p>01 / VISI\xD3N GENERAL</p>
+          <h2>TECNOLOG\xCDA DISE\xD1ADA PARA RESOLVER ALGO REAL.</h2>
+          <p>${c(e.description)}</p>
         </div>
-        <figure><img src="${currentItem?.image || "/assets/images/bg-image-28.jpeg"}" alt="${escapeHTML(detail.title)}" loading="lazy"></figure>
+        <figure><img src="${i?.image||"/assets/images/bg-image-28.jpeg"}" alt="${c(e.title)}" loading="lazy"></figure>
       </section>
       <section class="jcar-service-detail__article" data-jcar-reveal>
-        <p>02 / CÓMO TRABAJAMOS</p>
-        <h2>ESTRATEGIA, CONSTRUCCIÓN Y EVOLUCIÓN.</h2>
+        <p>02 / C\xD3MO TRABAJAMOS</p>
+        <h2>ESTRATEGIA, CONSTRUCCI\xD3N Y EVOLUCI\xD3N.</h2>
         <div>
-          ${editorialSections.map(([label, title, copy]) => `<article><span>${label}</span><h3>${title}</h3><p>${copy}</p></article>`).join("")}
+          ${r.map(([n,l,d])=>`<article><span>${n}</span><h3>${l}</h3><p>${d}</p></article>`).join("")}
         </div>
       </section>
       <section class="jcar-service-detail__summary" data-jcar-reveal>
         <p>03 / SIGUIENTE PASO</p>
-        <h2>LISTO PARA CONSTRUIR ${escapeHTML(detail.title)}.</h2>
-        <div><p>${escapeHTML(detail.lead)}</p><a href="${CONTACT_URL}" target="_blank" rel="noopener noreferrer">HABLEMOS DE TU PROYECTO →</a></div>
+        <h2>LISTO PARA CONSTRUIR ${c(e.title)}.</h2>
+        <div><p>${c(e.lead)}</p><a href="${S}" target="_blank" rel="noopener noreferrer">HABLEMOS DE TU PROYECTO \u2192</a></div>
       </section>
       <section class="jcar-service-detail__more" data-jcar-reveal>
-        <h2>MÁS SERVICIOS</h2>
-        <div>${siblingItems.map((item) => `<a href="${escapeHTML(item.href)}"><span>${escapeHTML(item.number)}</span><strong>${escapeHTML(item.title)}</strong><i>↗</i></a>`).join("")}</div>
-      </section>` : `
-      <section class="jcar-detail__hero jcar-panel jcar-detail__hero--media" data-jcar-reveal style="--jcar-detail-media:url('${detail.media?.[0] || "/assets/images/bg-image-28.jpeg"}')">
-        <a class="jcar-detail__back" href="${location.pathname.startsWith("/services/") ? "/services" : "/work"}">← Volver</a>
-        <p class="jcar-detail__kicker">${escapeHTML(detail.kicker)}</p>
-        <h1>${escapeHTML(detail.title)}</h1>
-        <p class="jcar-detail__lead">${escapeHTML(detail.lead)}</p>
+        <h2>M\xC1S SERVICIOS</h2>
+        <div>${o.map(n=>`<a href="${c(n.href)}"><span>${c(n.number)}</span><strong>${c(n.title)}</strong><i>\u2197</i></a>`).join("")}</div>
+      </section>`:`
+      <section class="jcar-detail__hero jcar-panel jcar-detail__hero--media" data-jcar-reveal style="--jcar-detail-media:url('${e.media?.[0]||"/assets/images/bg-image-28.jpeg"}')">
+        <a class="jcar-detail__back" href="${location.pathname.startsWith("/services/")?"/services":"/work"}">\u2190 Volver</a>
+        <p class="jcar-detail__kicker">${c(e.kicker)}</p>
+        <h1>${c(e.title)}</h1>
+        <p class="jcar-detail__lead">${c(e.lead)}</p>
         <div class="jcar-detail__index">JCL / 2026</div>
       </section>
       <section class="jcar-detail__intro jcar-panel jcar-panel--light" data-jcar-reveal>
         <p class="jcar-detail__eyebrow">PROYECTO / JCAR LABS</p>
-        <h2>${escapeHTML(detail.lead)}</h2>
+        <h2>${c(e.lead)}</h2>
         <div class="jcar-detail__intro-grid">
-          <p>${escapeHTML(detail.description)}</p>
-          <ul>${detail.tags.map((tag) => `<li>${escapeHTML(tag)}</li>`).join("")}</ul>
+          <p>${c(e.description)}</p>
+          <ul>${e.tags.map(n=>`<li>${c(n)}</li>`).join("")}</ul>
         </div>
       </section>
-      ${editorialSections.map(([label, title, copy], index) => `
-        <section class="jcar-detail__chapter jcar-panel jcar-panel--media${index % 2 ? " jcar-panel--lime" : ""}" data-jcar-reveal>
-          <p class="jcar-detail__eyebrow">${label}</p>
-          <h2>${title}</h2>
-          <p class="jcar-detail__chapter-copy">${copy}</p>
-          <div class="jcar-detail__media" aria-hidden="true" style="--jcar-detail-media:url('${detail.media?.[index % detail.media.length] || "/assets/images/bg-image-28.jpeg"}')"></div>
-          <span class="jcar-detail__chapter-number" aria-hidden="true">0${index + 1}</span>
+      ${r.map(([n,l,d],A)=>`
+        <section class="jcar-detail__chapter jcar-panel jcar-panel--media${A%2?" jcar-panel--lime":""}" data-jcar-reveal>
+          <p class="jcar-detail__eyebrow">${n}</p>
+          <h2>${l}</h2>
+          <p class="jcar-detail__chapter-copy">${d}</p>
+          <div class="jcar-detail__media" aria-hidden="true" style="--jcar-detail-media:url('${e.media?.[A%e.media.length]||"/assets/images/bg-image-28.jpeg"}')"></div>
+          <span class="jcar-detail__chapter-number" aria-hidden="true">0${A+1}</span>
         </section>`).join("")}
       <section class="jcar-detail__final jcar-panel" data-jcar-reveal>
         <p class="jcar-detail__eyebrow">PRODUCTO FINAL</p>
-        <h2>${escapeHTML(detail.title)}</h2>
-        <p>${escapeHTML(detail.lead)}</p>
-        <a class="jcar-detail__cta" href="${CONTACT_URL}" target="_blank" rel="noopener noreferrer">Hablemos de tu proyecto →</a>
+        <h2>${c(e.title)}</h2>
+        <p>${c(e.lead)}</p>
+        <a class="jcar-detail__cta" href="${S}" target="_blank" rel="noopener noreferrer">Hablemos de tu proyecto \u2192</a>
       </section>
       <section class="jcar-detail__share" data-jcar-reveal>
-        <p>MÁS PROYECTOS</p>
+        <p>M\xC1S PROYECTOS</p>
       </section>
       <section class="jcar-detail__related" data-jcar-reveal>
-        ${siblingItems.map((item) => `<a href="${escapeHTML(item.href)}"><span>${escapeHTML(item.number)}</span><strong>${escapeHTML(item.title)}</strong><span>↗</span></a>`).join("")}
-      </section>`
-    const footer = document.querySelector("footer")
-    if (footer) footer.before(main)
-    else document.body.append(main)
-  }
-
-  function renderLegalPage() {
-    const path = location.pathname.replace(/\/$/, "") || "/"
-    const legal = legalPages[path]
-    if (!legal && path !== "/404") return
-    for (const main of document.querySelectorAll("main:not([data-jcar-legal]):not([data-jcar-not-found])")) main.hidden = true
-
-    if (path === "/404") {
-      if (document.querySelector("[data-jcar-not-found]")) return
-      const main = document.createElement("main")
-      main.dataset.jcarNotFound = "true"
-      main.className = "jcar-not-found"
-      main.innerHTML = `
+        ${o.map(n=>`<a href="${c(n.href)}"><span>${c(n.number)}</span><strong>${c(n.title)}</strong><span>\u2197</span></a>`).join("")}
+      </section>`;const s=document.querySelector("footer");s?s.before(a):document.body.append(a)}function Q(){const e=location.pathname.replace(/\/$/,"")||"/",t=V[e];if(!t&&e!=="/404")return;for(const i of document.querySelectorAll("main:not([data-jcar-legal]):not([data-jcar-not-found])"))i.hidden=!0;if(e==="/404"){if(document.querySelector("[data-jcar-not-found]"))return;const i=document.createElement("main");i.dataset.jcarNotFound="true",i.className="jcar-not-found",i.innerHTML=`
         <section data-jcar-reveal>
           <p>JCL / ERROR</p>
           <strong aria-hidden="true">404</strong>
-          <h1>Esta página no existe.</h1>
-          <a href="/">Volver al inicio →</a>
-        </section>`
-      const footer = document.querySelector("footer")
-      if (footer) footer.before(main)
-      else document.body.append(main)
-      return
-    }
-
-    if (document.querySelector("[data-jcar-legal]")) return
-    const main = document.createElement("main")
-    main.dataset.jcarLegal = "true"
-    main.className = "jcar-legal"
-    main.innerHTML = `
+          <h1>Esta p\xE1gina no existe.</h1>
+          <a href="/">Volver al inicio \u2192</a>
+        </section>`;const r=document.querySelector("footer");r?r.before(i):document.body.append(i);return}if(document.querySelector("[data-jcar-legal]"))return;const a=document.createElement("main");a.dataset.jcarLegal="true",a.className="jcar-legal",a.innerHTML=`
       <section class="jcar-legal__hero" data-jcar-reveal>
-        <p>${legal.kicker}</p>
-        <h1>${legal.title}</h1>
-        <div><span>${legal.updated}</span><strong>JCL / 2026</strong></div>
-        <p>${legal.lead}</p>
+        <p>${t.kicker}</p>
+        <h1>${t.title}</h1>
+        <div><span>${t.updated}</span><strong>JCL / 2026</strong></div>
+        <p>${t.lead}</p>
       </section>
-      <section class="jcar-legal__content" aria-label="${legal.title}">
-        ${legal.sections.map(([number, title, copy]) => `
+      <section class="jcar-legal__content" aria-label="${t.title}">
+        ${t.sections.map(([i,r,s])=>`
           <article data-jcar-reveal>
-            <span>${number}</span>
-            <h2>${title}</h2>
-            <p>${copy}</p>
+            <span>${i}</span>
+            <h2>${r}</h2>
+            <p>${s}</p>
           </article>`).join("")}
-      </section>`
-    const footer = document.querySelector("footer")
-    if (footer) footer.before(main)
-    else document.body.append(main)
-  }
-
-  function renderListingPage() {
-    const listing = listingPages[location.pathname.replace(/\/$/, "")]
-    if (!listing) return
-    for (const main of document.querySelectorAll("main:not([data-jcar-list])")) main.hidden = true
-    if (document.querySelector("[data-jcar-list]")) return
-
-    const main = document.createElement("main")
-    main.dataset.jcarList = "true"
-    const isServices = location.pathname.replace(/\/$/, "") === "/services"
-    main.className = `jcar-list${isServices ? " jcar-services" : ""}`
-    main.innerHTML = isServices ? `
+      </section>`;const o=document.querySelector("footer");o?o.before(a):document.body.append(a)}function K(){const e=f[location.pathname.replace(/\/$/,"")];if(!e)return;for(const i of document.querySelectorAll("main:not([data-jcar-list])"))i.hidden=!0;if(document.querySelector("[data-jcar-list]"))return;const t=document.createElement("main");t.dataset.jcarList="true";const a=location.pathname.replace(/\/$/,"")==="/services";t.className=`jcar-list${a?" jcar-services":""}`,t.innerHTML=a?`
       <section class="jcar-services__header" data-jcar-reveal>
         <div class="jcar-services__title">
           <h1>SERVICIOS</h1>
-          <div class="jcar-services__index"><span aria-hidden="true">✣</span><strong>CAPACIDADES DIGITALES</strong><i></i></div>
+          <div class="jcar-services__index"><span aria-hidden="true">\u2723</span><strong>CAPACIDADES DIGITALES</strong><i></i></div>
         </div>
         <div class="jcar-services__statement">
-          <h2>TECNOLOGÍA QUE HACE CRECER NEGOCIOS.</h2>
+          <h2>TECNOLOG\xCDA QUE HACE CRECER NEGOCIOS.</h2>
         </div>
       </section>
       <section class="jcar-services__cards" aria-label="Servicios">
-        ${listing.items.map((item) => `
-          <a class="jcar-service-card" href="${item.href}" data-jcar-service-card>
+        ${e.items.map(i=>`
+          <a class="jcar-service-card" href="${i.href}" data-jcar-service-card>
             <div class="jcar-service-card__content">
-              <p class="jcar-service-card__date">SERVICIO ${item.number} · 2026</p>
-              <h2>${escapeHTML(item.title)}</h2>
+              <p class="jcar-service-card__date">SERVICIO ${i.number} \xB7 2026</p>
+              <h2>${c(i.title)}</h2>
               <span class="jcar-service-card__line" aria-hidden="true"></span>
-              <p class="jcar-service-card__description"><span class="sr-only">${escapeHTML(item.description)}</span><span class="jcar-service-card__letters" aria-hidden="true">${animatedLetters(item.description)}</span></p>
+              <p class="jcar-service-card__description"><span class="sr-only">${c(i.description)}</span><span class="jcar-service-card__letters" aria-hidden="true">${B(i.description)}</span></p>
               <div class="jcar-service-card__author">
-                <span><img src="${item.avatar}" alt="" loading="lazy"></span>
+                <span><img src="${i.avatar}" alt="" loading="lazy"></span>
                 <p>POR<br><strong>JCAR LABS INC.</strong></p>
-                <i aria-hidden="true">↗</i>
+                <i aria-hidden="true">\u2197</i>
               </div>
             </div>
-            <div class="jcar-service-card__visual" aria-hidden="true"><img src="${item.image}" alt="" loading="lazy" decoding="async"><span>${escapeHTML(item.tags)}</span></div>
+            <div class="jcar-service-card__visual" aria-hidden="true"><img src="${i.image}" alt="" loading="lazy" decoding="async"><span>${c(i.tags)}</span></div>
           </a>`).join("")}
-      </section>` : `
-      <section class="jcar-work-list" aria-label="${listing.title}">
-        ${listing.items.map((item) => `
-          <a class="jcar-work-card" href="${item.href}" data-jcar-reveal>
+      </section>`:`
+      <section class="jcar-work-list" aria-label="${e.title}">
+        ${e.items.map(i=>`
+          <a class="jcar-work-card" href="${i.href}" data-jcar-reveal>
             <div class="jcar-work-card__content">
               <p class="jcar-work-card__eyebrow">(PROYECTO)</p>
-              <h2>${escapeHTML(item.title)}</h2>
-              <p class="jcar-work-card__description">${escapeHTML(item.description)}</p>
-              <div class="jcar-work-card__meta"><strong>${escapeHTML(item.client)}</strong><span>${escapeHTML(item.category)}</span><small>${escapeHTML(item.date)}</small></div>
+              <h2>${c(i.title)}</h2>
+              <p class="jcar-work-card__description">${c(i.description)}</p>
+              <div class="jcar-work-card__meta"><strong>${c(i.client)}</strong><span>${c(i.category)}</span><small>${c(i.date)}</small></div>
             </div>
             <div class="jcar-work-card__ticks" aria-hidden="true"></div>
-            <div class="jcar-work-card__visual" aria-hidden="true" style="--jcar-work-image:url('${item.image}')"><span>JCL / ${item.number}</span></div>
+            <div class="jcar-work-card__visual" aria-hidden="true" style="--jcar-work-image:url('${i.image}')"><span>JCL / ${i.number}</span></div>
           </a>`).join("")}
-      </section>`
-    const footer = document.querySelector("footer")
-    if (footer) footer.before(main)
-    else document.body.append(main)
-  }
-
-  function renderServicesFooter() {
-    if (location.pathname.replace(/\/$/, "") !== "/services") return
-    const footer = document.querySelector("footer")
-    if (!footer || footer.dataset.jcarServicesFooter === "true") return
-    footer.dataset.jcarServicesFooter = "true"
-    footer.className = "jcar-services-footer"
-    footer.innerHTML = `
+      </section>`;const o=document.querySelector("footer");o?o.before(t):document.body.append(t)}function X(){if(location.pathname.replace(/\/$/,"")!=="/services")return;const e=document.querySelector("footer");!e||e.dataset.jcarServicesFooter==="true"||(e.dataset.jcarServicesFooter="true",e.className="jcar-services-footer",e.innerHTML=`
       <div class="jcar-services-footer__ticks" aria-hidden="true"></div>
       <p class="jcar-services-footer__name">JCAR LABS INC.</p>
       <div class="jcar-services-footer__directory">
         <div><strong>+51 904 615 337</strong><a href="mailto:contacto@jcarlabs.com">contacto@jcarlabs.com</a></div>
-        <div><strong>JCAR LABS</strong><p>PRODUCTOS DIGITALES<br>SOFTWARE · WEB · IA<br>PERÚ</p></div>
-        <nav aria-label="Navegación del pie">
-          <a href="/">INICIO</a><a href="/work">PROYECTOS</a><a href="/#about-me">NOSOTROS</a><a href="/services">SERVICIOS</a><a href="/contact">CONTACTO</a><a href="/privacy-policy">PRIVACIDAD</a><a href="/terms-of-use">TÉRMINOS</a>
+        <div><strong>JCAR LABS</strong><p>PRODUCTOS DIGITALES<br>SOFTWARE \xB7 WEB \xB7 IA<br>PER\xDA</p></div>
+        <nav aria-label="Navegaci\xF3n del pie">
+          <a href="/">INICIO</a><a href="/work">PROYECTOS</a><a href="/#about-me">NOSOTROS</a><a href="/services">SERVICIOS</a><a href="/contact">CONTACTO</a><a href="/privacy-policy">PRIVACIDAD</a><a href="/terms-of-use">T\xC9RMINOS</a>
         </nav>
-        <div><a href="${CONTACT_URL}" target="_blank" rel="noopener noreferrer">WHATSAPP</a><a href="${EMAIL_URL}">CORREO</a></div>
+        <div><a href="${S}" target="_blank" rel="noopener noreferrer">WHATSAPP</a><a href="${N}">CORREO</a></div>
       </div>
       <p class="jcar-services-footer__wordmark">JCAR LABS</p>
-      <div class="jcar-services-footer__bottom"><span>© 2026 JCAR LABS INC. TODOS LOS DERECHOS RESERVADOS.</span><a href="#top" aria-label="Volver arriba">↑</a></div>`
-  }
-
-  function restoreOriginalFramerTree() {
-    document.documentElement.classList.remove("has-jcar-site-header")
-
-    for (const element of document.querySelectorAll([
-      "[data-jcar-site-header]",
-      "[data-jcar-contact]",
-      "[data-jcar-list]",
-      "[data-jcar-detail]",
-      "[data-jcar-legal]",
-      "[data-jcar-not-found]",
-    ].join(","))) {
-      element.remove()
-    }
-
-    for (const element of document.querySelectorAll("main[hidden], footer[hidden]")) {
-      element.hidden = false
-    }
-
-    const about = document.querySelector('main section[data-framer-name="Section 11 - About"]')
-    if (about) about.id = "about-me"
-  }
-
-  function setupRevealAnimations() {
-    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (!revealObserver && !reduceMotion) {
-      revealObserver = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible")
-            revealObserver.unobserve(entry.target)
-          }
-        }
-      }, { threshold: 0.12 })
-    }
-    for (const element of document.querySelectorAll("[data-jcar-reveal]")) {
-      if (reduceMotion) element.classList.add("is-visible")
-      else if (!element.dataset.jcarRevealObserved) {
-        element.dataset.jcarRevealObserved = "true"
-        revealObserver.observe(element)
-      }
-    }
-  }
-
-  function setupServiceCardAnimations() {
-    const cards = document.querySelectorAll("[data-jcar-service-card]")
-    if (!cards.length) return
-    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (!serviceCardObserver && !reduceMotion) {
-      serviceCardObserver = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue
-          entry.target.classList.add("is-active")
-          serviceCardObserver.unobserve(entry.target)
-        }
-      }, { threshold: 0.12, rootMargin: "0px 0px -4% 0px" })
-    }
-    for (const card of cards) {
-      if (reduceMotion) card.classList.add("is-active")
-      else if (!card.dataset.jcarServiceObserved) {
-        card.dataset.jcarServiceObserved = "true"
-        serviceCardObserver.observe(card)
-      }
-    }
-  }
-
-  function setupMetadataGuard() {
-    const routeTitles = {
-      "/": "JCAR Labs Inc. — Ingeniería de Software, SaaS e IA",
-      "/work": "Proyectos — JCAR Labs Inc.",
-      "/services": "Servicios — JCAR Labs Inc.",
-      "/contact": "Contacto — JCAR Labs Inc.",
-      "/privacy-policy": "Política de privacidad — JCAR Labs Inc.",
-      "/terms-of-use": "Términos de uso — JCAR Labs Inc.",
-    }
-    const configured = detailPages[location.pathname]?.title
-    const expected = configured
-      ? `${configured} — JCAR Labs Inc.`
-      : routeTitles[location.pathname] || document.title.replace(/Adam Knoxville|Vertical — Editorial-Style Portfolio/gi, "JCAR Labs Inc.")
-    const enforce = () => {
-      if (document.title !== expected) document.title = expected
-    }
-    enforce()
-    if (!metadataObserver) {
-      metadataObserver = new MutationObserver(enforce)
-      metadataObserver.observe(document.head, { childList: true, subtree: true, characterData: true })
-    }
-  }
-
-  function applyBrand() {
-    document.documentElement.lang = "es"
-    setupMetadataGuard()
-
-    if (RESTORATION_MODE) {
-      restoreOriginalFramerTree()
-      restoreHomeComposition()
-      replaceCompositeText()
-      adaptDetailCopy()
-      restoreEditorialEmphasis()
-      updateNavigationAndLinks()
-      configureContactForm()
-      applyCorporateCopy()
-      return
-    }
-
-    restoreHomeComposition()
-    replaceCompositeText()
-    restoreEditorialEmphasis()
-    renderAboutSection()
-    renderSiteHeader()
-    updateNavigationAndLinks()
-    hideUnconfirmedCards()
-    renderContactPage()
-    configureContactForm()
-    renderLegalPage()
-    renderListingPage()
-    renderDetailPage()
-    renderServicesFooter()
-    setupRevealAnimations()
-    setupServiceCardAnimations()
-    setupEditorialMotion()
-  }
-
-  let scheduled = false
-  const schedule = () => {
-    if (scheduled) return
-    scheduled = true
-    requestAnimationFrame(() => {
-      scheduled = false
-      applyBrand()
-    })
-  }
-
-  const startBranding = () => {
-    setupMetadataGuard()
-    if (RESTORATION_MODE) {
-      const main = document.querySelector("#main")
-      const hydrationExpected = main?.hasAttribute("data-framer-hydrate-v2")
-      if (!hydrationExpected) {
-        applyBrand()
-        return
-      }
-
-      // Wait until Framer has committed its hydrated component tree. Mutating
-      // the server-rendered tree sooner creates React mismatches and can tear
-      // down CMS pages after their entrance animation.
-      let attempts = 0
-      const hydrationTimer = setInterval(() => {
-        attempts += 1
-        const hydrated = Boolean(main.querySelector(":scope > style"))
-        if (!hydrated && attempts < 120) return
-        clearInterval(hydrationTimer)
-        requestAnimationFrame(() => requestAnimationFrame(applyBrand))
-      }, 100)
-      return
-    }
-
-    const initialDelay = document.documentElement.classList.contains("jcar-interactive-page") || document.documentElement.classList.contains("jcar-static-page") ? 0 : 2200
-    setTimeout(() => {
-      applyBrand()
-      new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true })
-    }, initialDelay)
-    setTimeout(applyBrand, 3600)
-    setTimeout(applyBrand, 5200)
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startBranding, { once: true })
-  } else {
-    startBranding()
-  }
-  if (RESTORATION_MODE) {
-    // Route changes reload the corresponding exported Framer document. This
-    // prevents React from reconciling a page whose copy was adapted to JCAR.
-    document.addEventListener("click", (event) => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
-      const anchor = event.target.closest("a[href]")
-      if (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download")) return
-      const url = new URL(anchor.href, location.href)
-      if (url.origin !== location.origin) return
-      if (url.pathname === location.pathname && url.search === location.search) return
-      event.preventDefault()
-      location.assign(url.href)
-    }, true)
-    addEventListener("hashchange", () => setTimeout(applyBrand, 50))
-  } else {
-    addEventListener("hashchange", schedule)
-  }
-})()
+      <div class="jcar-services-footer__bottom"><span>\xA9 2026 JCAR LABS INC. TODOS LOS DERECHOS RESERVADOS.</span><a href="#top" aria-label="Volver arriba">\u2191</a></div>`)}function Z(){document.documentElement.classList.remove("has-jcar-site-header");for(const t of document.querySelectorAll(["[data-jcar-site-header]","[data-jcar-contact]","[data-jcar-list]","[data-jcar-detail]","[data-jcar-legal]","[data-jcar-not-found]"].join(",")))t.remove();for(const t of document.querySelectorAll("main[hidden], footer[hidden]"))t.hidden=!1;const e=document.querySelector('main section[data-framer-name="Section 11 - About"]');e&&(e.id="about-me")}function ee(){const e=matchMedia("(prefers-reduced-motion: reduce)").matches;!T&&!e&&(T=new IntersectionObserver(t=>{for(const a of t)a.isIntersecting&&(a.target.classList.add("is-visible"),T.unobserve(a.target))},{threshold:.12}));for(const t of document.querySelectorAll("[data-jcar-reveal]"))e?t.classList.add("is-visible"):t.dataset.jcarRevealObserved||(t.dataset.jcarRevealObserved="true",T.observe(t))}function ae(){const e=document.querySelectorAll("[data-jcar-service-card]");if(!e.length)return;const t=matchMedia("(prefers-reduced-motion: reduce)").matches;!m&&!t&&(m=new IntersectionObserver(a=>{for(const o of a)o.isIntersecting&&(o.target.classList.add("is-active"),m.unobserve(o.target))},{threshold:.12,rootMargin:"0px 0px -4% 0px"}));for(const a of e)t?a.classList.add("is-active"):a.dataset.jcarServiceObserved||(a.dataset.jcarServiceObserved="true",m.observe(a))}function G(){const e={"/":"JCAR Labs Inc. \u2014 Ingenier\xEDa de Software, SaaS e IA","/work":"Proyectos \u2014 JCAR Labs Inc.","/services":"Servicios \u2014 JCAR Labs Inc.","/contact":"Contacto \u2014 JCAR Labs Inc.","/privacy-policy":"Pol\xEDtica de privacidad \u2014 JCAR Labs Inc.","/terms-of-use":"T\xE9rminos de uso \u2014 JCAR Labs Inc."},t=g[location.pathname]?.title,a=t?`${t} \u2014 JCAR Labs Inc.`:e[location.pathname]||document.title.replace(/Adam Knoxville|Vertical — Editorial-Style Portfolio/gi,"JCAR Labs Inc."),o=()=>{document.title!==a&&(document.title=a)};o(),L||(L=new MutationObserver(o),L.observe(document.head,{childList:!0,subtree:!0,characterData:!0}))}function I(){document.documentElement.lang="es",G(),Z(),H(),y(),W(),b(),M(),j(),F()}let v=!1;const te=()=>{v||(v=!0,requestAnimationFrame(()=>{v=!1,I()}))},w=()=>{G();{const t=document.querySelector("#main");if(!t?.hasAttribute("data-framer-hydrate-v2")){I();return}let o=0;const i=setInterval(()=>{o+=1,!(!t.querySelector(":scope > style")&&o<120)&&(clearInterval(i),requestAnimationFrame(()=>{requestAnimationFrame(()=>{I();const s=document.querySelector('main section[data-framer-name="Section 11 - About"]');if(s){const n=()=>{for(const l of s.querySelectorAll('[data-framer-name="Author Name"] p, .framer-1mieko6 p'))l.textContent!=="JCAR LABS INC"&&(l.textContent="JCAR LABS INC");for(const l of s.querySelectorAll('img[src*="signature.svg"]'))l.alt="Jhon Charles \u2014 CEO de Jcar Labs Inc.";for(const l of s.querySelectorAll('[data-framer-name="Signature"] [data-framer-name="Subtitle"] p, .framer-kpmnl9 .framer-i5ly5t p'))l.textContent!=="CEO de Jcar Labs Inc."&&(l.textContent="CEO de Jcar Labs Inc.")};n(),new MutationObserver(n).observe(s,{childList:!0,subtree:!0,characterData:!0})}})}))},100);return}const e=document.documentElement.classList.contains("jcar-interactive-page")||document.documentElement.classList.contains("jcar-static-page")?0:2200;setTimeout(()=>{I(),new MutationObserver(te).observe(document.body,{childList:!0,subtree:!0})},e),setTimeout(I,3600),setTimeout(I,5200)};document.readyState==="loading"?document.addEventListener("DOMContentLoaded",w,{once:!0}):w(),document.addEventListener("click",e=>{if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.target.closest("a[href]");if(!t||t.target==="_blank"||t.hasAttribute("download"))return;const a=new URL(t.href,location.href);a.origin===location.origin&&(a.pathname===location.pathname&&a.search===location.search||(e.preventDefault(),location.assign(a.href)))},!0),addEventListener("hashchange",()=>setTimeout(I,50))})();

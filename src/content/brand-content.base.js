@@ -26,10 +26,10 @@
     "PRIVACY POLICY": "POLÍTICA DE PRIVACIDAD",
     "TERMS OF USE": "TÉRMINOS DE USO",
     "VERTICAL": "JCAR LABS",
-    "ADAM KNOXVILLE": BRAND,
-    "ADAM KNOXVILLE / VERTICAL": BRAND,
+    "ADAM KNOXVILLE": "JCAR LABS INC",
+    "ADAM KNOXVILLE / VERTICAL": "JCAR LABS INC",
     "VISUAL ARTIST/CREATOR": "DESARROLLO WEB · SOFTWARE · IA",
-    "INDEPENDENT VISUAL ARTIST": "EQUIPO DE DESARROLLO Y TECNOLOGÍA",
+    "INDEPENDENT VISUAL ARTIST": "CEO de Jcar Labs Inc.",
     "EXPLORE": "DESCUBRIR",
     "I BREAK THINGS": "CREAMOS SOLUCIONES",
     "TO SEE WHAT": "DIGITALES QUE",
@@ -402,6 +402,17 @@
       const replacement = replacements.get(key)
       if (!replacement || key === normalized(replacement)) continue
       element.textContent = replacement
+    }
+
+    // Explicit branding enforcement for About Section (Author Name, Signature, Subtitle)
+    for (const el of document.querySelectorAll('[data-framer-name="Author Name"] p, .framer-1mieko6 p')) {
+      if (el.textContent !== "JCAR LABS INC") el.textContent = "JCAR LABS INC"
+    }
+    for (const img of document.querySelectorAll('[data-framer-name="Signature"] img, .framer-kpmnl9 img, img[src*="signature.svg"]')) {
+      img.alt = "Jhon Charles — CEO de Jcar Labs Inc."
+    }
+    for (const el of document.querySelectorAll('[data-framer-name="Signature"] [data-framer-name="Subtitle"] p, .framer-kpmnl9 .framer-i5ly5t p')) {
+      if (el.textContent !== "CEO de Jcar Labs Inc.") el.textContent = "CEO de Jcar Labs Inc."
     }
 
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
@@ -1214,7 +1225,27 @@
         const hydrated = Boolean(main.querySelector(":scope > style"))
         if (!hydrated && attempts < 120) return
         clearInterval(hydrationTimer)
-        requestAnimationFrame(() => requestAnimationFrame(applyBrand))
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            applyBrand()
+            const aboutSec = document.querySelector('main section[data-framer-name="Section 11 - About"]')
+            if (aboutSec) {
+              const fixAbout = () => {
+                for (const el of aboutSec.querySelectorAll('[data-framer-name="Author Name"] p, .framer-1mieko6 p')) {
+                  if (el.textContent !== "JCAR LABS INC") el.textContent = "JCAR LABS INC"
+                }
+                for (const img of aboutSec.querySelectorAll('img[src*="signature.svg"]')) {
+                  img.alt = "Jhon Charles — CEO de Jcar Labs Inc."
+                }
+                for (const el of aboutSec.querySelectorAll('[data-framer-name="Signature"] [data-framer-name="Subtitle"] p, .framer-kpmnl9 .framer-i5ly5t p')) {
+                  if (el.textContent !== "CEO de Jcar Labs Inc.") el.textContent = "CEO de Jcar Labs Inc."
+                }
+              }
+              fixAbout()
+              new MutationObserver(fixAbout).observe(aboutSec, { childList: true, subtree: true, characterData: true })
+            }
+          })
+        })
       }, 100)
       return
     }
