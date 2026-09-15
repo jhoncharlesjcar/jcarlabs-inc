@@ -124,6 +124,17 @@ return http.createServer(async (req, res) => {
     res.end();
     return;
   }
+
+  // Match the explicit Vercel function URL in dev and local production too.
+  if (pathname === '/api/framercms') {
+    const file = parsedUrl.searchParams.get('file');
+    if (!file || !/^[\w-]+\.framercms$/.test(file)) {
+      res.writeHead(400, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=UTF-8' });
+      res.end('400 Bad Request');
+      return;
+    }
+    pathname = `/assets/cms/${file}`;
+  }
   
   // Resolve requests inside the site root and reject traversal attempts.
   const relativeUrl = pathname === '/404' || pathname === '/404/' ? '404.html' : pathname.replace(/^[/\\]+/, '');

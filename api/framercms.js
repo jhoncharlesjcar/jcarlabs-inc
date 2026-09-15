@@ -84,8 +84,8 @@ export function resetRateLimitStore() {
  * (e.g. ?range=0-1023,2048-4095) instead of the standard HTTP Range header.
  * This protocol cannot be served by a plain static CDN.
  *
- * Routing: vercel.json rewrites /assets/cms/:file → /api/framercms?file=:file
- * Vercel appends the original query string, so ?range= is automatically forwarded.
+ * The browser calls /api/framercms?file=...&range=... directly. A rewrite
+ * from /assets/cms cannot override the existing static file on Vercel.
  *
  * @param {import('http').IncomingMessage} req
  * @param {import('http').ServerResponse}  res

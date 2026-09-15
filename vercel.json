@@ -17,13 +17,6 @@
     { "source": "/services/integraciones-sunat", "destination": "/services/auditoria-de-codigo", "permanent": true }
   ],
 
-  "rewrites": [
-    {
-      "source": "/assets/cms/:file",
-      "destination": "/api/framercms?file=:file"
-    }
-  ],
-
   "headers": [
     {
       "source": "/(.*)",

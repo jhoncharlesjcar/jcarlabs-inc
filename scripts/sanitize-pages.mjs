@@ -28,10 +28,10 @@ for (const file of files) {
   let content = await fs.readFile(file, 'utf8');
   const original = content;
 
-  // 0. Ensure data-local-cms-fetch is strictly restricted to localhost
+  // 0. The build injects the shared CMS transport for every environment.
   content = content.replace(
     /<script data-local-cms-fetch>[\s\S]*?<\/script>/g,
-    '<script data-local-cms-fetch>(function(){var isLocal=location.hostname===\'localhost\'||location.hostname===\'127.0.0.1\';if(!isLocal)return;var f=window.fetch;window.fetch=function(u,o){var raw=typeof u===\'string\'?u:(u&&u.url?u.url:String(u||\'\'));if(raw.includes(\'.framercms\')){var parsed=new URL(raw,location.href);var file=parsed.pathname.split(\'/\').pop();return f(\'/assets/cms/\'+file+parsed.search,o)}return f(u,o)}})();</script>'
+    ''
   );
 
   // 1. Sanitize Logo Alt Text

@@ -15,7 +15,7 @@ export default defineConfig({
         const transport = createSiteServer({ rootDirectory: fileURLToPath(new URL('./public/', import.meta.url)) });
         server.middlewares.use((req, res, next) => {
           const pathname = new URL(req.url, 'http://localhost').pathname;
-          if (pathname.startsWith('/assets/cms/') && pathname.endsWith('.framercms')) {
+          if (pathname === '/api/framercms' || (pathname.startsWith('/assets/cms/') && pathname.endsWith('.framercms'))) {
             transport.emit('request', req, res);
           } else next();
         });

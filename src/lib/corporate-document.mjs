@@ -1,5 +1,6 @@
 import { site, services } from '../content/corporate.mjs';
 import { withUrlShim } from './url-shim.js';
+import { withCmsFetch } from './cms-fetch.mjs';
 import { applyCorporateHtml } from './corporate-html.mjs';
 
 const escape = (text) => text.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
@@ -7,7 +8,7 @@ export function corporateDocument(source, route) {
   const service = services.find((item) => item.route === route);
   const title = service ? `${service.title} — ${site.name}` : route === '/' ? site.title : null;
   const description = service?.description || (['/', '/services', '/contact'].includes(route) ? site.description : null);
-  let result = withUrlShim(source);
+  let result = withUrlShim(withCmsFetch(source));
   if (route === '/') result = result.replace('</head>', '<link rel="stylesheet" href="/hero-adjustments.css"></head>');
   if (title) result = result.replace(/<title>[\s\S]*?<\/title>/, `<title>${escape(title)}</title>`);
   // [1.1] Eliminar meta etiquetas de Framer que revelan el proyecto original (incondicional).

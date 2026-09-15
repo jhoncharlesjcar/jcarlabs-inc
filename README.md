@@ -100,7 +100,7 @@ pnpm start
 
 ## 🚀 Despliegue en Producción (Vercel)
 
-El proyecto se encuentra 100% preconfigurado para despliegue sin fricción en **Vercel**:
+El proyecto incluye configuración para desplegar en **Vercel**:
 
 1. **Conexión con GitHub:** Conecta el repositorio `jhoncharlesjcar/Website_JcarLabs_Inc` desde el panel de Vercel.
 2. **Configuración Automática:** Vercel reconocerá la configuración provista en `vercel.json`:
@@ -108,6 +108,10 @@ El proyecto se encuentra 100% preconfigurado para despliegue sin fricción en **
    * **Output Directory:** `dist`
    * **Serverless Functions:** Manejadores en `api/` incluidos automáticamente.
    * **Caching Headers:** Políticas `immutable` de 1 año para assets estáticos y revalidación para HTML.
+
+El CMS de Framer requiere la función `/api/framercms?file=...&range=...`. El build instala el adaptador de carga en todas las páginas, y desarrollo/preview ofrecen la misma URL. No debe sustituirse por una reescritura desde los archivos de `/assets/cms`: Vercel prioriza esos archivos estáticos y devolvería el binario completo, ignorando los rangos. Subir solo `dist` a un alojamiento estático no incluye esta función.
+
+Diagnóstico, pruebas y comprobaciones posteriores al despliegue: [Auditoría de despliegue](docs/AUDITORIA-DESPLIEGUE-2026-09-14.md).
 
 ---
 
